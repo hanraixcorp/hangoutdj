@@ -34,15 +34,16 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 
 /* MAP */
 #map-container{position:absolute;inset:0;z-index:1;overflow:hidden;}
-#map-world{position:absolute;width:100%;height:100%;background:#1c2a1c;}
-.floor-grass{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),linear-gradient(160deg,#1e3a1e 0%,#2a4a20 40%,#1a3018 100%);}
+/* Map world is LARGE - camera will move it via transform */
+#map-world{position:absolute;width:3000px;height:2000px;background:#1c2a1c;transform-origin:0 0;}
+.floor-grass{position:absolute;top:0;left:0;width:3000px;height:2000px;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),linear-gradient(160deg,#1e3a1e 0%,#2a4a20 40%,#1a3018 100%);}
 .grass-patch{position:absolute;border-radius:50%;background:radial-gradient(circle,#2d5a20,transparent 70%);pointer-events:none;}
 .fence{position:absolute;pointer-events:none;z-index:5;}
 .fence-h{height:16px;background:repeating-linear-gradient(90deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-top:3px solid #6B3410;border-bottom:3px solid #4A1E07;box-shadow:0 3px 8px rgba(0,0,0,0.5);}
 .fence-v{width:16px;background:repeating-linear-gradient(180deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-left:3px solid #6B3410;border-right:3px solid #4A1E07;box-shadow:3px 0 8px rgba(0,0,0,0.5);}
 
 /* STAGE */
-#stage-area{position:absolute;top:5%;left:25%;width:50%;height:24%;border-radius:0 0 50% 50%/0 0 30px 30px;background:repeating-linear-gradient(90deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 30px),linear-gradient(180deg,#1a0a2e 0%,#2d1b4e 50%,#1e1438 100%);border:3px solid rgba(120,0,255,0.5);box-shadow:0 0 30px rgba(100,0,255,0.3),inset 0 0 20px rgba(100,0,255,0.1);z-index:3;overflow:hidden;}
+#stage-area{position:absolute;top:80px;left:900px;width:1200px;height:320px;border-radius:0 0 50% 50%/0 0 30px 30px;background:repeating-linear-gradient(90deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 30px),linear-gradient(180deg,#1a0a2e 0%,#2d1b4e 50%,#1e1438 100%);border:3px solid rgba(120,0,255,0.5);box-shadow:0 0 30px rgba(100,0,255,0.3),inset 0 0 20px rgba(100,0,255,0.1);z-index:3;overflow:hidden;}
 .stage-lights{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff00ff,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);background-size:200%;animation:lightBar 2s linear infinite;}
 @keyframes lightBar{0%{background-position:0%}100%{background-position:200%}}
 .stage-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Orbitron',sans-serif;color:#cc00ff;font-size:clamp(9px,1.6vw,16px);text-shadow:0 0 10px #cc00ff;letter-spacing:3px;white-space:nowrap;}
@@ -59,11 +60,11 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 @keyframes spotMove{0%{transform:rotate(-15deg)}100%{transform:rotate(15deg)}}
 
 /* CHILL ZONE */
-#chill-zone{position:absolute;bottom:12%;right:5%;width:clamp(90px,13vw,150px);height:clamp(90px,13vw,150px);background:radial-gradient(circle,rgba(255,100,100,0.15),transparent 70%);border:2px dashed rgba(255,100,100,0.5);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff8888;font-size:clamp(8px,1.1vw,12px);text-align:center;z-index:3;pointer-events:none;}
+#chill-zone{position:absolute;top:1300px;right:120px;width:340px;height:340px;background:radial-gradient(circle,rgba(255,100,100,0.18) 0%,rgba(255,180,100,0.1) 50%,transparent 80%);border:3px dashed rgba(255,100,100,0.6);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff8888;font-size:12px;text-align:center;z-index:3;pointer-events:none;}
 .chill-icon{font-size:clamp(18px,2.8vw,30px);margin-bottom:3px;}
 
 /* POND */
-#pond{position:absolute;bottom:8%;left:3%;width:clamp(110px,16vw,190px);height:clamp(75px,11vw,120px);background:radial-gradient(ellipse at 40% 40%,rgba(0,180,255,0.7) 0%,rgba(0,100,200,0.6) 50%,rgba(0,60,150,0.8) 100%);border-radius:50%;border:3px solid rgba(0,200,255,0.4);box-shadow:0 0 20px rgba(0,150,255,0.4),inset 0 0 30px rgba(0,0,80,0.4);z-index:3;overflow:hidden;}
+#pond{position:absolute;top:1300px;left:60px;width:440px;height:280px;background:radial-gradient(ellipse at 40% 40%,rgba(0,180,255,0.75) 0%,rgba(0,120,220,0.65) 50%,rgba(0,60,160,0.85) 100%);border-radius:50%;border:3px solid rgba(0,200,255,0.5);box-shadow:0 0 30px rgba(0,150,255,0.5),inset 0 0 40px rgba(0,0,100,0.5);z-index:3;overflow:hidden;}
 .pond-shimmer{position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(255,255,255,0.05) 9px);animation:shimmer 3s linear infinite;}
 @keyframes shimmer{0%{transform:translateY(0)}100%{transform:translateY(9px)}}
 .pond-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);color:#00ccff;font-size:clamp(8px,1vw,11px);white-space:nowrap;text-shadow:0 0 8px #00ccff;font-weight:700;}
@@ -131,7 +132,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 @keyframes effectFloat{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-40px)}}
 
 /* VISUALIZER */
-#visualizer{position:absolute;bottom:0;left:25%;right:25%;height:28px;display:flex;align-items:flex-end;justify-content:center;gap:3px;z-index:4;pointer-events:none;opacity:0;transition:opacity 0.5s;}
+#visualizer{position:absolute;top:390px;left:900px;width:1200px;height:28px;display:flex;align-items:flex-end;justify-content:center;gap:3px;z-index:4;pointer-events:none;opacity:0;transition:opacity 0.5s;}
 #visualizer.active{opacity:1;}
 .viz-bar{width:4px;background:linear-gradient(180deg,#ff00ff,#00d2ff);border-radius:2px 2px 0 0;animation:vizAnim 0.5s ease-in-out infinite alternate;}
 @keyframes vizAnim{0%{height:4px}100%{height:var(--h,20px)}}
@@ -140,10 +141,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 @keyframes particleFly{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:0.8}100%{transform:translateY(-80px) translateX(var(--dx,20px));opacity:0}}
 
 /* ===== SIDEBAR UI (LEFT) ===== */
-#sidebar-left{position:absolute;top:0;left:0;bottom:0;width:clamp(200px,20vw,260px);z-index:50;display:flex;flex-direction:column;gap:0;pointer-events:none;}
+#sidebar-left{position:fixed;top:0;left:0;bottom:0;width:clamp(200px,20vw,260px);z-index:50;display:flex;flex-direction:column;gap:0;pointer-events:none;}
 
 /* TOP BAR (DJ controls) */
-#top-bar{position:absolute;top:0;left:0;right:0;height:44px;z-index:55;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.72);padding:0 10px;border-bottom:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(6px);}
+#top-bar{position:fixed;top:0;left:0;right:0;height:44px;z-index:55;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.82);padding:0 10px;border-bottom:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(6px);}
 #playlist{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(0,210,255,0.3);padding:4px 7px;border-radius:6px;outline:none;font-size:10px;font-family:'Rajdhani',sans-serif;max-width:clamp(80px,12vw,170px);}
 #playlist option{background:#0d1a2e;}
 .btn-ui{padding:4px 10px;border-radius:6px;border:none;font-weight:700;cursor:pointer;color:white;font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all 0.2s;white-space:nowrap;}
@@ -168,7 +169,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 .panel-body.collapsed{max-height:0!important;}
 
 /* CHAT PANEL */
-#chat-panel{position:absolute;left:0;bottom:0;width:clamp(200px,20vw,260px);}
+#chat-panel{position:fixed;left:0;bottom:0;width:clamp(220px,22vw,290px);z-index:50;}
 #chat-box{overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding:6px;scrollbar-width:thin;scrollbar-color:#333 transparent;}
 .chat-msg{background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:5px;width:fit-content;font-size:11px;text-shadow:1px 1px 0 #000;word-wrap:break-word;max-width:100%;border-left:2px solid transparent;max-width:220px;}
 .chat-msg.system-msg{border-left-color:#ffcc00;color:#ffd700;font-style:italic;}
@@ -179,7 +180,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 #btn-send{background:linear-gradient(90deg,#00d2ff,#0066ff);border:none;padding:4px 9px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700;color:#fff;}
 
 /* LEADERBOARD PANEL */
-#lb-panel{position:absolute;right:0;top:44px;width:clamp(170px,17vw,220px);}
+#lb-panel{position:fixed;right:0;top:44px;width:clamp(200px,22vw,280px);z-index:50;}
 #lb-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06);}
 .lb-tab{flex:1;padding:5px;text-align:center;font-size:9px;cursor:pointer;color:#888;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
 .lb-tab.active{color:#00d2ff;border-bottom:2px solid #00d2ff;}
@@ -194,7 +195,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 .lb-dot{width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 5px #00ff88;margin-right:5px;flex-shrink:0;}
 
 /* STATUS BARS (player HUD) */
-#player-hud{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);z-index:60;display:none;flex-direction:column;align-items:center;gap:4px;}
+#player-hud{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:60;display:none;flex-direction:column;align-items:center;gap:4px;}
 .hud-bar-wrap{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.6);padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
 .hud-icon{font-size:13px;}
 .hud-bar{width:80px;height:7px;background:#333;border-radius:4px;overflow:hidden;}
@@ -204,10 +205,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 .hud-val{font-size:10px;font-weight:700;min-width:24px;text-align:right;}
 
 /* FISH STATUS */
-#fish-status{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:5px 14px;border-radius:20px;font-size:11px;color:#00ccff;display:none;z-index:60;border:1px solid rgba(0,200,255,0.3);backdrop-filter:blur(4px);}
+#fish-status{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:5px 14px;border-radius:20px;font-size:11px;color:#00ccff;display:none;z-index:60;border:1px solid rgba(0,200,255,0.3);backdrop-filter:blur(4px);}
 
 /* DPAD */
-#dpad{position:absolute;bottom:14px;left:clamp(210px,21vw,270px);display:grid;grid-template-columns:repeat(3,42px);grid-gap:5px;z-index:60;}
+#dpad{position:fixed;bottom:14px;left:clamp(210px,21vw,270px);display:grid;grid-template-columns:repeat(3,42px);grid-gap:5px;z-index:60;}
 .dir-btn{width:42px;height:42px;background:rgba(255,255,255,0.12);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:15px;color:white;font-weight:700;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);}
 .dir-btn:active{background:rgba(255,255,255,0.4);transform:scale(0.9);}
 #btn-u{grid-column:2;grid-row:1;}#btn-l{grid-column:1;grid-row:2;}#btn-r{grid-column:3;grid-row:2;}#btn-d{grid-column:2;grid-row:3;}
@@ -308,7 +309,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 /* AD WEBVIEW */
 #ad-webview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
 #ad-frame-wrap{background:#111;border:2px solid rgba(0,210,255,0.3);border-radius:12px;overflow:hidden;position:relative;}
-#ad-iframe{width:320px;height:250px;border:none;display:block;}
+#ad-iframe{width:min(640px,95vw);height:400px;border:none;display:block;}
 #ad-countdown{font-family:'Orbitron',sans-serif;color:#00d2ff;font-size:13px;letter-spacing:2px;}
 #ad-skip-btn{padding:8px 24px;border-radius:20px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;display:none;}
 .ad-label{font-size:10px;color:#888;letter-spacing:2px;}
@@ -368,8 +369,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
       <div id="visualizer"></div>
       <div id="chill-zone">
         <div class="chill-icon">☕</div>
-        <div style="font-size:9px;font-weight:700;">Chill Zone</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;">Chill Zone</div>
         <div style="font-size:8px;color:#ffaaaa;margin-top:2px;">+HP +Thirst</div>
+        <div style="font-size:14px;margin-top:3px;">🛋️ 🪴 🎵</div>
+        <div style="font-size:8px;color:#ffccaa;margin-top:1px;">Santai & Relax</div>
       </div>
       <div id="pond">
         <div class="pond-shimmer"></div>
@@ -377,10 +380,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
         <div class="pond-lily" style="width:13px;height:13px;top:60%;left:60%;"></div>
         <div class="pond-label">🎣 Kolam Mancing</div>
       </div>
-      <div class="fence fence-h" style="top:2%;left:3%;right:3%;position:absolute;"></div>
-      <div class="fence fence-h" style="bottom:2%;left:3%;right:3%;position:absolute;"></div>
-      <div class="fence fence-v" style="left:2%;top:2%;bottom:2%;position:absolute;"></div>
-      <div class="fence fence-v" style="right:2%;top:2%;bottom:2%;position:absolute;"></div>
+      <div class="fence fence-h" style="top:30px;left:40px;right:40px;position:absolute;"></div>
+      <div class="fence fence-h" style="top:1950px;left:40px;right:40px;position:absolute;"></div>
+      <div class="fence fence-v" style="left:30px;top:30px;bottom:30px;position:absolute;"></div>
+      <div class="fence fence-v" style="right:30px;top:30px;bottom:30px;position:absolute;"></div>
     </div>
   </div>
 
@@ -390,6 +393,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
     <button id="btn-play-dj" class="btn-ui" onclick="toggleDJ()">▶</button>
     <div id="vol-wrap"><span>🔊</span><input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.7" oninput="setVolume(this.value)"></div>
     <button id="btn-missions" class="btn-ui" onclick="openMissions()">🎯 MISI</button>
+    <button id="btn-ad-watch" class="btn-ui" onclick="openAdWatchMission()" style="background:rgba(255,200,0,0.2);border:1px solid rgba(255,200,0,0.5);color:#ffdd00;font-size:9px;animation:adBtnPulse 2s ease-in-out infinite alternate;">📺 TONTON IKLAN</button>
     <button id="btn-skills" class="btn-ui" onclick="openSkills()">⚡ SKILL</button>
     <button id="btn-profile" class="btn-ui" onclick="openProfile()">👤 PROFIL</button>
     <button id="btn-owner" class="btn-ui" onclick="openOwner()">👑 OWNER</button>
@@ -411,19 +415,19 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
     </div>
   </div>
 
-  <!-- LEADERBOARD PANEL (right) -->
+  <!-- LEADERBOARD PANEL (right) - SERVER ONLINE -->
   <div id="lb-panel" style="display:none;" class="panel-box">
     <div class="panel-header" onclick="togglePanel('lb-body','lb-toggle')">
-      <span>🏆 LEADERBOARD</span>
+      <span>🌐 SERVER ONLINE <span id="lb-online-count" style="color:#00ff88;font-size:9px;"></span></span>
       <span class="panel-toggle open" id="lb-toggle">▼</span>
     </div>
-    <div class="panel-body" id="lb-body" style="max-height:300px;">
+    <div class="panel-body" id="lb-body" style="max-height:350px;">
       <div id="lb-tabs">
-        <div class="lb-tab active" onclick="switchLbTab('players')">🌍 Pemain</div>
+        <div class="lb-tab active" onclick="switchLbTab('players')">👥 Online</div>
         <div class="lb-tab" onclick="switchLbTab('fish')">🎣 Mancing</div>
       </div>
-      <div id="lb-list" style="max-height:240px;"></div>
-      <div id="lb-fish-list" style="max-height:240px;display:none;"></div>
+      <div id="lb-list" style="max-height:290px;"></div>
+      <div id="lb-fish-list" style="max-height:290px;display:none;"></div>
     </div>
   </div>
 
@@ -496,8 +500,8 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
   <div id="ad-frame-wrap">
     <iframe id="ad-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
   </div>
-  <div id="ad-countdown">Tahan 10 detik... ⏳ <span id="ad-timer">10</span>s</div>
-  <button id="ad-skip-btn" onclick="closeAdWebview()">✅ KLAIM REWARD</button>
+  <div id="ad-countdown">Tonton iklan 23 detik... ⏳ <span id="ad-timer">23</span>s</div>
+  <button id="ad-skip-btn" onclick="closeAdWebview()">✅ KLAIM REWARD / AMBIL REWARD</button>
 </div>
 
 <script>
@@ -530,7 +534,7 @@ let myPlayerId = null;
 let myData = null;
 let playersDB = {}; // full snapshot
 let playersElements = {};
-let mapContainer = document.getElementById('map-container');
+let mapContainer = document.getElementById('map-world');
 let localSongs = [
   {name:'Lagu Chill 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
   {name:'Lagu Chill 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'},
@@ -542,18 +546,30 @@ let adminSettings = { autoplay: false, loop: true, order: 'sequence' };
 
 // Skills system
 const SKILLS_DEF = [
-  {id:'explode',name:'Ledakin!',icon:'💣',desc:'Ledakkan player',cost:30,effect:'explosion'},
-  {id:'nuke',name:'Nuklir',icon:'☢️',desc:'Kirim nuklir ke player',cost:80,effect:'nuke'},
-  {id:'grenade',name:'Granat',icon:'💥',desc:'Lempar granat',cost:25,effect:'grenade'},
+  {id:'explode',name:'Ledakin!',icon:'💣',desc:'Ledakkan player -40HP',cost:30,effect:'explosion'},
+  {id:'nuke',name:'Nuklir',icon:'☢️',desc:'Kirim nuklir -80HP',cost:80,effect:'nuke'},
+  {id:'grenade',name:'Granat',icon:'💥',desc:'Lempar granat -30HP',cost:25,effect:'grenade'},
   {id:'firework',name:'Mercon',icon:'🎆',desc:'Kirim kembang api',cost:15,effect:'firework'},
   {id:'freeze',name:'Bekukan',icon:'🧊',desc:'Bekukan player 5 detik',cost:20,effect:'freeze'},
-  {id:'bazooka',name:'Bazooka',icon:'🚀',desc:'Tembak bazooka',cost:35,effect:'bazooka'},
-  {id:'santet',name:'Santet',icon:'🪄',desc:'Santet mystik player',cost:40,effect:'santet'},
+  {id:'bazooka',name:'Bazooka',icon:'🚀',desc:'Tembak bazooka -50HP',cost:35,effect:'bazooka'},
+  {id:'santet',name:'Santet',icon:'🪄',desc:'Santet mystik -25HP',cost:40,effect:'santet'},
   {id:'kill',name:'Kill',icon:'☠️',desc:'Bunuh player seketika',cost:60,effect:'kill'},
   {id:'teleport',name:'Teleport',icon:'🌀',desc:'Teleport ke player',cost:10,effect:'teleport'},
-  {id:'shoot',name:'Tembak',icon:'🔫',desc:'Tembak player',cost:20,effect:'shoot'},
+  {id:'shoot',name:'Tembak',icon:'🔫',desc:'Tembak player -20HP',cost:20,effect:'shoot'},
   {id:'punish',name:'Hukum Sapu',icon:'🧹',desc:'Suruh nyapu 5x',cost:15,effect:'sweep'},
-  {id:'love',name:'Cinta',icon:'💖',desc:'Kirim cinta ke player',cost:5,effect:'love'},
+  {id:'love',name:'Cinta',icon:'💖',desc:'Kirim cinta +10HP',cost:5,effect:'love'},
+  {id:'heal',name:'Sembuh',icon:'💊',desc:'Sembuhkan diri +50HP',cost:25,effect:'heal_self'},
+  {id:'shield',name:'Tameng',icon:'🛡️',desc:'Lindungi player +20HP',cost:18,effect:'shield'},
+  {id:'thunder',name:'Petir',icon:'⚡',desc:'Sambaran petir -45HP',cost:38,effect:'thunder'},
+  {id:'poison',name:'Racun',icon:'🐍',desc:'Racuni player -15HP/tik',cost:30,effect:'poison'},
+  {id:'ghost',name:'Hantu',icon:'👻',desc:'Kirim hantu menakut',cost:12,effect:'ghost'},
+  {id:'rainbow',name:'Pelangi',icon:'🌈',desc:'Kirim keberuntungan +SP',cost:20,effect:'rainbow'},
+  {id:'curse',name:'Kutuk',icon:'💀',desc:'Kutuk -semua stat',cost:50,effect:'curse'},
+  {id:'star',name:'Bintang',icon:'⭐',desc:'Beri bintang +XP bonus',cost:10,effect:'star'},
+  {id:'bomb',name:'Bom Waktu',icon:'⏱️',desc:'Bom meledak 3 detik',cost:45,effect:'timebomb'},
+  {id:'dance',name:'Paksa Dansa',icon:'💃',desc:'Paksa player dansa',cost:8,effect:'dance'},
+  {id:'prank',name:'Prank',icon:'🤡',desc:'Prank kocak ke player',cost:6,effect:'prank'},
+  {id:'dragon',name:'Naga Api',icon:'🐉',desc:'Semburan naga -70HP',cost:90,effect:'dragon'},
 ];
 let myActiveSkill = null;
 let mySkillPoints = 0;
@@ -564,10 +580,25 @@ let missions = [
   {id:'fish_rare',title:'Ikan Langka',desc:'Tangkap 1 ikan Langka/Epik/Legendaris',reward:'⚡ 30 Skill Poin',progress:0,target:1,completed:false,action:'skillpoints30'},
   {id:'chat10',title:'Rajin Ngobrol',desc:'Kirim 10 pesan chat',reward:'🎰 2x Spin',progress:0,target:10,completed:false,action:'spin2'},
   {id:'chill3',title:'Santai Dulu',desc:'Kunjungi Chill Zone 3x',reward:'⚡ 20 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints20'},
-  {id:'watch_ad',title:'Nonton Iklan',desc:'Tonton 1 iklan full 10 detik',reward:'🎰 3x Spin + 50 SP',progress:0,target:1,completed:false,action:'spin3_sp50'},
+  {id:'watch_ad',title:'Nonton Iklan',desc:'Tonton 1 iklan full 23 detik',reward:'🎰 3x Spin + 50 SP',progress:0,target:1,completed:false,action:'spin3_sp50'},
   {id:'fish10',title:'Master Pancing',desc:'Tangkap 10 ikan',reward:'⚡ 60 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints60'},
   {id:'level5',title:'Naik Level',desc:'Capai Level 5',reward:'🎰 5x Spin',progress:0,target:5,completed:false,action:'spin5'},
   {id:'kill_skill',title:'Jagoan Jahat',desc:'Gunakan skill ke player lain 3x',reward:'⚡ 40 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints40'},
+  // NEW MISSIONS
+  {id:'fish20',title:'Legenda Pancing',desc:'Tangkap 20 ikan total',reward:'🎰 3x Spin + 80 SP',progress:0,target:20,completed:false,action:'spin3_sp80'},
+  {id:'fish_myth',title:'Pemburu Mitos',desc:'Tangkap ikan Mitos (Naga Laut/Peri Air)',reward:'🎰 10x Spin',progress:0,target:1,completed:false,action:'spin10'},
+  {id:'chat50',title:'Chatmaster',desc:'Kirim 50 pesan chat',reward:'⚡ 100 Skill Poin',progress:0,target:50,completed:false,action:'skillpoints100'},
+  {id:'chill10',title:'Raja Chill',desc:'Kunjungi Chill Zone 10x',reward:'🎰 3x Spin',progress:0,target:10,completed:false,action:'spin3'},
+  {id:'watch_ad3',title:'Nonton Iklan 3x',desc:'Tonton 3 iklan penuh',reward:'🎰 10x Spin + 150 SP',progress:0,target:3,completed:false,action:'spin10_sp150'},
+  {id:'level10',title:'Veteran',desc:'Capai Level 10',reward:'🎰 8x Spin + 200 SP',progress:0,target:10,completed:false,action:'spin8_sp200'},
+  {id:'skill10',title:'Dukun Sakti',desc:'Gunakan skill 10x',reward:'⚡ 80 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints80'},
+  {id:'spin5',title:'Penjudi Handal',desc:'Lakukan 5x spin wheel',reward:'⚡ 50 Skill Poin',progress:0,target:5,completed:false,action:'skillpoints50'},
+  {id:'respawn3',title:'Pantang Menyerah',desc:'Respawn sebanyak 3x',reward:'🎰 2x Spin + 30 SP',progress:0,target:3,completed:false,action:'spin2_sp30'},
+  {id:'fish_epik',title:'Kolektor Epik',desc:'Tangkap 3 ikan Epik',reward:'🎰 4x Spin',progress:0,target:3,completed:false,action:'spin4'},
+  {id:'login7',title:'Setia',desc:'Login selama 7 sesi',reward:'⚡ 120 Skill Poin',progress:0,target:7,completed:false,action:'skillpoints120'},
+  {id:'chat_skill',title:'Jago Skill Chat',desc:'Gunakan skill sambil chat 5x',reward:'🎰 3x Spin',progress:0,target:5,completed:false,action:'spin3'},
+  {id:'fish50',title:'Dewa Pancing',desc:'Tangkap 50 ikan total',reward:'🎰 15x Spin',progress:0,target:50,completed:false,action:'spin15'},
+  {id:'level20',title:'Sultan Level',desc:'Capai Level 20',reward:'🎰 20x Spin + 500 SP',progress:0,target:20,completed:false,action:'spin20_sp500'},
 ];
 let savedMissions = {};
 let spinTokens = 0;
@@ -617,73 +648,96 @@ function requestFullScreen(){
 }
 
 // ===== BUILD DECORATIONS =====
+const MAP_W=3000, MAP_H=2000;
 function buildDecorations(){
   const world=document.getElementById('map-world');
-  for(let i=0;i<25;i++){
+  // Grass patches
+  for(let i=0;i<60;i++){
     let g=document.createElement('div');g.className='grass-patch';
-    let s=28+Math.random()*70;
-    g.style.cssText=`position:absolute;width:${s}px;height:${s}px;left:${Math.random()*90}%;top:${Math.random()*90}%;opacity:0.5;z-index:2;`;
+    let s=28+Math.random()*90;
+    g.style.cssText=`position:absolute;width:${s}px;height:${s}px;left:${60+Math.random()*(MAP_W-120)}px;top:${60+Math.random()*(MAP_H-120)}px;opacity:0.5;z-index:2;`;
     world.appendChild(g);
   }
+  // Trees (pixel positions)
   const treePos=[
-    {x:'8%',y:'10%'},{x:'8%',y:'30%'},{x:'8%',y:'55%'},{x:'8%',y:'75%'},
-    {x:'16%',y:'85%'},{x:'32%',y:'88%'},{x:'60%',y:'88%'},{x:'76%',y:'83%'},
-    {x:'86%',y:'68%'},{x:'88%',y:'42%'},{x:'88%',y:'20%'},{x:'74%',y:'7%'},
-    {x:'54%',y:'4%'},{x:'34%',y:'4%'},
+    {x:90,y:120},{x:90,y:400},{x:90,y:700},{x:90,y:1000},{x:90,y:1300},{x:90,y:1700},
+    {x:300,y:1850},{x:600,y:1880},{x:1000,y:1880},{x:1400,y:1880},{x:1800,y:1880},{x:2200,y:1870},{x:2600,y:1860},{x:2880,y:1800},
+    {x:2880,y:1500},{x:2880,y:1200},{x:2880,y:900},{x:2880,y:600},{x:2880,y:300},{x:2700,y:90},{x:2400,y:80},{x:2000,y:70},
+    {x:1600,y:70},{x:1200,y:70},{x:800,y:70},{x:400,y:80},
+    // Extra interior trees
+    {x:500,y:500},{x:1500,y:500},{x:2400,y:600},{x:600,y:1100},{x:2300,y:1200},{x:1200,y:1500},
   ];
   treePos.forEach(pos=>{
     let t=document.createElement('div');t.className='tree';
-    let tw=22+Math.random()*12,th=tw*1.1;
-    t.style.cssText=`position:absolute;left:${pos.x};top:${pos.y};z-index:4;pointer-events:none;`;
+    let tw=24+Math.random()*16,th=tw*1.1;
+    t.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
     t.innerHTML=`<div class="tree-top" style="width:${tw}px;height:${th}px;"></div><div class="tree-trunk" style="width:${tw*0.3}px;height:${tw*0.4}px;"></div>`;
     world.appendChild(t);
   });
+  // Lamp posts (pixel positions)
   const lampPos=[
-    {x:'22%',y:'34%'},{x:'50%',y:'34%'},{x:'72%',y:'34%'},
-    {x:'22%',y:'67%'},{x:'50%',y:'67%'},{x:'72%',y:'64%'},
+    {x:450,y:450},{x:900,y:450},{x:1500,y:450},{x:2100,y:450},{x:2600,y:450},
+    {x:450,y:950},{x:900,y:950},{x:1500,y:950},{x:2100,y:950},{x:2600,y:950},
+    {x:450,y:1200},{x:900,y:1200},{x:1500,y:1200},{x:2100,y:1200},{x:2600,y:1200},
   ];
   lampPos.forEach(pos=>{
     let l=document.createElement('div');l.className='lamp-post';
-    l.style.cssText=`position:absolute;left:${pos.x};top:${pos.y};z-index:4;pointer-events:none;`;
+    l.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
     l.innerHTML=`<div class="lamp-light"></div><div class="lamp-pole" style="height:33px;"></div>`;
     world.appendChild(l);
   });
   // Fish in pond
   const pond=document.getElementById('pond');
-  ['🐟','🐠','🐡','🐟'].forEach((f,i)=>{
+  ['🐟','🐠','🐡','🐟','🐠','🦈'].forEach((f,i)=>{
     let fe=document.createElement('div');fe.className='fish';
     fe.innerText=f;
     fe.style.cssText=`left:${10+Math.random()*60}%;top:${20+Math.random()*50}%;animation-delay:${i*1.5}s;animation-duration:${5+Math.random()*3}s;`;
     pond.appendChild(fe);
   });
-  // Paths
+  // Paths (pixel)
   let ph=document.createElement('div');ph.className='path path-h';
-  ph.style.cssText='position:absolute;left:3%;right:3%;top:40%;z-index:2;';
+  ph.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.5}px;z-index:2;`;
   world.appendChild(ph);
+  let ph2=document.createElement('div');ph2.className='path path-h';
+  ph2.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.72}px;z-index:2;`;
+  world.appendChild(ph2);
   let pv=document.createElement('div');pv.className='path path-v';
-  pv.style.cssText='position:absolute;left:49%;top:30%;bottom:58%;z-index:2;';
+  pv.style.cssText=`position:absolute;left:${MAP_W*0.5}px;top:400px;height:${MAP_H-450}px;z-index:2;`;
   world.appendChild(pv);
-  // Particles
-  for(let i=0;i<12;i++){
+  let pv2=document.createElement('div');pv2.className='path path-v';
+  pv2.style.cssText=`position:absolute;left:${MAP_W*0.3}px;top:400px;height:400px;z-index:2;`;
+  world.appendChild(pv2);
+  // Particles near stage
+  for(let i=0;i<18;i++){
     let p=document.createElement('div');p.className='particle';
     let cols=['#00d2ff','#ff00ff','#ffcc00','#00ff88'];
-    p.style.cssText=`position:absolute;left:${25+Math.random()*50}%;top:${20+Math.random()*10}%;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${(Math.random()-0.5)*40}px;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
+    p.style.cssText=`position:absolute;left:${900+Math.random()*1200}px;top:${200+Math.random()*200}px;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${(Math.random()-0.5)*40}px;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
     world.appendChild(p);
   }
   // Firework tool on map
   let fw=document.createElement('div');fw.className='firework-tool';
-  fw.innerText='🎆';fw.title='Kembang Api (dekat sini dan tekan F)';
-  fw.style.cssText='position:absolute;left:55%;top:42%;z-index:4;';
+  fw.innerText='🎆';fw.title='Kembang Api';
+  fw.style.cssText=`position:absolute;left:1700px;top:600px;z-index:4;`;
   world.appendChild(fw);
-  // Visualizer bars
+  // Visualizer bars (under stage)
   const viz=document.getElementById('visualizer');
-  for(let i=0;i<20;i++){
+  for(let i=0;i<28;i++){
     let b=document.createElement('div');b.className='viz-bar';
     b.style.setProperty('--h',(8+Math.random()*22)+'px');
     b.style.animationDelay=(Math.random()*0.5)+'s';
     b.style.animationDuration=(0.3+Math.random()*0.4)+'s';
     viz.appendChild(b);
   }
+  // Extra: benches in chill zone
+  let bench=document.createElement('div');
+  bench.style.cssText=`position:absolute;top:1380px;right:200px;font-size:24px;z-index:4;pointer-events:none;`;
+  bench.innerText='🪑🪑';world.appendChild(bench);
+  let bench2=document.createElement('div');
+  bench2.style.cssText=`position:absolute;top:1460px;right:220px;font-size:20px;z-index:4;pointer-events:none;`;
+  bench2.innerText='☕🍵🧋';world.appendChild(bench2);
+  let bench3=document.createElement('div');
+  bench3.style.cssText=`position:absolute;top:1430px;right:320px;font-size:18px;z-index:4;pointer-events:none;`;
+  bench3.innerText='🪴🌿';world.appendChild(bench3);
 }
 
 // ===== START GAME =====
@@ -716,7 +770,7 @@ window.startGame = async () => {
       hp:100,thirst:100,level:myLevel,xp:myXp,alive:true};
   } else {
     myPlayerId='usr_'+Math.random().toString(36).substr(2,6);
-    myData={username,age,gender,x:window.innerWidth/2,y:window.innerHeight/2,
+    myData={username,age,gender,x:MAP_W/2,y:MAP_H/2,
       joinTime:Date.now(),hp:100,thirst:100,level:1,xp:0,alive:true};
     // Save username mapping
     set(usersRef,{playerId:myPlayerId,age,gender,xp:0,level:1,fishScore:0,fishCount:0,skillPoints:0,spinTokens:0,unlockedSkills:['firework','teleport','love'],missions:{}});
@@ -730,6 +784,12 @@ window.startGame = async () => {
   document.getElementById('dpad').style.display='grid';
 
   buildDecorations();
+  // Initialize camera position immediately
+  camX = myData.x - window.innerWidth/2 + 17;
+  camY = myData.y - window.innerHeight/2 + 30;
+  camX = Math.max(0,Math.min(MAP_W-window.innerWidth,camX));
+  camY = Math.max(0,Math.min(MAP_H-window.innerHeight,camY));
+  document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
   const myRef=ref(db,'players/'+myPlayerId);
   set(myRef,myData);
   onDisconnect(myRef).remove();
@@ -845,21 +905,29 @@ function renderLeaderboard(){
   lbList.innerHTML='';
   let arr=Object.keys(playersDB).map(k=>({id:k,...playersDB[k]}));
   arr.sort((a,b)=>(b.level||1)-(a.level||1)||(b.xp||0)-(a.xp||0));
-  arr.slice(0,10).forEach((p,i)=>{
+  // Update online count
+  const countEl=document.getElementById('lb-online-count');
+  if(countEl) countEl.innerText=`(${arr.length} online)`;
+  arr.slice(0,15).forEach((p,i)=>{
     let min=Math.floor((Date.now()-(p.joinTime||Date.now()))/60000);
+    let hrs=Math.floor(min/60),mins=min%60;
+    let timeStr=hrs>0?`${hrs}j ${mins}m`:`${mins}m`;
     let item=document.createElement('div');item.className='lb-item';
     let rank=['🥇','🥈','🥉'][i]||`#${i+1}`;
+    let genderIcon=p.gender==='Perempuan'?'👧':'👦';
+    let isMe=p.id===myPlayerId;
     item.innerHTML=`
-      <div style="display:flex;align-items:center;gap:5px;">
-        <div class="lb-dot" style="${p.id===myPlayerId?'background:#ffcc00;box-shadow:0 0 5px #ffcc00':''}"></div>
-        <div>
-          <div class="lb-name">${rank} ${p.username}${p.id===myPlayerId?' <span style="color:#ffcc00;font-size:8px;">YOU</span>':''}</div>
-          <div class="lb-detail">${p.age||'?'}·${(p.gender||'L').charAt(0)} | ⏱${min}m</div>
+      <div style="display:flex;align-items:center;gap:5px;width:100%;">
+        <div class="lb-dot" style="${isMe?'background:#ffcc00;box-shadow:0 0 5px #ffcc00':''}"></div>
+        <div style="flex:1;min-width:0;">
+          <div class="lb-name" style="${isMe?'color:#ffcc00':''}">${rank} ${p.username||'?'}${isMe?' <span style="color:#ffcc00;font-size:8px;">YOU</span>':''}</div>
+          <div class="lb-detail">${genderIcon} ${p.age||'?'} thn · ⏱${timeStr}</div>
+          <div style="display:flex;gap:4px;margin-top:2px;">
+            <span style="font-size:8px;background:rgba(255,136,0,0.2);padding:1px 4px;border-radius:4px;color:#ff8800;">Lv.${p.level||1}</span>
+            <span style="font-size:8px;background:rgba(0,204,255,0.15);padding:1px 4px;border-radius:4px;color:#00ccff;">🎣${p.fishCount||0}</span>
+            <span style="font-size:8px;background:rgba(255,200,0,0.15);padding:1px 4px;border-radius:4px;color:#ffcc00;">${p.xp||0}XP</span>
+          </div>
         </div>
-      </div>
-      <div class="lb-right">
-        <div class="lb-level">Lv.${p.level||1}</div>
-        <div class="lb-time">${p.xp||0} XP</div>
       </div>
     `;
     lbList.appendChild(item);
@@ -1047,6 +1115,57 @@ function handleIncomingEvent(ev){
     case 'love':
       showEffect('💖');myHp=Math.min(100,myHp+10);updateMyBars();
       push(ref(db,'chats'),{system:true,text:`💖 ${from} mengirim cinta ke ${myData.username}! +10 HP`});break;
+    case 'heal_self':
+      showEffect('💊');myHp=Math.min(100,myHp+50);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💊 ${myData.username} menyembuhkan diri sendiri! +50 HP`});break;
+    case 'shield':
+      showEffect('🛡️');myHp=Math.min(100,myHp+20);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🛡️ ${from} melindungi ${myData.username}! +20 HP`});break;
+    case 'thunder':
+      showEffect('⚡');myHp=Math.max(0,myHp-45);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`⚡ ${from} menyambar ${myData.username} dengan petir! -45 HP`});
+      checkDeath();break;
+    case 'poison':
+      showEffect('🐍');
+      push(ref(db,'chats'),{system:true,text:`🐍 ${from} meracuni ${myData.username}!`});
+      let poisonTick=0;
+      let poisonInterval=setInterval(()=>{
+        myHp=Math.max(0,myHp-5);updateMyBars();showFloatingText(myPlayerId,'🐍 -5HP',myData.x,myData.y);
+        poisonTick++;if(poisonTick>=3||myHp<=0){clearInterval(poisonInterval);checkDeath();}
+      },2000);
+      break;
+    case 'ghost':
+      showEffect('👻');
+      push(ref(db,'chats'),{system:true,text:`👻 ${from} mengirim hantu ke ${myData.username}! BOO!`});break;
+    case 'rainbow':
+      showEffect('🌈');addSkillPoints(10);
+      push(ref(db,'chats'),{system:true,text:`🌈 ${from} memberi keberuntungan ke ${myData.username}! +10 SP`});break;
+    case 'curse':
+      showEffect('💀');myHp=Math.max(0,myHp-30);myThirst=Math.max(0,myThirst-30);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💀 ${from} mengutuk ${myData.username}! -30HP -30Thirst`});
+      checkDeath();break;
+    case 'star':
+      showEffect('⭐');addXp(20);
+      push(ref(db,'chats'),{system:true,text:`⭐ ${from} memberi bintang ke ${myData.username}! +20 XP`});break;
+    case 'timebomb':
+      showEffect('⏱️');
+      push(ref(db,'chats'),{system:true,text:`⏱️ ${from} pasang bom waktu ke ${myData.username}!`});
+      setTimeout(()=>{
+        showEffect('💣');myHp=Math.max(0,myHp-45);updateMyBars();
+        push(ref(db,'chats'),{system:true,text:`💥 BOM WAKTU meledak di ${myData.username}! -45 HP`});
+        checkDeath();
+      },3000);
+      break;
+    case 'dance':
+      showEffect('💃');
+      push(ref(db,'chats'),{system:true,text:`💃 ${from} memaksa ${myData.username} untuk dansa! 🕺`});break;
+    case 'prank':
+      showEffect('🤡');
+      push(ref(db,'chats'),{system:true,text:`🤡 ${from} memprank ${myData.username}! HAHAHA`});break;
+    case 'dragon':
+      showEffect('🐉');myHp=Math.max(0,myHp-70);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🐉 ${from} melepas naga api ke ${myData.username}! -70 HP`});
+      checkDeath();break;
   }
 }
 
@@ -1057,9 +1176,12 @@ function showEffect(emoji){
   setTimeout(()=>el.remove(),1000);
 }
 
-function showFloatingText(pid,text,x,y){
+function showFloatingText(pid,text,wx,wy){
+  // Convert world coords to screen coords
+  let sx=(wx||MAP_W/2)-camX;
+  let sy=(wy||MAP_H/2)-camY-40;
   let el=document.createElement('div');el.className='status-effect';
-  el.innerText=text;el.style.cssText=`position:fixed;left:${x||window.innerWidth/2}px;top:${(y||window.innerHeight/2)-40}px;font-size:14px;font-weight:700;color:#ff4444;pointer-events:none;z-index:400;`;
+  el.innerText=text;el.style.cssText=`position:fixed;left:${sx}px;top:${sy}px;font-size:14px;font-weight:700;color:#ff4444;pointer-events:none;z-index:400;`;
   document.body.appendChild(el);setTimeout(()=>el.remove(),2000);
 }
 
@@ -1075,7 +1197,7 @@ function checkDeath(){
 
 function respawn(){
   myHp=100;myThirst=100;isAlive=true;isFrozen=false;isSweeping=false;
-  myData.x=window.innerWidth/2;myData.y=window.innerHeight/2;
+  myData.x=MAP_W/2;myData.y=MAP_H/2;
   myData.hp=100;myData.thirst=100;myData.alive=true;myData.frozen=false;myData.sweeping=false;
   set(ref(db,'players/'+myPlayerId),myData);
   updateMyBars();
@@ -1118,11 +1240,10 @@ function updateMyBars(){
 }
 
 function isNearChillZone(){
-  const cz=document.getElementById('chill-zone');
-  const r=cz.getBoundingClientRect();
-  const cx=r.left+r.width/2,cy=r.top+r.height/2;
   if(!myData) return false;
-  return Math.hypot(myData.x-cx,myData.y-cy)<r.width*0.8;
+  // Chill zone center in world coords: right:120px from right of 3000px map = left:2540, top:1300, size 340px
+  const cx=2540+170, cy=1300+170;
+  return Math.hypot(myData.x-cx,myData.y-cy)<200;
 }
 
 // ===== MOVEMENT =====
@@ -1138,12 +1259,11 @@ window.move=d=>moveDir=d;
 window.stopMove=()=>moveDir=null;
 
 function getFenceBounds(){
-  const W=window.innerWidth,H=window.innerHeight;
-  return{minX:W*0.03,maxX:W*0.94,minY:H*0.05,maxY:H*0.93};
+  return{minX:50,maxX:MAP_W-60,minY:50,maxY:MAP_H-70};
 }
 
 function startGameLoop(){
-  const speed=4;
+  const speed=5;
   setInterval(()=>{
     if(!myData||!isAlive) return;
     if(isFrozen||isSweeping) return;
@@ -1157,16 +1277,36 @@ function startGameLoop(){
     if(moved){
       myData.x=Math.max(b.minX,Math.min(b.maxX-34,nx));
       myData.y=Math.max(b.minY,Math.min(b.maxY-54,ny));
-      // Chill zone check
+      // Chill zone check (use world coords)
       if(isNearChillZone()){
         if(!myData._lastChill||Date.now()-myData._lastChill>8000){
           myData._lastChill=Date.now();
           chillVisits++;updateMission('chill3',1);
+          updateMission('chill10',1);
         }
       }
-      set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp});
+      set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp,fishCount:myFishCount||0});
     }
+    // Always update camera (smooth follow)
+    updateCamera();
   },30);
+}
+
+// Camera follow system
+let camX=0,camY=0;
+function updateCamera(){
+  if(!myData) return;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  // Center player on screen
+  let targetCamX=myData.x - vw/2 + 17;
+  let targetCamY=myData.y - vh/2 + 30;
+  // Clamp so we don't show outside map
+  targetCamX=Math.max(0,Math.min(MAP_W-vw,targetCamX));
+  targetCamY=Math.max(0,Math.min(MAP_H-vh,targetCamY));
+  // Smooth interpolation
+  camX+=(targetCamX-camX)*0.12;
+  camY+=(targetCamY-camY)*0.12;
+  document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
 }
 
 // ===== FISHING =====
@@ -1181,14 +1321,29 @@ const fishPool=[
   {name:'Ikan Salmon',emoji:'🐟',rarity:'Biasa',points:7,xp:4},
   {name:'Ikan Nemo',emoji:'🐠',rarity:'Langka',points:25,xp:18},
   {name:'Paus Mini',emoji:'🐳',rarity:'Legendaris',points:120,xp:70},
+  {name:'Ikan Tuna',emoji:'🐟',rarity:'Biasa',points:10,xp:6},
+  {name:'Ikan Lele',emoji:'🐟',rarity:'Biasa',points:6,xp:3},
+  {name:'Kepiting',emoji:'🦀',rarity:'Langka',points:30,xp:20},
+  {name:'Udang Raksasa',emoji:'🦐',rarity:'Langka',points:28,xp:17},
+  {name:'Gurita',emoji:'🐙',rarity:'Epik',points:60,xp:38},
+  {name:'Penyu Emas',emoji:'🐢',rarity:'Epik',points:55,xp:35},
+  {name:'Hiu Putih',emoji:'🦈',rarity:'Legendaris',points:150,xp:90},
+  {name:'Naga Laut',emoji:'🐲',rarity:'Mitos',points:300,xp:200},
+  {name:'Peri Air',emoji:'🧚',rarity:'Mitos',points:250,xp:180},
+  {name:'Kaleng Rusak',emoji:'🥫',rarity:'Sampah',points:0,xp:0},
+  {name:'Sepatu Bolong',emoji:'👟',rarity:'Sampah',points:0,xp:0},
+  {name:'Mutiara',emoji:'🪨',rarity:'Langka',points:35,xp:22},
+  {name:'Ikan Dori',emoji:'🐠',rarity:'Biasa',points:9,xp:5},
+  {name:'Belut Listrik',emoji:'🐍',rarity:'Epik',points:70,xp:45},
+  {name:'Ikan Pelangi',emoji:'🌈',rarity:'Legendaris',points:130,xp:80},
 ];
 let isFishing=false;
 
 function isNearPond(){
-  const pond=document.getElementById('pond');
-  const pr=pond.getBoundingClientRect();
-  const cx=pr.left+pr.width/2,cy=pr.top+pr.height/2;
-  return myData&&Math.hypot(myData.x-cx,myData.y-cy)<pr.width*0.9;
+  if(!myData) return false;
+  // Pond: left:60, top:1300, width:440, height:280 -> center approx 280,1440
+  const cx=60+220, cy=1300+140;
+  return Math.hypot(myData.x-cx,myData.y-cy)<280;
 }
 
 window.tryFish=()=>{
@@ -1199,25 +1354,46 @@ window.tryFish=()=>{
   setTimeout(()=>{
     let roll=Math.random();
     let fish;
-    if(roll<0.04) fish=fishPool[4];
-    else if(roll<0.07) fish=fishPool[9];
-    else if(roll<0.15) fish=fishPool[2];
-    else if(roll<0.25) fish=fishPool[1];
-    else if(roll<0.35) fish=fishPool[8];
-    else if(roll<0.45) fish=fishPool[3];
-    else if(roll<0.5) fish=fishPool[7];
-    else if(roll<0.6) fish=fishPool[5];
-    else if(roll<0.7) fish=fishPool[6];
-    else fish=fishPool[0];
+    if(roll<0.01) fish=fishPool[17]; // Naga Laut Mitos
+    else if(roll<0.02) fish=fishPool[18]; // Peri Air Mitos
+    else if(roll<0.04) fish=fishPool[4]; // Lumba-lumba Legendaris
+    else if(roll<0.06) fish=fishPool[9]; // Paus Mini Legendaris
+    else if(roll<0.08) fish=fishPool[24]; // Ikan Pelangi Legendaris
+    else if(roll<0.10) fish=fishPool[16]; // Hiu Putih Legendaris
+    else if(roll<0.13) fish=fishPool[2]; // Hiu Mini Epik
+    else if(roll<0.16) fish=fishPool[14]; // Gurita Epik
+    else if(roll<0.19) fish=fishPool[15]; // Penyu Emas Epik
+    else if(roll<0.22) fish=fishPool[23]; // Belut Listrik Epik
+    else if(roll<0.26) fish=fishPool[1]; // Koi Langka
+    else if(roll<0.30) fish=fishPool[8]; // Nemo Langka
+    else if(roll<0.34) fish=fishPool[12]; // Kepiting Langka
+    else if(roll<0.38) fish=fishPool[13]; // Udang Langka
+    else if(roll<0.42) fish=fishPool[21]; // Mutiara Langka
+    else if(roll<0.48) fish=fishPool[3]; // Buntal Biasa
+    else if(roll<0.54) fish=fishPool[7]; // Salmon Biasa
+    else if(roll<0.58) fish=fishPool[22]; // Dori Biasa
+    else if(roll<0.62) fish=fishPool[10]; // Tuna Biasa
+    else if(roll<0.66) fish=fishPool[11]; // Lele Biasa
+    else if(roll<0.70) fish=fishPool[0]; // Mas Biasa
+    else if(roll<0.74) fish=fishPool[5]; // Sampah
+    else if(roll<0.78) fish=fishPool[6]; // Batu
+    else if(roll<0.84) fish=fishPool[19]; // Kaleng
+    else fish=fishPool[20]; // Sepatu
     showFishResult(fish);
     isFishing=false;hideFishStatus();
     // Update missions
     if(fish.points>0){
-      updateMission('fish5',1);updateMission('fish10',1);myFishCount++;myFishScore+=fish.points;
-      if(fish.rarity!=='Biasa'&&fish.rarity!=='Sampah') updateMission('fish_rare',1);
+      updateMission('fish5',1);updateMission('fish10',1);updateMission('fish20',1);updateMission('fish50',1);
+      myFishCount++;myFishScore+=fish.points;
+      if(fish.rarity==='Langka') updateMission('fish_rare',1);
+      if(fish.rarity==='Epik'){updateMission('fish_rare',1);updateMission('fish_epik',1);}
+      if(fish.rarity==='Legendaris'){updateMission('fish_rare',1);}
+      if(fish.rarity==='Mitos'){updateMission('fish_rare',1);updateMission('fish_myth',1);}
       addXp(fish.xp);
       // Save fish score
       set(ref(db,'fish_scores/'+myData.username),{score:myFishScore,count:myFishCount});
+      // Also store fishCount in player data for leaderboard
+      myData.fishCount=myFishCount;
       saveUserData();
     }
     if(fish.points>0){
@@ -1231,7 +1407,7 @@ function hideFishStatus(){setTimeout(()=>document.getElementById('fish-status').
 
 function showFishResult(fish){
   let ov=document.createElement('div');ov.className='popup-overlay';
-  const cols={Biasa:'#aaa',Langka:'#00ccff',Epik:'#cc00ff',Legendaris:'#ffcc00',Sampah:'#888'};
+  const cols={Biasa:'#aaa',Langka:'#00ccff',Epik:'#cc00ff',Legendaris:'#ffcc00',Mitos:'#ff4400',Sampah:'#888'};
   ov.innerHTML=`<div class="popup-box" style="max-width:300px;text-align:center;">
     <button class="popup-close" onclick="this.closest('.popup-overlay').remove()">✕</button>
     <h3>🎣 HASIL MANCING!</h3>
@@ -1252,6 +1428,8 @@ function addXp(amount){
   while(myXp>=needed){myXp-=needed;myLevel++;needed=myLevel*100;addSkillPoints(10);}
   myData.xp=myXp;myData.level=myLevel;
   updateMission('level5',myLevel>=5?5:myLevel);
+  updateMission('level10',myLevel>=10?10:myLevel);
+  updateMission('level20',myLevel>=20?20:myLevel);
   saveUserData();
 }
 function addSkillPoints(n){mySkillPoints+=n;saveUserData();}
@@ -1331,7 +1509,7 @@ window.executeSkill=(skillId,targetId,targetName)=>{
   }
   // Send event to target
   push(ref(db,'events/'+targetId),{type:sk.effect,from:myData.username});
-  updateMission('kill_skill',1);
+  updateMission('kill_skill',1);updateMission('skill10',1);updateMission('chat_skill',1);
   saveUserData();
   push(ref(db,'chats'),{skill:true,text:`${myData.username} menggunakan ${sk.icon}${sk.name} ke ${targetName}!`});
 };
@@ -1373,6 +1551,7 @@ let isSpinning=false;
 window.doSpin=()=>{
   if(spinTokens<=0||isSpinning) return;
   spinTokens--;isSpinning=true;
+  updateMission('spin5',1);
   document.getElementById('btn-spin').disabled=true;
   const canvas=document.getElementById('spin-canvas');
   const ctx=canvas.getContext('2d');
@@ -1446,18 +1625,14 @@ window.claimMission=(id)=>{
   if(!m||m.completed||m.progress<m.target) return;
   m.completed=true;
   const a=m.action;
-  if(a.startsWith('spin')){
-    let n=parseInt(a.replace('spin','').split('_')[0])||1;
-    spinTokens+=n;
-  }
-  if(a.includes('sp')){
-    let sp=parseInt(a.split('sp')[1])||0;
-    addSkillPoints(sp);
-  }
-  if(a==='skillpoints30') addSkillPoints(30);
-  if(a==='skillpoints20') addSkillPoints(20);
-  if(a==='skillpoints60') addSkillPoints(60);
-  if(a==='skillpoints40') addSkillPoints(40);
+  // Parse spin count: spin, spin2, spin3, spin10, spin15, spin20
+  let spinMatch=a.match(/spin(\d*)/);
+  if(spinMatch) spinTokens+=parseInt(spinMatch[1]||'1')||1;
+  // Parse sp count: sp50, sp80, sp100, sp150, sp200, sp500
+  let spMatch=a.match(/sp(\d+)/);
+  if(spMatch) addSkillPoints(parseInt(spMatch[1]));
+  // Legacy skillpoints format
+  if(a.startsWith('skillpoints')) addSkillPoints(parseInt(a.replace('skillpoints',''))||0);
   saveUserData();
   document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
   openMissions();
@@ -1476,6 +1651,7 @@ window.openAdWatchMission=()=>{
   document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
   openAdWebview(()=>{
     updateMission('watch_ad',1);
+    updateMission('watch_ad3',1);
     saveUserData();
     alert('🎉 Reward diklaim! Cek misi untuk klaim hadiah.');
     // Refresh ad (without page reload)
@@ -1495,35 +1671,43 @@ function openAdWebview(onComplete){
   const ov=document.getElementById('ad-webview-overlay');
   ov.style.display='flex';
   let iframe=document.getElementById('ad-iframe');
-  iframe.src='about:blank';
-  // Load ad content
-  setTimeout(()=>{
-    iframe.srcdoc=`<!DOCTYPE html><html><body style="margin:0;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;height:250px;color:white;font-family:sans-serif;">
-      <script>atOptions={'key':'93587828435852943b1acdaa744d23ee','format':'iframe','height':250,'width':320,'params':{}}<\/script>
-      <script src="https://www.highperformanceformat.com/93587828435852943b1acdaa744d23ee/invoke.js"><\/script>
-      <p style="font-size:12px;color:#888;margin-top:10px;">Iklan sedang dimuat...</p>
-    </body></html>`;
-  },500);
-  let t=10;
+  iframe.src='https://hangoutdj.vercel.app/iklan.html';
+  let t=23;
   document.getElementById('ad-timer').innerText=t;
   document.getElementById('ad-skip-btn').style.display='none';
   let cd=document.getElementById('ad-countdown');
   cd.style.display='block';
+  cd.innerHTML='Tonton iklan 23 detik... ⏳ <span id="ad-timer">'+t+'</span>s';
+  window._adCallback=onComplete;
   let ti=setInterval(()=>{
-    t--;document.getElementById('ad-timer').innerText=t;
+    t--;
+    let timerEl=document.getElementById('ad-timer');
+    if(timerEl) timerEl.innerText=t;
     if(t<=0){
       clearInterval(ti);
       document.getElementById('ad-skip-btn').style.display='block';
-      cd.innerText='✅ Iklan selesai! Klaim reward kamu.';
-      window._adCallback=onComplete;
+      cd.innerText='✅ Iklan selesai! Klik KLAIM REWARD untuk ambil hadiah.';
     }
   },1000);
+  // Store interval ref to clear if needed
+  ov._timerInterval=ti;
 }
 
 window.closeAdWebview=()=>{
-  document.getElementById('ad-webview-overlay').style.display='none';
+  const ov=document.getElementById('ad-webview-overlay');
+  ov.style.display='none';
+  // Auto-refresh iframe (generate new ad impression)
+  let iframe=document.getElementById('ad-iframe');
+  if(iframe){
+    setTimeout(()=>{
+      iframe.src='about:blank';
+      setTimeout(()=>{ iframe.src='https://hangoutdj.vercel.app/iklan.html'; },300);
+    },500);
+  }
   if(window._adCallback){window._adCallback();window._adCallback=null;}
 };
+
+// closeAdWebview defined above with openAdWebview
 
 // ===== PROFILE POPUP =====
 window.openProfile=()=>{
@@ -1708,6 +1892,7 @@ function pingTimer(){if(myData) set(ref(db,'players/'+myPlayerId+'/lastPing'),Da
 
 <style>
 @keyframes fishJump{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+@keyframes adBtnPulse{from{box-shadow:0 0 4px rgba(255,200,0,0.3)}to{box-shadow:0 0 12px rgba(255,200,0,0.8);}}
 </style>
 </body>
 </html>
