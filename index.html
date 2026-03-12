@@ -17,7 +17,7 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 @media(orientation:portrait){#rotate-overlay{display:flex;}#app{display:none!important;}}
 
 /* APP */
-#app{width:100vw;height:100vh;position:relative;overflow:hidden;display:flex;background:#1a1a2e;}
+#app{width:100vw;height:100vh;position:relative;overflow:hidden;background:#1a1a2e;}
 
 /* LOGIN */
 #login-screen{position:absolute;inset:0;z-index:1000;background:radial-gradient(ellipse at 50% 0%,#0d2444 0%,#060610 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
@@ -34,25 +34,31 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 
 /* MAP */
 #map-container{position:absolute;inset:0;z-index:1;overflow:hidden;}
-/* Map world is LARGE - camera will move it via transform */
-#map-world{position:absolute;width:3000px;height:2000px;background:#1c2a1c;transform-origin:0 0;}
-.floor-grass{position:absolute;top:0;left:0;width:3000px;height:2000px;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),linear-gradient(160deg,#1e3a1e 0%,#2a4a20 40%,#1a3018 100%);}
-.grass-patch{position:absolute;border-radius:50%;background:radial-gradient(circle,#2d5a20,transparent 70%);pointer-events:none;}
+#map-world{position:absolute;width:2000px;height:1500px;transform-origin:0 0;}
+.floor-grass{position:absolute;top:0;left:0;width:1400px;height:1500px;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.07) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.07) 40px),linear-gradient(160deg,#1e3a1e 0%,#2a4a20 40%,#1a3018 100%);}
+/* Beach transition */
+.floor-beach{position:absolute;top:0;left:1300px;width:200px;height:1500px;background:linear-gradient(90deg,#2a4a20,#c8a96e 40%,#d4b87a);}
+.floor-sand{position:absolute;top:0;left:1400px;width:600px;height:1500px;background:linear-gradient(90deg,#d4b87a,#c9aa60);}
+.floor-sea{position:absolute;top:0;left:1650px;width:350px;height:1500px;background:linear-gradient(90deg,rgba(0,100,200,0.9),rgba(0,60,180,0.98));animation:seaWave 4s ease-in-out infinite alternate;}
+@keyframes seaWave{0%{background-position:0%}100%{background-position:100%}}
+.sea-shimmer{position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent,transparent 18px,rgba(255,255,255,0.06) 19px);animation:seaShim 3s linear infinite;}
+@keyframes seaShim{0%{transform:translateY(0)}100%{transform:translateY(19px)}}
+.grass-patch{position:absolute;border-radius:50%;pointer-events:none;}
 .fence{position:absolute;pointer-events:none;z-index:5;}
-.fence-h{height:16px;background:repeating-linear-gradient(90deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-top:3px solid #6B3410;border-bottom:3px solid #4A1E07;box-shadow:0 3px 8px rgba(0,0,0,0.5);}
-.fence-v{width:16px;background:repeating-linear-gradient(180deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-left:3px solid #6B3410;border-right:3px solid #4A1E07;box-shadow:3px 0 8px rgba(0,0,0,0.5);}
+.fence-h{height:14px;background:repeating-linear-gradient(90deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-top:3px solid #6B3410;border-bottom:3px solid #4A1E07;box-shadow:0 3px 6px rgba(0,0,0,0.5);}
+.fence-v{width:14px;background:repeating-linear-gradient(180deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-left:3px solid #6B3410;border-right:3px solid #4A1E07;box-shadow:3px 0 6px rgba(0,0,0,0.5);}
 
 /* STAGE */
-#stage-area{position:absolute;top:80px;left:900px;width:1200px;height:320px;border-radius:0 0 50% 50%/0 0 30px 30px;background:repeating-linear-gradient(90deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 30px),linear-gradient(180deg,#1a0a2e 0%,#2d1b4e 50%,#1e1438 100%);border:3px solid rgba(120,0,255,0.5);box-shadow:0 0 30px rgba(100,0,255,0.3),inset 0 0 20px rgba(100,0,255,0.1);z-index:3;overflow:hidden;}
+#stage-area{position:absolute;top:40px;left:600px;width:800px;height:260px;border-radius:0 0 50% 50%/0 0 30px 30px;background:repeating-linear-gradient(90deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 30px),linear-gradient(180deg,#1a0a2e 0%,#2d1b4e 50%,#1e1438 100%);border:3px solid rgba(120,0,255,0.5);box-shadow:0 0 30px rgba(100,0,255,0.3),inset 0 0 20px rgba(100,0,255,0.1);z-index:3;overflow:hidden;}
 .stage-lights{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff00ff,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);background-size:200%;animation:lightBar 2s linear infinite;}
 @keyframes lightBar{0%{background-position:0%}100%{background-position:200%}}
-.stage-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Orbitron',sans-serif;color:#cc00ff;font-size:clamp(9px,1.6vw,16px);text-shadow:0 0 10px #cc00ff;letter-spacing:3px;white-space:nowrap;}
-.dj-booth{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:clamp(70px,14vw,140px);height:clamp(28px,5vw,50px);background:linear-gradient(180deg,#222,#111);border-radius:8px 8px 4px 4px;border:2px solid #444;box-shadow:0 0 15px rgba(0,210,255,0.4);}
+.stage-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Orbitron',sans-serif;color:#cc00ff;font-size:14px;text-shadow:0 0 10px #cc00ff;letter-spacing:3px;white-space:nowrap;}
+.dj-booth{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:44px;background:linear-gradient(180deg,#222,#111);border-radius:8px 8px 4px 4px;border:2px solid #444;box-shadow:0 0 15px rgba(0,210,255,0.4);}
 .dj-booth::before{content:'';position:absolute;top:5px;left:10%;right:10%;height:40%;background:linear-gradient(90deg,#00d2ff22,#ff00ff22,#00d2ff22);border-radius:4px;animation:djPulse 1s ease-in-out infinite alternate;}
 @keyframes djPulse{from{opacity:0.3}to{opacity:1}}
-.speaker{position:absolute;width:clamp(18px,3.5vw,36px);height:clamp(36px,7vw,72px);background:radial-gradient(circle at 50% 40%,#333,#111);border-radius:6px;border:2px solid #444;box-shadow:0 0 10px rgba(0,0,0,0.8);}
+.speaker{position:absolute;width:30px;height:60px;background:radial-gradient(circle at 50% 40%,#333,#111);border-radius:6px;border:2px solid #444;}
 .speaker::before{content:'';position:absolute;top:20%;left:15%;right:15%;bottom:20%;border-radius:50%;background:radial-gradient(circle,#555,#222);border:1px solid #666;}
-#spk-left{bottom:18px;left:4%;}#spk-right{bottom:18px;right:4%;}
+#spk-left{bottom:14px;left:4%;}#spk-right{bottom:14px;right:4%;}
 .spotlight{position:absolute;bottom:22px;border-bottom:180px solid;border-left:36px solid transparent;border-right:36px solid transparent;opacity:0.08;animation:spotMove 4s ease-in-out infinite alternate;pointer-events:none;}
 #spot1{left:30%;border-bottom-color:#ff00ff;animation-delay:0s;}
 #spot2{left:45%;border-bottom-color:#00ffff;animation-delay:1s;}
@@ -60,44 +66,73 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 @keyframes spotMove{0%{transform:rotate(-15deg)}100%{transform:rotate(15deg)}}
 
 /* CHILL ZONE */
-#chill-zone{position:absolute;top:1300px;right:120px;width:340px;height:340px;background:radial-gradient(circle,rgba(255,100,100,0.18) 0%,rgba(255,180,100,0.1) 50%,transparent 80%);border:3px dashed rgba(255,100,100,0.6);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff8888;font-size:12px;text-align:center;z-index:3;pointer-events:none;}
-.chill-icon{font-size:clamp(18px,2.8vw,30px);margin-bottom:3px;}
+#chill-zone{position:absolute;top:900px;right:100px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,100,100,0.18) 0%,rgba(255,180,100,0.1) 50%,transparent 80%);border:3px dashed rgba(255,100,100,0.6);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff8888;font-size:11px;text-align:center;z-index:3;pointer-events:none;}
+.chill-icon{font-size:26px;margin-bottom:4px;}
 
 /* POND */
-#pond{position:absolute;top:1300px;left:60px;width:440px;height:280px;background:radial-gradient(ellipse at 40% 40%,rgba(0,180,255,0.75) 0%,rgba(0,120,220,0.65) 50%,rgba(0,60,160,0.85) 100%);border-radius:50%;border:3px solid rgba(0,200,255,0.5);box-shadow:0 0 30px rgba(0,150,255,0.5),inset 0 0 40px rgba(0,0,100,0.5);z-index:3;overflow:hidden;}
+#pond{position:absolute;top:870px;left:60px;width:380px;height:240px;background:radial-gradient(ellipse at 40% 40%,rgba(0,180,255,0.75) 0%,rgba(0,120,220,0.65) 50%,rgba(0,60,160,0.85) 100%);border-radius:50%;border:3px solid rgba(0,200,255,0.5);box-shadow:0 0 30px rgba(0,150,255,0.5),inset 0 0 40px rgba(0,0,100,0.5);z-index:3;overflow:hidden;}
 .pond-shimmer{position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(255,255,255,0.05) 9px);animation:shimmer 3s linear infinite;}
 @keyframes shimmer{0%{transform:translateY(0)}100%{transform:translateY(9px)}}
-.pond-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);color:#00ccff;font-size:clamp(8px,1vw,11px);white-space:nowrap;text-shadow:0 0 8px #00ccff;font-weight:700;}
+.pond-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);color:#00ccff;font-size:10px;white-space:nowrap;text-shadow:0 0 8px #00ccff;font-weight:700;}
 .pond-lily{position:absolute;background:#2d8a2d;border-radius:50%;border:1px solid #1a5a1a;}
 .pond-lily::after{content:'🌺';position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:9px;}
-.fish{position:absolute;font-size:clamp(9px,1.4vw,13px);animation:fishSwim 6s ease-in-out infinite;pointer-events:none;z-index:4;}
-@keyframes fishSwim{0%{transform:translateX(0) scaleX(1)}40%{transform:translateX(40px) scaleX(1)}50%{transform:translateX(40px) scaleX(-1)}90%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+.fish{position:absolute;font-size:12px;animation:fishSwim 6s ease-in-out infinite;pointer-events:none;z-index:4;}
+@keyframes fishSwim{0%{transform:translateX(0) scaleX(1)}40%{transform:translateX(35px) scaleX(1)}50%{transform:translateX(35px) scaleX(-1)}90%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+
+/* FOUNTAIN - respawn point */
+#fountain{position:absolute;top:680px;left:640px;width:120px;height:120px;z-index:4;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;}
+.fountain-base{width:100px;height:30px;background:radial-gradient(ellipse,#4488cc,#224466);border-radius:50%;border:2px solid rgba(0,200,255,0.5);box-shadow:0 0 15px rgba(0,150,255,0.5);}
+.fountain-water{position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:28px;animation:fountainAnim 1.5s ease-in-out infinite alternate;}
+@keyframes fountainAnim{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.1)}}
+.fountain-pool{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:26px;background:radial-gradient(ellipse,rgba(0,150,255,0.7),rgba(0,80,180,0.4));border-radius:50%;border:2px solid rgba(0,200,255,0.4);}
 
 /* PATH */
 .path{position:absolute;z-index:2;background:#3a3020;}
-.path-h{height:26px;border-top:2px solid #4a4030;border-bottom:2px solid #4a4030;}
-.path-v{width:26px;border-left:2px solid #4a4030;border-right:2px solid #4a4030;}
+.path-h{height:24px;border-top:2px solid #4a4030;border-bottom:2px solid #4a4030;}
+.path-v{width:24px;border-left:2px solid #4a4030;border-right:2px solid #4a4030;}
 
-/* TREES / LAMPS */
+/* WATER STATION */
+.water-station{position:absolute;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;}
+.water-station-icon{font-size:20px;animation:waterFloat 2s ease-in-out infinite alternate;}
+@keyframes waterFloat{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.water-station-label{font-size:8px;color:#00ccff;background:rgba(0,50,100,0.6);padding:1px 5px;border-radius:8px;margin-top:2px;white-space:nowrap;}
+
+/* TREES / NATURE */
 .tree{position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
-.tree-top{background:radial-gradient(circle,#2d7a2d,#1a5a1a);border-radius:50% 50% 40% 40%;border:1px solid #1a4a1a;box-shadow:0 0 12px rgba(50,200,50,0.3);}
+.tree-top{border-radius:50% 50% 40% 40%;border:1px solid #1a4a1a;box-shadow:0 0 10px rgba(50,200,50,0.2);}
 .tree-trunk{background:linear-gradient(180deg,#8B5E3C,#6B4423);border-radius:2px;}
+.flower{position:absolute;z-index:3;font-size:14px;pointer-events:none;animation:flowerSway 3s ease-in-out infinite alternate;}
+@keyframes flowerSway{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.animal{position:absolute;z-index:5;font-size:18px;pointer-events:none;cursor:default;}
+.butterfly{animation:flyAnim 8s linear infinite;z-index:6;}
+@keyframes flyAnim{0%{transform:translate(0,0)}25%{transform:translate(40px,-20px)}50%{transform:translate(80px,10px)}75%{transform:translate(40px,30px)}100%{transform:translate(0,0)}}
 .lamp-post{position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
 .lamp-pole{width:4px;background:linear-gradient(180deg,#aaa,#666);border-radius:2px;}
-.lamp-light{width:15px;height:8px;background:radial-gradient(circle,#fffbe0,#ffcc00);border-radius:50% 50% 0 0;box-shadow:0 0 12px #ffcc0088,0 0 24px #ffcc0044;animation:lampFlicker 4s ease-in-out infinite alternate;}
+.lamp-light{width:14px;height:7px;background:radial-gradient(circle,#fffbe0,#ffcc00);border-radius:50% 50% 0 0;box-shadow:0 0 12px #ffcc0088,0 0 24px #ffcc0044;animation:lampFlicker 4s ease-in-out infinite alternate;}
 @keyframes lampFlicker{0%,90%{opacity:1}95%{opacity:0.8}100%{opacity:1}}
 
+/* BEACH ELEMENTS */
+.beach-umbrella{position:absolute;z-index:4;font-size:28px;pointer-events:none;}
+.palm-tree{position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.palm-top{font-size:28px;}
+.palm-trunk{width:6px;height:40px;background:linear-gradient(180deg,#8B6914,#6B4A0C);border-radius:3px;}
+.sand-decor{position:absolute;z-index:3;font-size:14px;pointer-events:none;}
+
 /* FIREWORK TOOL on map */
-.firework-tool{position:absolute;font-size:28px;z-index:4;cursor:pointer;animation:fwFloat 2s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #ffcc00);}
+.firework-tool{position:absolute;font-size:26px;z-index:4;cursor:pointer;animation:fwFloat 2s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #ffcc00);}
 @keyframes fwFloat{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-6px) rotate(5deg)}}
 
 /* PLAYER */
-.player{position:absolute;width:34px;display:flex;flex-direction:column;align-items:center;z-index:10;transition:top 0.08s linear,left 0.08s linear;}
-.player-above{position:absolute;top:-52px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;min-width:80px;transform:translateX(-50%);left:17px;}
-.name-tag{background:rgba(0,0,0,0.75);padding:2px 7px;border-radius:20px;color:white;font-size:9px;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);letter-spacing:0.5px;}
+.player{position:absolute;width:34px;display:flex;flex-direction:column;align-items:center;z-index:10;transition:left 0.08s linear,top 0.08s linear;}
+.player-above{position:absolute;top:-62px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;min-width:90px;transform:translateX(-50%);left:17px;}
+.name-tag{background:rgba(0,0,0,0.75);padding:2px 7px;border-radius:20px;color:white;font-size:9px;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);}
 .player-info-tag{background:rgba(0,0,0,0.6);padding:1px 6px;border-radius:10px;font-size:8px;color:#aaa;white-space:nowrap;}
-.player-chat-bubble{background:rgba(30,30,50,0.9);border:1px solid rgba(0,210,255,0.4);padding:3px 8px;border-radius:10px 10px 10px 0;font-size:10px;color:#fff;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.5);}
-.player-level-tag{background:linear-gradient(90deg,#ff8800,#cc4400);padding:1px 6px;border-radius:10px;font-size:8px;color:#fff;font-weight:700;letter-spacing:1px;}
+.player-chat-bubble{background:rgba(30,30,50,0.92);border:1px solid rgba(0,210,255,0.4);padding:3px 8px;border-radius:10px 10px 10px 0;font-size:10px;color:#fff;white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.player-level-tag{background:linear-gradient(90deg,#ff8800,#cc4400);padding:1px 5px;border-radius:10px;font-size:7px;color:#fff;font-weight:700;}
+.player-bars{display:flex;flex-direction:column;gap:1px;}
+.bar-mini{width:40px;height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.bar-fill-hp{height:100%;background:linear-gradient(90deg,#ff4444,#ff0000);border-radius:2px;transition:width 0.3s;}
+.bar-fill-th{height:100%;background:linear-gradient(90deg,#00ccff,#0066ff);border-radius:2px;transition:width 0.3s;}
 .head{width:22px;height:22px;background:#ffcc99;border-radius:50%;border:1.5px solid #cc9966;position:relative;}
 .head::before{content:'';position:absolute;bottom:6px;left:4px;width:5px;height:5px;background:#444;border-radius:50%;box-shadow:9px 0 0 #444;}
 .body{width:26px;height:24px;border-radius:6px 6px 0 0;border:1.5px solid rgba(0,0,0,0.4);margin-top:-2px;position:relative;}
@@ -108,226 +143,233 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 .Perempuan .body::after{content:'';position:absolute;bottom:-6px;left:-3px;right:-3px;height:8px;background:linear-gradient(180deg,#e74c3c,#c0392b);border-radius:0 0 8px 8px;}
 .player-shadow{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:26px;height:7px;background:radial-gradient(ellipse,rgba(0,0,0,0.4),transparent 70%);border-radius:50%;}
 .my-player .name-tag{background:rgba(0,80,150,0.85);border-color:#00d2ff;color:#00d2ff;}
-
-/* HEALTH / THIRST BAR (above player) */
-.player-bars{display:flex;gap:3px;margin-bottom:1px;}
-.bar-mini{width:36px;height:4px;background:#333;border-radius:2px;overflow:hidden;}
-.bar-fill-hp{height:100%;background:linear-gradient(90deg,#ff4444,#ff0000);border-radius:2px;transition:width 0.3s;}
-.bar-fill-th{height:100%;background:linear-gradient(90deg,#00ccff,#0066ff);border-radius:2px;transition:width 0.3s;}
-
-/* DEAD OVERLAY */
-.player-dead{opacity:0.3;filter:grayscale(1);}
-.dead-icon{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:20px;animation:deadBounce 0.5s infinite alternate;}
-@keyframes deadBounce{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-4px)}}
-
-/* FROZEN */
-.player-frozen .body,.player-frozen .head,.player-frozen .leg{filter:hue-rotate(200deg) brightness(1.5)!important;background:linear-gradient(180deg,#aaeeff,#66ccff)!important;}
-
-/* SWEEPING */
-.broom-icon{position:absolute;font-size:18px;animation:sweep 0.4s ease-in-out infinite alternate;}
+.player-dead .head,.player-dead .body{opacity:0.4;filter:grayscale(1);}
+.dead-icon{position:absolute;font-size:18px;top:-10px;}
+.player-frozen{filter:brightness(0.7) saturate(0.3) hue-rotate(180deg);}
+.broom-icon{position:absolute;font-size:16px;top:-8px;right:-10px;animation:sweep 0.3s ease-in-out infinite alternate;}
 @keyframes sweep{from{transform:rotate(-20deg)}to{transform:rotate(20deg)}}
 
-/* STATUS EFFECT LABEL */
-.status-effect{position:absolute;top:-70px;left:50%;transform:translateX(-50%);font-size:16px;white-space:nowrap;pointer-events:none;animation:effectFloat 2s ease-out forwards;}
-@keyframes effectFloat{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-40px)}}
+/* EMOTE/DANCE ANIMATIONS */
+.emote-dance{animation:danceEmote 0.4s ease-in-out infinite alternate;}
+@keyframes danceEmote{0%{transform:rotate(-15deg) translateY(0)}50%{transform:rotate(15deg) translateY(-8px)}100%{transform:rotate(-15deg) translateY(0)}}
+.emote-wiggle{animation:wiggleEmote 0.25s ease-in-out infinite alternate;}
+@keyframes wiggleEmote{from{transform:skewX(-15deg) scale(1.1)}to{transform:skewX(15deg) scale(0.95)}}
+.emote-spin{animation:spinEmote 0.6s linear infinite;}
+@keyframes spinEmote{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.emote-bounce{animation:bounceEmote 0.5s ease-in-out infinite alternate;}
+@keyframes bounceEmote{from{transform:translateY(0) scale(1)}to{transform:translateY(-12px) scale(1.1)}}
+.emote-floss{animation:flossEmote 0.3s ease-in-out infinite alternate;}
+@keyframes flossEmote{0%{transform:rotate(-10deg) translateX(-5px)}100%{transform:rotate(10deg) translateX(5px)}}
+.emote-icon{position:absolute;top:-30px;font-size:20px;animation:emoteFloat 0.5s ease-in-out infinite alternate;}
+@keyframes emoteFloat{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-6px)}}
+
+/* STATUS */
+.status-effect{position:fixed;font-size:14px;white-space:nowrap;pointer-events:none;animation:effectFloat 2s ease-out forwards;z-index:400;font-weight:700;}
+@keyframes effectFloat{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-40px)}}
 
 /* VISUALIZER */
-#visualizer{position:absolute;top:390px;left:900px;width:1200px;height:28px;display:flex;align-items:flex-end;justify-content:center;gap:3px;z-index:4;pointer-events:none;opacity:0;transition:opacity 0.5s;}
+#visualizer{position:absolute;top:300px;left:600px;width:800px;height:28px;display:flex;align-items:flex-end;justify-content:center;gap:3px;z-index:4;pointer-events:none;opacity:0;transition:opacity 0.5s;}
 #visualizer.active{opacity:1;}
 .viz-bar{width:4px;background:linear-gradient(180deg,#ff00ff,#00d2ff);border-radius:2px 2px 0 0;animation:vizAnim 0.5s ease-in-out infinite alternate;}
 @keyframes vizAnim{0%{height:4px}100%{height:var(--h,20px)}}
-
 .particle{position:absolute;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:2;animation:particleFly linear infinite;}
 @keyframes particleFly{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:0.8}100%{transform:translateY(-80px) translateX(var(--dx,20px));opacity:0}}
 
-/* ===== SIDEBAR UI (LEFT) ===== */
-#sidebar-left{position:fixed;top:0;left:0;bottom:0;width:clamp(200px,20vw,260px);z-index:50;display:flex;flex-direction:column;gap:0;pointer-events:none;}
-
-/* TOP BAR (DJ controls) */
-#top-bar{position:fixed;top:0;left:0;right:0;height:44px;z-index:55;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.82);padding:0 10px;border-bottom:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(6px);}
-#playlist{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(0,210,255,0.3);padding:4px 7px;border-radius:6px;outline:none;font-size:10px;font-family:'Rajdhani',sans-serif;max-width:clamp(80px,12vw,170px);}
+/* ===== FIXED UI ===== */
+/* TOP BAR */
+#top-bar{position:fixed;top:0;left:0;right:0;height:40px;z-index:55;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.85);padding:0 8px;border-bottom:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(6px);}
+#playlist{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(0,210,255,0.3);padding:3px 6px;border-radius:6px;outline:none;font-size:10px;font-family:'Rajdhani',sans-serif;max-width:clamp(70px,10vw,150px);}
 #playlist option{background:#0d1a2e;}
-.btn-ui{padding:4px 10px;border-radius:6px;border:none;font-weight:700;cursor:pointer;color:white;font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all 0.2s;white-space:nowrap;}
-#btn-play-dj{background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;box-shadow:0 0 10px rgba(0,180,255,0.3);}
+.btn-ui{padding:3px 8px;border-radius:6px;border:none;font-weight:700;cursor:pointer;color:white;font-size:9px;font-family:'Orbitron',sans-serif;letter-spacing:0.5px;transition:all 0.2s;white-space:nowrap;}
+#btn-play-dj{background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;}
 #btn-play-dj.active{background:linear-gradient(90deg,#ff4444,#cc0000);}
-#vol-wrap{display:flex;align-items:center;gap:4px;}
+#vol-wrap{display:flex;align-items:center;gap:3px;}
 #vol-wrap span{font-size:11px;color:#aaa;}
-#vol-slider{width:50px;height:4px;accent-color:#00d2ff;}
-#btn-admin{background:rgba(255,150,0,0.2);border:1px solid rgba(255,150,0,0.4);color:#ffaa00;font-size:9px;}
-#btn-skills{background:rgba(150,0,255,0.25);border:1px solid rgba(180,0,255,0.4);color:#cc88ff;font-size:9px;}
-#btn-missions{background:rgba(0,200,100,0.2);border:1px solid rgba(0,200,100,0.4);color:#00ff88;font-size:9px;}
-#btn-profile{background:rgba(255,200,0,0.15);border:1px solid rgba(255,200,0,0.3);color:#ffdd44;font-size:9px;}
-#btn-owner{background:rgba(255,50,150,0.15);border:1px solid rgba(255,50,150,0.3);color:#ff88cc;font-size:9px;}
+#vol-slider{width:44px;height:4px;accent-color:#00d2ff;}
+#btn-admin{background:rgba(255,150,0,0.2);border:1px solid rgba(255,150,0,0.4);color:#ffaa00;}
+#btn-skills{background:rgba(150,0,255,0.25);border:1px solid rgba(180,0,255,0.4);color:#cc88ff;}
+#btn-missions{background:rgba(0,200,100,0.2);border:1px solid rgba(0,200,100,0.4);color:#00ff88;}
+#btn-profile{background:rgba(255,200,0,0.15);border:1px solid rgba(255,200,0,0.3);color:#ffdd44;}
+#btn-owner{background:rgba(255,50,150,0.15);border:1px solid rgba(255,50,150,0.3);color:#ff88cc;}
+#btn-ad-watch{background:rgba(255,200,0,0.2);border:1px solid rgba(255,200,0,0.5);color:#ffdd00;animation:adBtnPulse 2s ease-in-out infinite alternate;}
+@keyframes adBtnPulse{from{box-shadow:0 0 4px rgba(255,200,0,0.3)}to{box-shadow:0 0 12px rgba(255,200,0,0.8)}}
 
-/* PANEL BOXES (collapsible) */
-.panel-box{background:rgba(0,0,0,0.65);border:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(5px);pointer-events:auto;overflow:hidden;}
-.panel-header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;font-family:'Orbitron',sans-serif;color:#00d2ff;letter-spacing:1px;background:rgba(0,210,255,0.05);}
+/* PANEL BOXES */
+.panel-box{background:rgba(0,0,0,0.72);border:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(5px);overflow:hidden;}
+.panel-header{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06);font-size:9px;font-family:'Orbitron',sans-serif;color:#00d2ff;letter-spacing:1px;background:rgba(0,210,255,0.05);}
 .panel-header:hover{background:rgba(0,210,255,0.1);}
-.panel-toggle{font-size:10px;color:#888;transition:transform 0.2s;}
+.panel-toggle{font-size:9px;color:#888;transition:transform 0.2s;}
 .panel-toggle.open{transform:rotate(180deg);}
-.panel-body{overflow:hidden;transition:max-height 0.3s ease;}
+.panel-body{overflow:hidden;transition:max-height 0.3s ease;max-height:400px;}
 .panel-body.collapsed{max-height:0!important;}
 
-/* CHAT PANEL */
-#chat-panel{position:fixed;left:0;bottom:0;width:clamp(220px,22vw,290px);z-index:50;}
-#chat-box{overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding:6px;scrollbar-width:thin;scrollbar-color:#333 transparent;}
-.chat-msg{background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:5px;width:fit-content;font-size:11px;text-shadow:1px 1px 0 #000;word-wrap:break-word;max-width:100%;border-left:2px solid transparent;max-width:220px;}
+/* CHAT PANEL - top left, below top bar */
+#chat-panel{position:fixed;left:0;top:40px;width:clamp(220px,20vw,270px);z-index:50;}
+#chat-box{overflow-y:auto;display:flex;flex-direction:column;gap:2px;padding:5px;scrollbar-width:thin;scrollbar-color:#333 transparent;max-height:130px;}
+.chat-msg{background:rgba(0,0,0,0.5);padding:3px 7px;border-radius:5px;font-size:10px;text-shadow:1px 1px 0 #000;word-wrap:break-word;max-width:100%;border-left:2px solid transparent;}
 .chat-msg.system-msg{border-left-color:#ffcc00;color:#ffd700;font-style:italic;}
 .chat-msg.regular-msg{border-left-color:#00d2ff;}
 .chat-msg.skill-msg{border-left-color:#ff00ff;color:#ff88ff;}
-#chat-input-wrapper{display:flex;background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:5px;}
-#chat-input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:11px;font-family:'Rajdhani',sans-serif;}
-#btn-send{background:linear-gradient(90deg,#00d2ff,#0066ff);border:none;padding:4px 9px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700;color:#fff;}
+#chat-input-wrapper{display:flex;background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:4px;}
+#chat-input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:10px;font-family:'Rajdhani',sans-serif;}
+#btn-send{background:linear-gradient(90deg,#00d2ff,#0066ff);border:none;padding:3px 7px;border-radius:4px;cursor:pointer;font-size:9px;font-weight:700;color:#fff;}
+/* Fullscreen button under chat */
+#btn-fullscreen-ui{width:100%;padding:4px;border:none;background:rgba(0,210,255,0.1);border-top:1px solid rgba(0,210,255,0.15);color:#00d2ff;font-size:9px;cursor:pointer;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:background 0.2s;}
+#btn-fullscreen-ui:hover{background:rgba(0,210,255,0.2);}
 
-/* LEADERBOARD PANEL */
-#lb-panel{position:fixed;right:0;top:44px;width:clamp(200px,22vw,280px);z-index:50;}
+/* LEADERBOARD PANEL - top right, below top bar */
+#lb-panel{position:fixed;right:0;top:40px;width:clamp(210px,20vw,270px);z-index:50;}
 #lb-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06);}
-.lb-tab{flex:1;padding:5px;text-align:center;font-size:9px;cursor:pointer;color:#888;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
+.lb-tab{flex:1;padding:4px;text-align:center;font-size:8px;cursor:pointer;color:#888;font-family:'Orbitron',sans-serif;letter-spacing:0.5px;}
 .lb-tab.active{color:#00d2ff;border-bottom:2px solid #00d2ff;}
-#lb-list,#lb-fish-list{overflow-y:auto;padding:5px;display:flex;flex-direction:column;gap:4px;scrollbar-width:thin;scrollbar-color:#333 transparent;}
-.lb-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);padding:5px 7px;border-radius:5px;border:1px solid rgba(255,255,255,0.04);}
-.lb-name{font-weight:700;color:#fff;font-size:11px;}
-.lb-detail{font-size:9px;color:#888;}
-.lb-right{text-align:right;}
-.lb-time{color:#00d2ff;font-weight:700;font-size:10px;}
-.lb-level{color:#ff8800;font-size:9px;}
-.lb-fish-score{color:#00ccff;font-weight:700;font-size:11px;}
-.lb-dot{width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 5px #00ff88;margin-right:5px;flex-shrink:0;}
+#lb-list,#lb-fish-list{overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:3px;scrollbar-width:thin;scrollbar-color:#333 transparent;max-height:280px;}
+.lb-item{display:flex;align-items:center;background:rgba(255,255,255,0.04);padding:4px 6px;border-radius:5px;border:1px solid rgba(255,255,255,0.04);}
+.lb-name{font-weight:700;color:#fff;font-size:10px;}
+.lb-detail{font-size:8px;color:#888;}
+.lb-dot{width:6px;height:6px;border-radius:50%;background:#00ff88;box-shadow:0 0 4px #00ff88;margin-right:4px;flex-shrink:0;}
 
-/* STATUS BARS (player HUD) */
-#player-hud{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:60;display:none;flex-direction:column;align-items:center;gap:4px;}
-.hud-bar-wrap{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.6);padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
-.hud-icon{font-size:13px;}
-.hud-bar{width:80px;height:7px;background:#333;border-radius:4px;overflow:hidden;}
-.hud-bar-fill{height:100%;border-radius:4px;transition:width 0.5s;}
-#hp-fill{background:linear-gradient(90deg,#ff4444,#ff0000);}
+/* PLAYER HUD - bottom center */
+#player-hud{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);z-index:60;display:none;flex-direction:row;align-items:center;gap:8px;background:rgba(0,0,0,0.65);padding:5px 14px;border-radius:25px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
+.hud-bar-wrap{display:flex;align-items:center;gap:5px;}
+.hud-icon{font-size:12px;}
+.hud-bar{width:70px;height:6px;background:#333;border-radius:3px;overflow:hidden;}
+.hud-bar-fill{height:100%;border-radius:3px;transition:width 0.5s;}
+#hp-fill{background:linear-gradient(90deg,#ff6666,#ff0000);}
 #th-fill{background:linear-gradient(90deg,#00ccff,#0066ff);}
-.hud-val{font-size:10px;font-weight:700;min-width:24px;text-align:right;}
+.hud-val{font-size:10px;font-weight:700;min-width:22px;text-align:right;}
+.hud-sep{width:1px;height:18px;background:rgba(255,255,255,0.15);}
 
 /* FISH STATUS */
-#fish-status{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:5px 14px;border-radius:20px;font-size:11px;color:#00ccff;display:none;z-index:60;border:1px solid rgba(0,200,255,0.3);backdrop-filter:blur(4px);}
+#fish-status{position:fixed;bottom:55px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.75);padding:4px 14px;border-radius:20px;font-size:11px;color:#00ccff;display:none;z-index:60;border:1px solid rgba(0,200,255,0.3);backdrop-filter:blur(4px);white-space:nowrap;}
 
-/* DPAD */
-#dpad{position:fixed;bottom:14px;left:clamp(210px,21vw,270px);display:grid;grid-template-columns:repeat(3,42px);grid-gap:5px;z-index:60;}
-.dir-btn{width:42px;height:42px;background:rgba(255,255,255,0.12);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:15px;color:white;font-weight:700;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);}
-.dir-btn:active{background:rgba(255,255,255,0.4);transform:scale(0.9);}
-#btn-u{grid-column:2;grid-row:1;}#btn-l{grid-column:1;grid-row:2;}#btn-r{grid-column:3;grid-row:2;}#btn-d{grid-column:2;grid-row:3;}
-#btn-fish-action{grid-column:2;grid-row:2;font-size:17px;background:rgba(0,150,255,0.25);border-color:rgba(0,200,255,0.4);}
+/* DPAD - bottom left */
+#dpad{position:fixed;bottom:10px;left:8px;display:grid;grid-template-columns:repeat(3,40px);grid-template-rows:repeat(3,40px);grid-gap:4px;z-index:60;}
+.dir-btn{width:40px;height:40px;background:rgba(255,255,255,0.13);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:14px;color:white;font-weight:700;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);cursor:pointer;}
+.dir-btn:active,.dir-btn.pressed{background:rgba(255,255,255,0.4);transform:scale(0.9);}
+#btn-u{grid-column:2;grid-row:1;}
+#btn-l{grid-column:1;grid-row:2;}
+#btn-r{grid-column:3;grid-row:2;}
+#btn-d{grid-column:2;grid-row:3;}
+#btn-fish-action{grid-column:2;grid-row:2;font-size:16px;background:rgba(0,150,255,0.3);border-color:rgba(0,200,255,0.4);}
 @media(min-width:1024px){#dpad{display:none;}}
 
-/* ===== POPUPS ===== */
+/* TOAST NOTIFICATION */
+#toast-container{position:fixed;top:50px;left:50%;transform:translateX(-50%);z-index:800;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;}
+.toast{background:rgba(0,0,0,0.85);border:1px solid rgba(0,210,255,0.4);padding:8px 18px;border-radius:20px;font-size:12px;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.5);backdrop-filter:blur(8px);animation:toastIn 0.3s ease,toastOut 0.4s ease 2.6s forwards;white-space:nowrap;}
+.toast.success{border-color:rgba(0,255,136,0.5);color:#00ff88;}
+.toast.warning{border-color:rgba(255,200,0,0.5);color:#ffdd00;}
+.toast.error{border-color:rgba(255,80,80,0.5);color:#ff8888;}
+@keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastOut{from{opacity:1}to{opacity:0}}
+
+/* POPUPS */
 .popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
-.popup-box{background:linear-gradient(135deg,#0d1a2e,#1a0d2e);border:1px solid rgba(0,210,255,0.3);border-radius:16px;padding:22px;width:min(420px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(0,100,255,0.3);animation:popIn 0.3s ease;position:relative;scrollbar-width:thin;scrollbar-color:#333 transparent;}
+.popup-box{background:linear-gradient(135deg,#0d1a2e,#1a0d2e);border:1px solid rgba(0,210,255,0.3);border-radius:16px;padding:20px;width:min(420px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(0,100,255,0.3);animation:popIn 0.3s ease;position:relative;scrollbar-width:thin;scrollbar-color:#333 transparent;}
 @keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
 .popup-box h3{font-family:'Orbitron',sans-serif;color:#00d2ff;margin-bottom:14px;text-align:center;font-size:14px;letter-spacing:2px;}
-.popup-close{position:absolute;top:10px;right:14px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;z-index:2;}
+.popup-close{position:absolute;top:10px;right:14px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
 .popup-close:hover{color:white;}
 
 /* SKILLS POPUP */
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
-.skill-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 6px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
-.skill-card:hover{background:rgba(0,210,255,0.1);border-color:#00d2ff;transform:scale(1.04);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px;}
+.skill-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 5px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.skill-card:hover:not(.locked){background:rgba(0,210,255,0.1);border-color:#00d2ff;transform:scale(1.04);}
 .skill-card.locked{opacity:0.4;cursor:not-allowed;}
-.skill-card.locked::after{content:'🔒';position:absolute;top:4px;right:4px;font-size:10px;}
-.skill-icon{font-size:26px;display:block;margin-bottom:4px;}
-.skill-name{font-size:9px;font-weight:700;color:#ddd;letter-spacing:0.5px;}
-.skill-desc{font-size:8px;color:#888;margin-top:2px;}
-.skill-cost{font-size:8px;color:#ffcc00;margin-top:3px;}
+.skill-card.locked::after{content:'🔒';position:absolute;top:4px;right:4px;font-size:9px;}
+.skill-icon{font-size:24px;display:block;margin-bottom:3px;}
+.skill-name{font-size:8px;font-weight:700;color:#ddd;letter-spacing:0.3px;}
+.skill-desc{font-size:7px;color:#888;margin-top:2px;}
+.skill-cost{font-size:7px;color:#ffcc00;margin-top:3px;}
 .skill-card.active-skill{border-color:#ff00ff;background:rgba(255,0,255,0.1);}
 
-/* MISSIONS POPUP */
-.mission-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;}
-.mission-item:hover{background:rgba(0,210,255,0.07);}
+/* MISSIONS */
+.mission-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:11px;margin-bottom:7px;cursor:pointer;transition:all 0.2s;}
 .mission-item.completed{border-color:#00ff88;opacity:0.7;}
-.mission-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.mission-title{font-weight:700;font-size:12px;color:#fff;}
-.mission-reward{font-size:10px;color:#ffcc00;}
-.mission-desc{font-size:10px;color:#888;margin-bottom:6px;}
-.mission-progress{height:5px;background:#333;border-radius:3px;overflow:hidden;}
-.mission-bar{height:100%;background:linear-gradient(90deg,#00d2ff,#00ff88);border-radius:3px;transition:width 0.5s;}
-.mission-action{width:100%;padding:6px;border-radius:6px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-size:10px;margin-top:8px;font-family:'Orbitron',sans-serif;}
+.mission-title{font-weight:700;font-size:11px;color:#fff;}
+.mission-reward{font-size:9px;color:#ffcc00;}
+.mission-desc{font-size:9px;color:#888;margin:3px 0;}
+.mission-progress{height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.mission-bar{height:100%;background:linear-gradient(90deg,#00d2ff,#00ff88);border-radius:2px;transition:width 0.5s;}
+.mission-action{width:100%;padding:5px;border-radius:6px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-size:9px;margin-top:7px;font-family:'Orbitron',sans-serif;}
 .mission-action:disabled{background:#333;color:#666;cursor:not-allowed;}
 
 /* SPIN WHEEL */
 #spin-container{text-align:center;padding:10px 0;}
-#spin-wheel{width:200px;height:200px;border-radius:50%;position:relative;margin:0 auto 12px;border:4px solid rgba(0,210,255,0.4);overflow:hidden;cursor:pointer;box-shadow:0 0 20px rgba(0,100,255,0.3);}
-#spin-canvas{width:200px;height:200px;}
-#spin-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:24px;filter:drop-shadow(0 0 4px #ff0);}
-#btn-spin{padding:10px 30px;border-radius:20px;border:none;background:linear-gradient(90deg,#ff8800,#cc4400);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:12px;box-shadow:0 0 15px rgba(255,100,0,0.4);}
+#spin-wheel{width:190px;height:190px;border-radius:50%;position:relative;margin:0 auto 10px;border:4px solid rgba(0,210,255,0.4);overflow:hidden;cursor:pointer;}
+#spin-canvas{width:190px;height:190px;}
+#spin-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:22px;}
+#btn-spin{padding:8px 26px;border-radius:20px;border:none;background:linear-gradient(90deg,#ff8800,#cc4400);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
 #btn-spin:disabled{background:#333;color:#666;cursor:not-allowed;}
-.spin-result{font-size:13px;color:#ffcc00;font-weight:700;margin-top:8px;min-height:20px;}
+.spin-result{font-size:12px;color:#ffcc00;font-weight:700;margin-top:7px;min-height:18px;}
 
-/* TARGET SELECTOR (skill use) */
-.target-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;margin-top:8px;}
-.target-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;}
+/* TARGET SELECTOR */
+.target-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto;margin-top:8px;}
+.target-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:7px 9px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;}
 .target-item:hover{background:rgba(255,50,50,0.15);border-color:#ff4444;}
 
-/* PROFILE POPUP */
-.profile-field{margin-bottom:10px;}
-.profile-field label{display:block;font-size:10px;color:#aaa;margin-bottom:4px;letter-spacing:1px;}
-.profile-field input,.profile-field select{width:100%;padding:8px 11px;border-radius:7px;border:1px solid rgba(0,210,255,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;font-family:'Rajdhani',sans-serif;}
-.profile-field input:focus{border-color:#00d2ff;}
-.profile-avatar{width:70px;height:70px;border-radius:50%;border:3px solid #00d2ff;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(0,100,200,0.2);margin:0 auto 14px;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
-.stat-box{background:rgba(255,255,255,0.04);border-radius:8px;padding:8px;text-align:center;border:1px solid rgba(255,255,255,0.07);}
-.stat-box .stat-val{font-size:18px;font-weight:700;color:#00d2ff;font-family:'Orbitron',sans-serif;}
-.stat-box .stat-label{font-size:9px;color:#888;margin-top:2px;}
+/* PROFILE */
+.profile-avatar{width:70px;height:70px;border-radius:50%;border:3px solid #00d2ff;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(0,100,200,0.2);margin:0 auto 12px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;}
+.stat-box{background:rgba(255,255,255,0.04);border-radius:8px;padding:7px;text-align:center;border:1px solid rgba(255,255,255,0.07);}
+.stat-box .stat-val{font-size:17px;font-weight:700;color:#00d2ff;font-family:'Orbitron',sans-serif;}
+.stat-box .stat-label{font-size:8px;color:#888;margin-top:2px;}
+.profile-field{margin-bottom:9px;}
+.profile-field label{display:block;font-size:9px;color:#aaa;margin-bottom:3px;letter-spacing:1px;}
+.profile-field input,.profile-field select{width:100%;padding:7px 10px;border-radius:7px;border:1px solid rgba(0,210,255,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;}
 
 /* ADMIN PANEL */
 #admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
-#admin-panel{background:linear-gradient(135deg,#0a0f1a,#1a0a2e);border:1px solid rgba(255,150,0,0.4);border-radius:16px;padding:22px;width:min(440px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(255,100,0,0.2);position:relative;animation:popIn 0.3s ease;scrollbar-width:thin;}
-#admin-panel h3{font-family:'Orbitron',sans-serif;color:#ffaa00;margin-bottom:16px;text-align:center;font-size:14px;letter-spacing:2px;}
-.admin-field{margin-bottom:10px;}
-.admin-field label{display:block;font-size:10px;color:#aaa;margin-bottom:4px;letter-spacing:1px;}
-.admin-field input,.admin-field select{width:100%;padding:8px 11px;border-radius:7px;border:1px solid rgba(255,150,0,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;font-family:'Rajdhani',sans-serif;}
-#admin-song-list{max-height:150px;overflow-y:auto;margin-top:8px;display:flex;flex-direction:column;gap:5px;}
-.admin-song-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);padding:6px 9px;border-radius:6px;font-size:11px;}
+#admin-panel{background:linear-gradient(135deg,#0a0f1a,#1a0a2e);border:1px solid rgba(255,150,0,0.4);border-radius:16px;padding:20px;width:min(430px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(255,100,0,0.2);position:relative;animation:popIn 0.3s ease;scrollbar-width:thin;}
+#admin-panel h3{font-family:'Orbitron',sans-serif;color:#ffaa00;margin-bottom:14px;text-align:center;font-size:13px;letter-spacing:2px;}
+.admin-field{margin-bottom:9px;}
+.admin-field label{display:block;font-size:9px;color:#aaa;margin-bottom:3px;letter-spacing:1px;}
+.admin-field input,.admin-field select{width:100%;padding:7px 10px;border-radius:7px;border:1px solid rgba(255,150,0,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;}
+.btn-admin-add{width:100%;padding:8px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff8800,#cc5500);color:white;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:1px;margin-top:7px;}
+.btn-close-admin{position:absolute;top:10px;right:14px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
+.admin-section{margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:10px;}
+.admin-section-title{font-size:9px;color:#ffaa00;letter-spacing:2px;margin-bottom:7px;font-family:'Orbitron',sans-serif;}
+#admin-song-list{max-height:130px;overflow-y:auto;margin-top:7px;display:flex;flex-direction:column;gap:4px;}
+.admin-song-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);padding:5px 8px;border-radius:5px;font-size:10px;}
 .admin-song-item span{color:#ddd;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.admin-song-del{background:rgba(255,50,50,0.2);border:1px solid rgba(255,50,50,0.4);color:#ff6666;border-radius:4px;padding:2px 7px;cursor:pointer;font-size:10px;flex-shrink:0;}
-.btn-admin-add{width:100%;padding:9px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff8800,#cc5500);color:white;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px;margin-top:8px;}
-.admin-section{margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:12px;}
-.admin-section-title{font-size:10px;color:#ffaa00;letter-spacing:2px;margin-bottom:8px;font-family:'Orbitron',sans-serif;}
-.btn-close-admin{position:absolute;top:12px;right:16px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
-#admin-status-msg{font-size:10px;color:#ff8888;text-align:center;min-height:14px;margin-top:5px;}
-#admin-status-msg2{font-size:10px;color:#88ff88;text-align:center;margin-top:5px;min-height:14px;}
-.toggle-switch{display:flex;align-items:center;gap:8px;margin-top:6px;}
-.toggle-switch input[type="checkbox"]{width:36px;height:20px;cursor:pointer;accent-color:#00d2ff;}
-.toggle-switch label{font-size:11px;color:#ccc;}
+.admin-song-del{background:rgba(255,50,50,0.2);border:1px solid rgba(255,50,50,0.4);color:#ff6666;border-radius:4px;padding:2px 6px;cursor:pointer;font-size:9px;flex-shrink:0;}
+#admin-status-msg{font-size:10px;color:#ff8888;text-align:center;min-height:13px;margin-top:4px;}
+#admin-status-msg2{font-size:10px;color:#88ff88;text-align:center;margin-top:4px;min-height:13px;}
+.toggle-switch{display:flex;align-items:center;gap:7px;margin-top:5px;}
+.toggle-switch input{width:34px;height:18px;cursor:pointer;accent-color:#00d2ff;}
+.toggle-switch label{font-size:10px;color:#ccc;}
 
-/* OWNER POPUP */
-.owner-card{text-align:center;padding:10px 0;}
-.owner-avatar{font-size:60px;margin-bottom:10px;animation:ownerPulse 2s ease-in-out infinite alternate;}
+/* OWNER */
+.owner-card{text-align:center;padding:8px 0;}
+.owner-avatar{font-size:56px;margin-bottom:8px;animation:ownerPulse 2s ease-in-out infinite alternate;}
 @keyframes ownerPulse{from{transform:scale(1)}to{transform:scale(1.05)}}
-.owner-name{font-family:'Orbitron',sans-serif;font-size:16px;color:#00d2ff;text-shadow:0 0 10px #00d2ff;margin-bottom:4px;}
-.owner-socials{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
-.owner-social{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,0.08);}
-.owner-social-icon{font-size:20px;}
-.owner-social-info{display:flex;flex-direction:column;}
-.owner-social-label{font-size:10px;color:#888;}
-.owner-social-value{font-size:13px;color:#fff;font-weight:700;}
+.owner-name{font-family:'Orbitron',sans-serif;font-size:15px;color:#00d2ff;text-shadow:0 0 10px #00d2ff;margin-bottom:3px;}
+.owner-socials{display:flex;flex-direction:column;gap:7px;margin-top:12px;}
+.owner-social{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border-radius:10px;padding:9px 12px;border:1px solid rgba(255,255,255,0.08);}
+.owner-social-icon{font-size:18px;}
+.owner-social-label{font-size:9px;color:#888;}
+.owner-social-value{font-size:12px;color:#fff;font-weight:700;}
 
 /* AD WEBVIEW */
-#ad-webview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
-#ad-frame-wrap{background:#111;border:2px solid rgba(0,210,255,0.3);border-radius:12px;overflow:hidden;position:relative;}
-#ad-iframe{width:min(640px,95vw);height:400px;border:none;display:block;}
-#ad-countdown{font-family:'Orbitron',sans-serif;color:#00d2ff;font-size:13px;letter-spacing:2px;}
-#ad-skip-btn{padding:8px 24px;border-radius:20px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;display:none;}
+#ad-webview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;}
+#ad-frame-wrap{background:#111;border:2px solid rgba(0,210,255,0.3);border-radius:12px;overflow:hidden;}
+#ad-iframe{width:min(620px,95vw);height:380px;border:none;display:block;}
+#ad-countdown{font-family:'Orbitron',sans-serif;color:#00d2ff;font-size:12px;letter-spacing:2px;}
+#ad-skip-btn{padding:8px 22px;border-radius:20px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;display:none;}
 .ad-label{font-size:10px;color:#888;letter-spacing:2px;}
+#ad-close-x{position:fixed;top:10px;right:14px;background:rgba(255,50,50,0.2);border:1px solid rgba(255,50,50,0.4);color:#ff8888;font-size:12px;padding:4px 10px;border-radius:8px;cursor:pointer;font-family:'Orbitron',sans-serif;display:none;}
 
 /* FIREWORK EXPLOSION */
 .explosion{position:fixed;pointer-events:none;z-index:400;font-size:40px;animation:explode 1s ease-out forwards;}
 @keyframes explode{0%{transform:scale(0);opacity:1}50%{transform:scale(2);opacity:1}100%{transform:scale(3);opacity:0}}
 
 /* BUTTONS */
-.btn-primary{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px;}
-.btn-danger{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff4444,#cc0000);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
-.btn-warn{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff8800,#cc5500);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
+.btn-primary{padding:8px 18px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px;}
+.btn-danger{padding:8px 18px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff4444,#cc0000);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
 
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#333;border-radius:2px;}
 </style>
 </head>
 <body>
-
 <div id="rotate-overlay">
   <span class="rotate-icon">📱</span>
   <h2>Putar HP Kamu!</h2>
@@ -335,14 +377,13 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
 </div>
 
 <div id="app">
-
   <!-- LOGIN -->
   <div id="login-screen">
     <div class="login-stars" id="login-stars"></div>
     <div class="login-logo">🎧 HANGOUT DJ</div>
     <div class="login-sub">VIRTUAL WORLD · REAL VIBES</div>
     <div class="login-card">
-      <input type="text" id="username" placeholder="Username (unik, 1x pakai)" autocomplete="off" maxlength="18">
+      <input type="text" id="username" placeholder="Username (unik)" autocomplete="off" maxlength="18">
       <input type="number" id="age" placeholder="Umur" min="1" max="99">
       <select id="gender">
         <option value="Laki-laki">🚹 Laki-laki</option>
@@ -356,6 +397,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
   <div id="map-container">
     <div id="map-world">
       <div class="floor-grass"></div>
+      <div class="floor-beach"></div>
+      <div class="floor-sand"></div>
+      <div class="floor-sea"><div class="sea-shimmer"></div></div>
+      <!-- Stage -->
       <div id="stage-area">
         <div class="stage-lights"></div>
         <div id="spot1" class="spotlight"></div>
@@ -367,23 +412,33 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
         <div class="stage-label">🎵 DJ STAGE</div>
       </div>
       <div id="visualizer"></div>
+      <!-- Fountain (respawn) -->
+      <div id="fountain">
+        <div class="fountain-water">⛲</div>
+        <div class="fountain-pool"></div>
+      </div>
+      <!-- Chill Zone -->
       <div id="chill-zone">
         <div class="chill-icon">☕</div>
-        <div style="font-size:10px;font-weight:700;letter-spacing:1px;">Chill Zone</div>
-        <div style="font-size:8px;color:#ffaaaa;margin-top:2px;">+HP +Thirst</div>
-        <div style="font-size:14px;margin-top:3px;">🛋️ 🪴 🎵</div>
-        <div style="font-size:8px;color:#ffccaa;margin-top:1px;">Santai & Relax</div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:1px;">CHILL ZONE</div>
+        <div style="font-size:7px;color:#ffaaaa;margin-top:2px;">+HP +Thirst</div>
+        <div style="font-size:12px;margin-top:3px;">🛋️ 🪴 🎵</div>
       </div>
+      <!-- Pond -->
       <div id="pond">
         <div class="pond-shimmer"></div>
-        <div class="pond-lily" style="width:18px;height:18px;top:25%;left:15%;"></div>
-        <div class="pond-lily" style="width:13px;height:13px;top:60%;left:60%;"></div>
+        <div class="pond-lily" style="width:16px;height:16px;top:25%;left:15%;"></div>
+        <div class="pond-lily" style="width:12px;height:12px;top:60%;left:60%;"></div>
         <div class="pond-label">🎣 Kolam Mancing</div>
       </div>
-      <div class="fence fence-h" style="top:30px;left:40px;right:40px;position:absolute;"></div>
-      <div class="fence fence-h" style="top:1950px;left:40px;right:40px;position:absolute;"></div>
-      <div class="fence fence-v" style="left:30px;top:30px;bottom:30px;position:absolute;"></div>
-      <div class="fence fence-v" style="right:30px;top:30px;bottom:30px;position:absolute;"></div>
+      <!-- Fences: top, bottom, left, right (right fence open for beach access) -->
+      <div class="fence fence-h" style="top:20px;left:30px;right:30px;position:absolute;"></div>
+      <div class="fence fence-h" style="top:1465px;left:30px;right:30px;position:absolute;"></div>
+      <div class="fence fence-v" style="left:22px;top:20px;bottom:20px;position:absolute;"></div>
+      <!-- Right fence has gap at middle to access beach -->
+      <div class="fence fence-v" style="right:605px;top:20px;height:500px;position:absolute;"></div>
+      <div class="fence fence-v" style="right:605px;top:1000px;bottom:20px;position:absolute;"></div>
+      <div style="position:absolute;right:605px;top:500px;height:500px;font-size:12px;color:#ffcc00;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;letter-spacing:2px;font-family:Orbitron,sans-serif;opacity:0.8;pointer-events:none;">🏖️ PANTAI</div>
     </div>
   </div>
 
@@ -393,62 +448,63 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
     <button id="btn-play-dj" class="btn-ui" onclick="toggleDJ()">▶</button>
     <div id="vol-wrap"><span>🔊</span><input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.7" oninput="setVolume(this.value)"></div>
     <button id="btn-missions" class="btn-ui" onclick="openMissions()">🎯 MISI</button>
-    <button id="btn-ad-watch" class="btn-ui" onclick="openAdWatchMission()" style="background:rgba(255,200,0,0.2);border:1px solid rgba(255,200,0,0.5);color:#ffdd00;font-size:9px;animation:adBtnPulse 2s ease-in-out infinite alternate;">📺 TONTON IKLAN</button>
+    <button id="btn-ad-watch" class="btn-ui" onclick="openAdWatchMission()">📺 IKLAN</button>
     <button id="btn-skills" class="btn-ui" onclick="openSkills()">⚡ SKILL</button>
     <button id="btn-profile" class="btn-ui" onclick="openProfile()">👤 PROFIL</button>
     <button id="btn-owner" class="btn-ui" onclick="openOwner()">👑 OWNER</button>
     <button id="btn-admin" class="btn-ui" onclick="openAdmin()">⚙</button>
   </div>
 
-  <!-- CHAT PANEL (bottom-left) -->
+  <!-- CHAT PANEL (top-left) -->
   <div id="chat-panel" style="display:none;" class="panel-box">
     <div class="panel-header" onclick="togglePanel('chat-body','chat-toggle')">
       <span>💬 GLOBAL CHAT</span>
       <span class="panel-toggle" id="chat-toggle">▼</span>
     </div>
-    <div class="panel-body" id="chat-body" style="max-height:180px;">
-      <div id="chat-box" style="max-height:140px;"></div>
+    <div class="panel-body" id="chat-body">
+      <div id="chat-box"></div>
       <div id="chat-input-wrapper">
         <input type="text" id="chat-input" placeholder="Ketik pesan..." onkeypress="handleEnter(event)" maxlength="120">
         <button id="btn-send" onclick="sendChat()">KIRIM</button>
       </div>
     </div>
+    <button id="btn-fullscreen-ui" onclick="requestFullScreen()">⛶ LAYAR PENUH</button>
   </div>
 
-  <!-- LEADERBOARD PANEL (right) - SERVER ONLINE -->
+  <!-- LEADERBOARD PANEL (top-right) -->
   <div id="lb-panel" style="display:none;" class="panel-box">
     <div class="panel-header" onclick="togglePanel('lb-body','lb-toggle')">
-      <span>🌐 SERVER ONLINE <span id="lb-online-count" style="color:#00ff88;font-size:9px;"></span></span>
+      <span>🌐 SERVER ONLINE <span id="lb-online-count" style="color:#00ff88;font-size:8px;"></span></span>
       <span class="panel-toggle open" id="lb-toggle">▼</span>
     </div>
-    <div class="panel-body" id="lb-body" style="max-height:350px;">
+    <div class="panel-body" id="lb-body">
       <div id="lb-tabs">
         <div class="lb-tab active" onclick="switchLbTab('players')">👥 Online</div>
-        <div class="lb-tab" onclick="switchLbTab('fish')">🎣 Mancing</div>
+        <div class="lb-tab" onclick="switchLbTab('fish')">🎣 Skor Ikan</div>
       </div>
-      <div id="lb-list" style="max-height:290px;"></div>
-      <div id="lb-fish-list" style="max-height:290px;display:none;"></div>
+      <div id="lb-list"></div>
+      <div id="lb-fish-list" style="display:none;"></div>
     </div>
   </div>
 
-  <!-- PLAYER HUD -->
+  <!-- PLAYER HUD (bottom center) -->
   <div id="player-hud">
-    <div class="hud-bar-wrap">
-      <span class="hud-icon">❤️</span>
-      <div class="hud-bar"><div class="hud-bar-fill" id="hp-fill" style="width:100%;"></div></div>
-      <span class="hud-val" id="hp-val">100</span>
-    </div>
-    <div class="hud-bar-wrap">
-      <span class="hud-icon">💧</span>
-      <div class="hud-bar"><div class="hud-bar-fill" id="th-fill" style="width:100%;"></div></div>
-      <span class="hud-val" id="th-val">100</span>
-    </div>
+    <span class="hud-icon">❤️</span>
+    <div class="hud-bar"><div class="hud-bar-fill" id="hp-fill" style="width:100%;"></div></div>
+    <span class="hud-val" id="hp-val">100</span>
+    <div class="hud-sep"></div>
+    <span class="hud-icon">💧</span>
+    <div class="hud-bar"><div class="hud-bar-fill" id="th-fill" style="width:100%;"></div></div>
+    <span class="hud-val" id="th-val">100</span>
+    <div class="hud-sep"></div>
+    <span id="hud-sp" style="font-size:9px;color:#ffcc00;font-weight:700;">⚡0SP</span>
+    <span id="hud-token" style="font-size:9px;color:#ff8800;font-weight:700;margin-left:5px;">🎰0</span>
   </div>
 
   <!-- FISH STATUS -->
   <div id="fish-status"></div>
 
-  <!-- DPAD -->
+  <!-- DPAD (bottom-left) -->
   <div id="dpad" style="display:none;">
     <div class="dir-btn" id="btn-u" onmousedown="move('up')" onmouseup="stopMove()" ontouchstart="move('up')" ontouchend="stopMove()">▲</div>
     <div class="dir-btn" id="btn-l" onmousedown="move('left')" onmouseup="stopMove()" ontouchstart="move('left')" ontouchend="stopMove()">◀</div>
@@ -457,7 +513,10 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
     <div class="dir-btn" id="btn-d" onmousedown="move('down')" onmouseup="stopMove()" ontouchstart="move('down')" ontouchend="stopMove()">▼</div>
   </div>
 
-  <audio id="dj-audio" loop></audio>
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <audio id="dj-audio"></audio>
 </div>
 
 <!-- ADMIN PANEL -->
@@ -481,9 +540,9 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
       </div>
       <div class="admin-section">
         <div class="admin-section-title">🔁 AUTOPLAY SETTINGS</div>
-        <div class="toggle-switch"><input type="checkbox" id="admin-autoplay" onchange="adminSetAutoplay(this.checked)"><label>Autoplay Music (semua user)</label></div>
-        <div class="toggle-switch"><input type="checkbox" id="admin-loop" onchange="adminSetLoop(this.checked)" checked><label>Loop Playlist</label></div>
-        <div class="admin-field" style="margin-top:8px;"><label>URUTAN PUTAR</label>
+        <div class="toggle-switch"><input type="checkbox" id="admin-autoplay" onchange="adminSetAutoplay(this.checked)"><label>Autoplay Music</label></div>
+        <div class="toggle-switch"><input type="checkbox" id="admin-loop" onchange="adminSetLoop(this.checked)" checked><label>Auto Next Song</label></div>
+        <div class="admin-field" style="margin-top:7px;"><label>URUTAN PUTAR</label>
           <select id="admin-order" onchange="adminSetOrder(this.value)">
             <option value="sequence">Berurutan</option>
             <option value="random">Acak</option>
@@ -494,14 +553,15 @@ body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
   </div>
 </div>
 
-<!-- AD WEBVIEW OVERLAY -->
+<!-- AD WEBVIEW -->
 <div id="ad-webview-overlay">
-  <div class="ad-label">TONTON IKLAN UNTUK DAPAT REWARD</div>
+  <div class="ad-label">TONTON IKLAN UNTUK DAPAT REWARD 🎁</div>
   <div id="ad-frame-wrap">
     <iframe id="ad-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
   </div>
-  <div id="ad-countdown">Tonton iklan 23 detik... ⏳ <span id="ad-timer">23</span>s</div>
-  <button id="ad-skip-btn" onclick="closeAdWebview()">✅ KLAIM REWARD / AMBIL REWARD</button>
+  <div id="ad-countdown">⏳ <span id="ad-timer">23</span>s lagi...</div>
+  <button id="ad-skip-btn" onclick="closeAdWebview()">✅ KLAIM REWARD</button>
+  <button id="ad-close-x" onclick="forceCloseAd()">✕ TUTUP</button>
 </div>
 
 <script>
@@ -532,75 +592,94 @@ const db = getDatabase(app);
 // ===== STATE =====
 let myPlayerId = null;
 let myData = null;
-let playersDB = {}; // full snapshot
+let playersDB = {};
 let playersElements = {};
 let mapContainer = document.getElementById('map-world');
+
+// Map dimensions
+const MAP_W = 2000, MAP_H = 1500;
+// Fountain/respawn position
+const SPAWN_X = 700, SPAWN_Y = 720;
+// Chill zone world coords
+const CHILL_CX = 2000-100-140, CHILL_CY = 900+140; // right:100, top:900, size:280
+// Pond world coords
+const POND_CX = 60+190, POND_CY = 870+120;
+// Water station positions
+const WATER_STATIONS = [{x:300,y:400},{x:900,y:500},{x:1200,y:300},{x:400,y:1100},{x:1100,y:1100},{x:1600,y:700},{x:1700,y:400}];
+// Sea fishing zone starts at x=1650
+const SEA_START_X = 1650;
+
 let localSongs = [
-  {name:'Lagu Chill 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
-  {name:'Lagu Chill 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'},
-  {name:'Lagu Santai 3',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'},
+  {name:'Chill Beat 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
+  {name:'Chill Beat 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'},
+  {name:'Santai 3',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'},
   {name:'Beat Malam',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3'},
+  {name:'Vibes 5',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3'},
 ];
 let currentSongIndex = 0;
+let isPlaying = false;
 let adminSettings = { autoplay: false, loop: true, order: 'sequence' };
 
-// Skills system
+// Skills
 const SKILLS_DEF = [
-  {id:'explode',name:'Ledakin!',icon:'💣',desc:'Ledakkan player -40HP',cost:30,effect:'explosion'},
-  {id:'nuke',name:'Nuklir',icon:'☢️',desc:'Kirim nuklir -80HP',cost:80,effect:'nuke'},
-  {id:'grenade',name:'Granat',icon:'💥',desc:'Lempar granat -30HP',cost:25,effect:'grenade'},
-  {id:'firework',name:'Mercon',icon:'🎆',desc:'Kirim kembang api',cost:15,effect:'firework'},
-  {id:'freeze',name:'Bekukan',icon:'🧊',desc:'Bekukan player 5 detik',cost:20,effect:'freeze'},
-  {id:'bazooka',name:'Bazooka',icon:'🚀',desc:'Tembak bazooka -50HP',cost:35,effect:'bazooka'},
-  {id:'santet',name:'Santet',icon:'🪄',desc:'Santet mystik -25HP',cost:40,effect:'santet'},
-  {id:'kill',name:'Kill',icon:'☠️',desc:'Bunuh player seketika',cost:60,effect:'kill'},
+  {id:'explode',name:'Ledakin!',icon:'💣',desc:'Ledakkan -40HP',cost:30,effect:'explosion'},
+  {id:'nuke',name:'Nuklir',icon:'☢️',desc:'Nuklir -80HP',cost:80,effect:'nuke'},
+  {id:'grenade',name:'Granat',icon:'💥',desc:'Granat -30HP',cost:25,effect:'grenade'},
+  {id:'firework',name:'Mercon',icon:'🎆',desc:'Kembang api keren',cost:15,effect:'firework'},
+  {id:'freeze',name:'Bekukan',icon:'🧊',desc:'Bekukan 5 detik',cost:20,effect:'freeze'},
+  {id:'bazooka',name:'Bazooka',icon:'🚀',desc:'Bazooka -50HP',cost:35,effect:'bazooka'},
+  {id:'santet',name:'Santet',icon:'🪄',desc:'Santet -25HP',cost:40,effect:'santet'},
+  {id:'kill',name:'Kill',icon:'☠️',desc:'Bunuh seketika',cost:60,effect:'kill'},
   {id:'teleport',name:'Teleport',icon:'🌀',desc:'Teleport ke player',cost:10,effect:'teleport'},
-  {id:'shoot',name:'Tembak',icon:'🔫',desc:'Tembak player -20HP',cost:20,effect:'shoot'},
-  {id:'punish',name:'Hukum Sapu',icon:'🧹',desc:'Suruh nyapu 5x',cost:15,effect:'sweep'},
+  {id:'shoot',name:'Tembak',icon:'🔫',desc:'Tembak -20HP',cost:20,effect:'shoot'},
+  {id:'punish',name:'Hukum Sapu',icon:'🧹',desc:'Suruh nyapu',cost:15,effect:'sweep'},
   {id:'love',name:'Cinta',icon:'💖',desc:'Kirim cinta +10HP',cost:5,effect:'love'},
-  {id:'heal',name:'Sembuh',icon:'💊',desc:'Sembuhkan diri +50HP',cost:25,effect:'heal_self'},
-  {id:'shield',name:'Tameng',icon:'🛡️',desc:'Lindungi player +20HP',cost:18,effect:'shield'},
-  {id:'thunder',name:'Petir',icon:'⚡',desc:'Sambaran petir -45HP',cost:38,effect:'thunder'},
-  {id:'poison',name:'Racun',icon:'🐍',desc:'Racuni player -15HP/tik',cost:30,effect:'poison'},
-  {id:'ghost',name:'Hantu',icon:'👻',desc:'Kirim hantu menakut',cost:12,effect:'ghost'},
-  {id:'rainbow',name:'Pelangi',icon:'🌈',desc:'Kirim keberuntungan +SP',cost:20,effect:'rainbow'},
-  {id:'curse',name:'Kutuk',icon:'💀',desc:'Kutuk -semua stat',cost:50,effect:'curse'},
-  {id:'star',name:'Bintang',icon:'⭐',desc:'Beri bintang +XP bonus',cost:10,effect:'star'},
-  {id:'bomb',name:'Bom Waktu',icon:'⏱️',desc:'Bom meledak 3 detik',cost:45,effect:'timebomb'},
-  {id:'dance',name:'Paksa Dansa',icon:'💃',desc:'Paksa player dansa',cost:8,effect:'dance'},
-  {id:'prank',name:'Prank',icon:'🤡',desc:'Prank kocak ke player',cost:6,effect:'prank'},
+  {id:'heal',name:'Sembuh',icon:'💊',desc:'Sembuh diri +50HP',cost:25,effect:'heal_self'},
+  {id:'shield',name:'Tameng',icon:'🛡️',desc:'Lindungi +20HP',cost:18,effect:'shield'},
+  {id:'thunder',name:'Petir',icon:'⚡',desc:'Petir -45HP',cost:38,effect:'thunder'},
+  {id:'poison',name:'Racun',icon:'🐍',desc:'Racun -5HP×3',cost:30,effect:'poison'},
+  {id:'ghost',name:'Hantu',icon:'👻',desc:'Kirim hantu BOO!',cost:12,effect:'ghost'},
+  {id:'rainbow',name:'Pelangi',icon:'🌈',desc:'Keberuntungan +SP',cost:20,effect:'rainbow'},
+  {id:'curse',name:'Kutuk',icon:'💀',desc:'Kutuk semua stat',cost:50,effect:'curse'},
+  {id:'star',name:'Bintang',icon:'⭐',desc:'Beri XP bonus',cost:10,effect:'star'},
+  {id:'bomb',name:'Bom Waktu',icon:'⏱️',desc:'Bom 3 detik -45HP',cost:45,effect:'timebomb'},
   {id:'dragon',name:'Naga Api',icon:'🐉',desc:'Semburan naga -70HP',cost:90,effect:'dragon'},
+  // EMOTE SKILLS
+  {id:'dance',name:'Dansa Joget',icon:'💃',desc:'Joget lucu asyik!',cost:5,effect:'emote_dance'},
+  {id:'wiggle',name:'Goyang Heboh',icon:'🕺',desc:'Goyang kanan kiri',cost:5,effect:'emote_wiggle'},
+  {id:'spin_emote',name:'Muter-muter',icon:'🌀',desc:'Putar-putar asik',cost:5,effect:'emote_spin'},
+  {id:'bounce',name:'Loncat Joget',icon:'🐸',desc:'Lompat-lompat riang',cost:5,effect:'emote_bounce'},
+  {id:'floss',name:'Floss Dance',icon:'✌️',desc:'Gaya floss ala TikTok',cost:5,effect:'emote_floss'},
+  {id:'prank',name:'Prank',icon:'🤡',desc:'Prank kocak',cost:6,effect:'prank'},
 ];
 let myActiveSkill = null;
 let mySkillPoints = 0;
 
-// Missions
 let missions = [
-  {id:'fish5',title:'Pemancing Handal',desc:'Tangkap 5 ikan apapun',reward:'🎰 1x Spin',progress:0,target:5,completed:false,action:'spin'},
-  {id:'fish_rare',title:'Ikan Langka',desc:'Tangkap 1 ikan Langka/Epik/Legendaris',reward:'⚡ 30 Skill Poin',progress:0,target:1,completed:false,action:'skillpoints30'},
-  {id:'chat10',title:'Rajin Ngobrol',desc:'Kirim 10 pesan chat',reward:'🎰 2x Spin',progress:0,target:10,completed:false,action:'spin2'},
-  {id:'chill3',title:'Santai Dulu',desc:'Kunjungi Chill Zone 3x',reward:'⚡ 20 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints20'},
-  {id:'watch_ad',title:'Nonton Iklan',desc:'Tonton 1 iklan full 23 detik',reward:'🎰 3x Spin + 50 SP',progress:0,target:1,completed:false,action:'spin3_sp50'},
-  {id:'fish10',title:'Master Pancing',desc:'Tangkap 10 ikan',reward:'⚡ 60 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints60'},
-  {id:'level5',title:'Naik Level',desc:'Capai Level 5',reward:'🎰 5x Spin',progress:0,target:5,completed:false,action:'spin5'},
-  {id:'kill_skill',title:'Jagoan Jahat',desc:'Gunakan skill ke player lain 3x',reward:'⚡ 40 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints40'},
-  // NEW MISSIONS
-  {id:'fish20',title:'Legenda Pancing',desc:'Tangkap 20 ikan total',reward:'🎰 3x Spin + 80 SP',progress:0,target:20,completed:false,action:'spin3_sp80'},
-  {id:'fish_myth',title:'Pemburu Mitos',desc:'Tangkap ikan Mitos (Naga Laut/Peri Air)',reward:'🎰 10x Spin',progress:0,target:1,completed:false,action:'spin10'},
-  {id:'chat50',title:'Chatmaster',desc:'Kirim 50 pesan chat',reward:'⚡ 100 Skill Poin',progress:0,target:50,completed:false,action:'skillpoints100'},
-  {id:'chill10',title:'Raja Chill',desc:'Kunjungi Chill Zone 10x',reward:'🎰 3x Spin',progress:0,target:10,completed:false,action:'spin3'},
-  {id:'watch_ad3',title:'Nonton Iklan 3x',desc:'Tonton 3 iklan penuh',reward:'🎰 10x Spin + 150 SP',progress:0,target:3,completed:false,action:'spin10_sp150'},
-  {id:'level10',title:'Veteran',desc:'Capai Level 10',reward:'🎰 8x Spin + 200 SP',progress:0,target:10,completed:false,action:'spin8_sp200'},
-  {id:'skill10',title:'Dukun Sakti',desc:'Gunakan skill 10x',reward:'⚡ 80 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints80'},
-  {id:'spin5',title:'Penjudi Handal',desc:'Lakukan 5x spin wheel',reward:'⚡ 50 Skill Poin',progress:0,target:5,completed:false,action:'skillpoints50'},
-  {id:'respawn3',title:'Pantang Menyerah',desc:'Respawn sebanyak 3x',reward:'🎰 2x Spin + 30 SP',progress:0,target:3,completed:false,action:'spin2_sp30'},
-  {id:'fish_epik',title:'Kolektor Epik',desc:'Tangkap 3 ikan Epik',reward:'🎰 4x Spin',progress:0,target:3,completed:false,action:'spin4'},
-  {id:'login7',title:'Setia',desc:'Login selama 7 sesi',reward:'⚡ 120 Skill Poin',progress:0,target:7,completed:false,action:'skillpoints120'},
-  {id:'chat_skill',title:'Jago Skill Chat',desc:'Gunakan skill sambil chat 5x',reward:'🎰 3x Spin',progress:0,target:5,completed:false,action:'spin3'},
-  {id:'fish50',title:'Dewa Pancing',desc:'Tangkap 50 ikan total',reward:'🎰 15x Spin',progress:0,target:50,completed:false,action:'spin15'},
-  {id:'level20',title:'Sultan Level',desc:'Capai Level 20',reward:'🎰 20x Spin + 500 SP',progress:0,target:20,completed:false,action:'spin20_sp500'},
+  {id:'fish5',title:'Pemancing Handal',desc:'Tangkap 5 ikan',reward:'1x Spin',progress:0,target:5,completed:false,action:'spin1'},
+  {id:'fish_rare',title:'Ikan Langka',desc:'Tangkap ikan Langka/Epik/Legendaris',reward:'30 SP',progress:0,target:1,completed:false,action:'skillpoints30'},
+  {id:'chat10',title:'Rajin Ngobrol',desc:'Kirim 10 pesan chat',reward:'2x Spin',progress:0,target:10,completed:false,action:'spin2'},
+  {id:'chill3',title:'Santai Dulu',desc:'Kunjungi Chill Zone 3x',reward:'20 SP',progress:0,target:3,completed:false,action:'skillpoints20'},
+  {id:'watch_ad',title:'Nonton Iklan',desc:'Tonton 1 iklan full',reward:'3x Spin + 50 SP',progress:0,target:1,completed:false,action:'spin3_sp50'},
+  {id:'fish10',title:'Master Pancing',desc:'Tangkap 10 ikan',reward:'60 SP',progress:0,target:10,completed:false,action:'skillpoints60'},
+  {id:'level5',title:'Naik Level',desc:'Capai Level 5',reward:'5x Spin',progress:0,target:5,completed:false,action:'spin5'},
+  {id:'kill_skill',title:'Jagoan Jahat',desc:'Gunakan skill 3x',reward:'40 SP',progress:0,target:3,completed:false,action:'skillpoints40'},
+  {id:'fish20',title:'Legenda Pancing',desc:'Tangkap 20 ikan',reward:'3x Spin + 80 SP',progress:0,target:20,completed:false,action:'spin3_sp80'},
+  {id:'fish_myth',title:'Pemburu Mitos',desc:'Tangkap ikan Mitos',reward:'10x Spin',progress:0,target:1,completed:false,action:'spin10'},
+  {id:'chat50',title:'Chatmaster',desc:'Kirim 50 pesan chat',reward:'100 SP',progress:0,target:50,completed:false,action:'skillpoints100'},
+  {id:'chill10',title:'Raja Chill',desc:'Kunjungi Chill Zone 10x',reward:'3x Spin',progress:0,target:10,completed:false,action:'spin3'},
+  {id:'watch_ad3',title:'Nonton Iklan 3x',desc:'Tonton 3 iklan penuh',reward:'10x Spin + 150 SP',progress:0,target:3,completed:false,action:'spin10_sp150'},
+  {id:'level10',title:'Veteran',desc:'Capai Level 10',reward:'8x Spin + 200 SP',progress:0,target:10,completed:false,action:'spin8_sp200'},
+  {id:'skill10',title:'Dukun Sakti',desc:'Gunakan skill 10x',reward:'80 SP',progress:0,target:10,completed:false,action:'skillpoints80'},
+  {id:'spin5',title:'Penjudi Handal',desc:'Lakukan 5x spin',reward:'50 SP',progress:0,target:5,completed:false,action:'skillpoints50'},
+  {id:'respawn3',title:'Pantang Menyerah',desc:'Respawn 3x',reward:'2x Spin + 30 SP',progress:0,target:3,completed:false,action:'spin2_sp30'},
+  {id:'fish_epik',title:'Kolektor Epik',desc:'Tangkap 3 ikan Epik',reward:'4x Spin',progress:0,target:3,completed:false,action:'spin4'},
+  {id:'fish50',title:'Dewa Pancing',desc:'Tangkap 50 ikan total',reward:'15x Spin',progress:0,target:50,completed:false,action:'spin15'},
+  {id:'level20',title:'Sultan Level',desc:'Capai Level 20',reward:'20x Spin + 500 SP',progress:0,target:20,completed:false,action:'spin20_sp500'},
+  {id:'play_time',title:'Pemain Setia',desc:'Bermain selama 10 menit',reward:'5x Spin + 50 SP',progress:0,target:10,completed:false,action:'spin5_sp50'},
+  {id:'emote5',title:'Raja Emote',desc:'Pakai emote 5x',reward:'30 SP',progress:0,target:5,completed:false,action:'skillpoints30'},
+  {id:'sea_fish',title:'Nelayan Laut',desc:'Mancing di lautan 3x',reward:'60 SP + 2x Spin',progress:0,target:3,completed:false,action:'skillpoints60_spin2'},
 ];
-let savedMissions = {};
 let spinTokens = 0;
 const SPIN_REWARDS = [
   {label:'💣 Skill Explode',action:'unlock_explode'},
@@ -614,24 +693,33 @@ const SPIN_REWARDS = [
   {label:'💖 Skill Cinta',action:'unlock_love'},
   {label:'Coba Lagi 😅',action:'nothing'},
 ];
-let unlockedSkills = new Set(['firework','teleport','love']); // default unlocked
+let unlockedSkills = new Set(['firework','teleport','love','dance','wiggle','spin_emote','bounce','floss','prank']);
 
 // HP / Thirst system
 let myHp = 100, myThirst = 100;
 let chillVisits = 0;
-let isFrozen = false, isSweeping = false;
+let isFrozen = false, isSweeping = false, isEmoting = false;
 let sweepCount = 0;
 let isAlive = true;
-
-// Fish leaderboard
-let myFishScore = 0;
-let myFishCount = 0;
-
-// Level system
+let myFishScore = 0, myFishCount = 0;
 let myXp = 0, myLevel = 1;
+let playMinutes = 0;
+
+// Camera
+let camX = 0, camY = 0;
+
+// ===== TOAST =====
+window.showToast = (msg, type='info', duration=3000) => {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerText = msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), duration);
+};
 
 // ===== LOGIN STARS =====
-(function buildLoginStars(){
+(function(){
   const c = document.getElementById('login-stars');
   for(let i=0;i<60;i++){
     let s=document.createElement('div');s.className='star';
@@ -642,102 +730,276 @@ let myXp = 0, myLevel = 1;
 })();
 
 // ===== FULLSCREEN =====
-function requestFullScreen(){
-  let e=document.documentElement;
-  (e.requestFullscreen||e.webkitRequestFullscreen||e.msRequestFullscreen||function(){}).call(e);
-}
+window.requestFullScreen = () => {
+  let e = document.documentElement;
+  (e.requestFullscreen||e.webkitRequestFullscreen||e.mozRequestFullScreen||e.msRequestFullscreen||function(){}).call(e);
+};
+
+// ===== PANEL TOGGLE =====
+window.togglePanel = (bodyId, toggleId) => {
+  const b = document.getElementById(bodyId);
+  const t = document.getElementById(toggleId);
+  b.classList.toggle('collapsed');
+  t.classList.toggle('open');
+};
 
 // ===== BUILD DECORATIONS =====
-const MAP_W=3000, MAP_H=2000;
-function buildDecorations(){
-  const world=document.getElementById('map-world');
+function buildDecorations() {
+  const world = document.getElementById('map-world');
+
   // Grass patches
-  for(let i=0;i<60;i++){
+  for(let i=0;i<80;i++){
     let g=document.createElement('div');g.className='grass-patch';
-    let s=28+Math.random()*90;
-    g.style.cssText=`position:absolute;width:${s}px;height:${s}px;left:${60+Math.random()*(MAP_W-120)}px;top:${60+Math.random()*(MAP_H-120)}px;opacity:0.5;z-index:2;`;
+    let s=20+Math.random()*80;
+    let colors=['#2d5a20','#3a6a28','#1e4a15','#4a7a35'];
+    g.style.cssText=`position:absolute;width:${s}px;height:${s}px;left:${40+Math.random()*(1300)}px;top:${40+Math.random()*(MAP_H-80)}px;background:radial-gradient(circle,${colors[Math.floor(Math.random()*colors.length)]},transparent 70%);opacity:0.6;z-index:2;`;
     world.appendChild(g);
   }
-  // Trees (pixel positions)
-  const treePos=[
-    {x:90,y:120},{x:90,y:400},{x:90,y:700},{x:90,y:1000},{x:90,y:1300},{x:90,y:1700},
-    {x:300,y:1850},{x:600,y:1880},{x:1000,y:1880},{x:1400,y:1880},{x:1800,y:1880},{x:2200,y:1870},{x:2600,y:1860},{x:2880,y:1800},
-    {x:2880,y:1500},{x:2880,y:1200},{x:2880,y:900},{x:2880,y:600},{x:2880,y:300},{x:2700,y:90},{x:2400,y:80},{x:2000,y:70},
-    {x:1600,y:70},{x:1200,y:70},{x:800,y:70},{x:400,y:80},
-    // Extra interior trees
-    {x:500,y:500},{x:1500,y:500},{x:2400,y:600},{x:600,y:1100},{x:2300,y:1200},{x:1200,y:1500},
+
+  // Trees
+  const treePos = [
+    {x:60,y:80},{x:60,y:250},{x:60,y:500},{x:60,y:700},{x:60,y:950},{x:60,y:1200},{x:60,y:1400},
+    {x:200,y:1420},{x:400,y:1450},{x:700,y:1450},{x:1000,y:1450},{x:1200,y:1430},
+    {x:1350,y:1380},{x:1350,y:1100},{x:1350,y:800},{x:1350,y:500},{x:1350,y:200},
+    {x:1200,y:50},{x:1000,y:50},{x:700,y:50},{x:400,y:50},{x:200,y:50},
+    // Interior
+    {x:200,y:500},{x:350,y:750},{x:1100,y:700},{x:1200,y:1100},{x:800,y:1300},{x:500,y:1250},
+    {x:900,y:1350},{x:250,y:350},{x:1050,y:400},{x:700,y:800},
   ];
   treePos.forEach(pos=>{
     let t=document.createElement('div');t.className='tree';
-    let tw=24+Math.random()*16,th=tw*1.1;
+    let tw=22+Math.random()*14,th=tw*1.1;
+    let shade=['#2d7a2d','#1a6a1a','#3a8a3a','#257a25'];
     t.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
-    t.innerHTML=`<div class="tree-top" style="width:${tw}px;height:${th}px;"></div><div class="tree-trunk" style="width:${tw*0.3}px;height:${tw*0.4}px;"></div>`;
+    t.innerHTML=`<div class="tree-top" style="width:${tw}px;height:${th}px;background:radial-gradient(circle,${shade[Math.floor(Math.random()*shade.length)]},#1a4a1a);"></div><div class="tree-trunk" style="width:${tw*0.3}px;height:${tw*0.4}px;"></div>`;
     world.appendChild(t);
   });
-  // Lamp posts (pixel positions)
-  const lampPos=[
-    {x:450,y:450},{x:900,y:450},{x:1500,y:450},{x:2100,y:450},{x:2600,y:450},
-    {x:450,y:950},{x:900,y:950},{x:1500,y:950},{x:2100,y:950},{x:2600,y:950},
-    {x:450,y:1200},{x:900,y:1200},{x:1500,y:1200},{x:2100,y:1200},{x:2600,y:1200},
+
+  // Flowers
+  const flowerEmojis = ['🌸','🌼','🌻','🌺','🌷','💐','🌹','🪷'];
+  for(let i=0;i<60;i++){
+    let f=document.createElement('div');f.className='flower';
+    f.innerText=flowerEmojis[Math.floor(Math.random()*flowerEmojis.length)];
+    f.style.cssText=`position:absolute;left:${80+Math.random()*1200}px;top:${80+Math.random()*(MAP_H-160)}px;font-size:${10+Math.random()*8}px;animation-delay:${Math.random()*3}s;`;
+    world.appendChild(f);
+  }
+
+  // Animals - grass area
+  const grassAnimals = ['🦋','🐦','🐛','🐞','🦜','🐇','🦎','🐿️'];
+  for(let i=0;i<20;i++){
+    let a=document.createElement('div');a.className='animal';
+    let emoji=grassAnimals[Math.floor(Math.random()*grassAnimals.length)];
+    let ax=100+Math.random()*1200, ay=100+Math.random()*(MAP_H-200);
+    a.innerText=emoji;
+    a.style.cssText=`position:absolute;left:${ax}px;top:${ay}px;font-size:16px;z-index:3;animation:flowerSway ${2+Math.random()*3}s ease-in-out infinite alternate;animation-delay:${Math.random()*2}s;`;
+    world.appendChild(a);
+  }
+
+  // Butterflies (moving)
+  for(let i=0;i<6;i++){
+    let b=document.createElement('div');b.className='butterfly';
+    b.innerText='🦋';
+    b.style.cssText=`position:absolute;left:${200+Math.random()*1000}px;top:${150+Math.random()*800}px;font-size:14px;animation-duration:${6+Math.random()*6}s;animation-delay:${Math.random()*4}s;`;
+    world.appendChild(b);
+  }
+
+  // Beach elements - palm trees
+  const palmPos = [{x:1450,y:200},{x:1520,y:600},{x:1480,y:1000},{x:1540,y:1200},{x:1560,y:400}];
+  palmPos.forEach(pos=>{
+    let p=document.createElement('div');p.className='palm-tree';
+    p.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;`;
+    p.innerHTML=`<div class="palm-top">🌴</div><div class="palm-trunk"></div>`;
+    world.appendChild(p);
+  });
+
+  // Beach umbrellas
+  for(let i=0;i<5;i++){
+    let u=document.createElement('div');u.className='beach-umbrella';
+    u.innerText='⛱️';
+    u.style.cssText=`position:absolute;left:${1430+Math.random()*180}px;top:${150+Math.random()*1200}px;`;
+    world.appendChild(u);
+  }
+
+  // Sand decorations
+  const sandDecors = ['🐚','🦀','🦞','🪸','⛵'];
+  for(let i=0;i<15;i++){
+    let d=document.createElement('div');d.className='sand-decor';
+    d.innerText=sandDecors[Math.floor(Math.random()*sandDecors.length)];
+    d.style.cssText=`position:absolute;left:${1410+Math.random()*240}px;top:${100+Math.random()*1300}px;`;
+    world.appendChild(d);
+  }
+
+  // Sea fish/animals
+  const seaAnims = ['🐋','🦈','🐳','🐠','🐟','🦑','🐙','🦐','🐡'];
+  for(let i=0;i<12;i++){
+    let sf=document.createElement('div');
+    sf.innerText=seaAnims[Math.floor(Math.random()*seaAnims.length)];
+    sf.style.cssText=`position:absolute;left:${1670+Math.random()*300}px;top:${80+Math.random()*1340}px;font-size:${14+Math.random()*12}px;z-index:3;animation:fishSwim ${4+Math.random()*4}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;
+    world.appendChild(sf);
+  }
+
+  // Lamp posts
+  const lampPos = [
+    {x:380,y:380},{x:700,y:380},{x:1050,y:380},{x:1250,y:380},
+    {x:380,y:850},{x:700,y:850},{x:1050,y:850},{x:1250,y:850},
+    {x:380,y:1200},{x:700,y:1200},{x:1050,y:1200},
   ];
   lampPos.forEach(pos=>{
     let l=document.createElement('div');l.className='lamp-post';
-    l.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
-    l.innerHTML=`<div class="lamp-light"></div><div class="lamp-pole" style="height:33px;"></div>`;
+    l.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;`;
+    l.innerHTML=`<div class="lamp-light"></div><div class="lamp-pole" style="height:30px;"></div>`;
     world.appendChild(l);
   });
-  // Fish in pond
+
+  // Water stations
+  WATER_STATIONS.forEach((ws,i)=>{
+    let el=document.createElement('div');el.className='water-station';
+    el.dataset.wsId=i;
+    el.style.cssText=`position:absolute;left:${ws.x}px;top:${ws.y}px;`;
+    el.innerHTML=`<div class="water-station-icon">🚰</div><div class="water-station-label">Minum Air</div>`;
+    world.appendChild(el);
+  });
+
+  // Paths
+  let ph=document.createElement('div');ph.className='path path-h';
+  ph.style.cssText=`position:absolute;left:30px;width:1350px;top:${MAP_H*0.52}px;`;
+  world.appendChild(ph);
+  let ph2=document.createElement('div');ph2.className='path path-h';
+  ph2.style.cssText=`position:absolute;left:30px;width:1350px;top:${MAP_H*0.73}px;`;
+  world.appendChild(ph2);
+  let pv=document.createElement('div');pv.className='path path-v';
+  pv.style.cssText=`position:absolute;left:${MAP_W*0.5}px;top:30px;height:1440px;`;
+  world.appendChild(pv);
+  let pv2=document.createElement('div');pv2.className='path path-v';
+  pv2.style.cssText=`position:absolute;left:${MAP_W*0.35}px;top:30px;height:700px;`;
+  world.appendChild(pv2);
+
+  // Path to beach (horizontal)
+  let pb=document.createElement('div');pb.className='path path-h';
+  pb.style.cssText=`position:absolute;left:1100px;width:600px;top:${MAP_H*0.5}px;`;
+  world.appendChild(pb);
+
+  // Firework tool
+  let fw=document.createElement('div');fw.className='firework-tool';
+  fw.innerText='🎆';fw.title='Kembang Api';
+  fw.style.cssText=`position:absolute;left:1100px;top:550px;`;
+  world.appendChild(fw);
+
+  // Chill zone extras
+  let cb1=document.createElement('div');cb1.style.cssText=`position:absolute;top:960px;right:180px;font-size:20px;z-index:4;pointer-events:none;`;
+  cb1.innerText='🪑🪑'; world.appendChild(cb1);
+  let cb2=document.createElement('div');cb2.style.cssText=`position:absolute;top:1020px;right:200px;font-size:16px;z-index:4;pointer-events:none;`;
+  cb2.innerText='☕🍵🧋'; world.appendChild(cb2);
+  let cb3=document.createElement('div');cb3.style.cssText=`position:absolute;top:990px;right:330px;font-size:16px;z-index:4;pointer-events:none;`;
+  cb3.innerText='🪴🌿'; world.appendChild(cb3);
+
+  // Particles near stage
+  for(let i=0;i<20;i++){
+    let p=document.createElement('div');p.className='particle';
+    let cols=['#00d2ff','#ff00ff','#ffcc00','#00ff88'];
+    p.style.cssText=`position:absolute;left:${700+Math.random()*600}px;top:${100+Math.random()*200}px;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${(Math.random()-0.5)*40}px;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
+    world.appendChild(p);
+  }
+
+  // Pond fish
   const pond=document.getElementById('pond');
-  ['🐟','🐠','🐡','🐟','🐠','🦈'].forEach((f,i)=>{
-    let fe=document.createElement('div');fe.className='fish';
-    fe.innerText=f;
+  ['🐟','🐠','🐡','🐟','🐠'].forEach((f,i)=>{
+    let fe=document.createElement('div');fe.className='fish';fe.innerText=f;
     fe.style.cssText=`left:${10+Math.random()*60}%;top:${20+Math.random()*50}%;animation-delay:${i*1.5}s;animation-duration:${5+Math.random()*3}s;`;
     pond.appendChild(fe);
   });
-  // Paths (pixel)
-  let ph=document.createElement('div');ph.className='path path-h';
-  ph.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.5}px;z-index:2;`;
-  world.appendChild(ph);
-  let ph2=document.createElement('div');ph2.className='path path-h';
-  ph2.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.72}px;z-index:2;`;
-  world.appendChild(ph2);
-  let pv=document.createElement('div');pv.className='path path-v';
-  pv.style.cssText=`position:absolute;left:${MAP_W*0.5}px;top:400px;height:${MAP_H-450}px;z-index:2;`;
-  world.appendChild(pv);
-  let pv2=document.createElement('div');pv2.className='path path-v';
-  pv2.style.cssText=`position:absolute;left:${MAP_W*0.3}px;top:400px;height:400px;z-index:2;`;
-  world.appendChild(pv2);
-  // Particles near stage
-  for(let i=0;i<18;i++){
-    let p=document.createElement('div');p.className='particle';
-    let cols=['#00d2ff','#ff00ff','#ffcc00','#00ff88'];
-    p.style.cssText=`position:absolute;left:${900+Math.random()*1200}px;top:${200+Math.random()*200}px;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${(Math.random()-0.5)*40}px;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
-    world.appendChild(p);
-  }
-  // Firework tool on map
-  let fw=document.createElement('div');fw.className='firework-tool';
-  fw.innerText='🎆';fw.title='Kembang Api';
-  fw.style.cssText=`position:absolute;left:1700px;top:600px;z-index:4;`;
-  world.appendChild(fw);
-  // Visualizer bars (under stage)
+
+  // Visualizer bars
   const viz=document.getElementById('visualizer');
-  for(let i=0;i<28;i++){
+  for(let i=0;i<24;i++){
     let b=document.createElement('div');b.className='viz-bar';
     b.style.setProperty('--h',(8+Math.random()*22)+'px');
     b.style.animationDelay=(Math.random()*0.5)+'s';
     b.style.animationDuration=(0.3+Math.random()*0.4)+'s';
     viz.appendChild(b);
   }
-  // Extra: benches in chill zone
-  let bench=document.createElement('div');
-  bench.style.cssText=`position:absolute;top:1380px;right:200px;font-size:24px;z-index:4;pointer-events:none;`;
-  bench.innerText='🪑🪑';world.appendChild(bench);
-  let bench2=document.createElement('div');
-  bench2.style.cssText=`position:absolute;top:1460px;right:220px;font-size:20px;z-index:4;pointer-events:none;`;
-  bench2.innerText='☕🍵🧋';world.appendChild(bench2);
-  let bench3=document.createElement('div');
-  bench3.style.cssText=`position:absolute;top:1430px;right:320px;font-size:18px;z-index:4;pointer-events:none;`;
-  bench3.innerText='🪴🌿';world.appendChild(bench3);
+
+  // BOT PLAYERS
+  spawnBots();
+}
+
+// ===== BOT PLAYERS =====
+const BOT_NAMES = ['Rizky_Mancing','Dewi_Cantik'];
+const BOTS = [
+  {id:'bot_001',username:'Rizky_Mancing',gender:'Laki-laki',age:22,x:350,y:900,level:5,xp:250,fishCount:14,alive:true,isBot:true,hp:85,thirst:90,state:'wander',target:{x:350,y:900}},
+  {id:'bot_002',username:'Dewi_Cantik',gender:'Perempuan',age:19,x:1600,y:750,level:3,xp:120,fishCount:7,alive:true,isBot:true,hp:92,thirst:80,state:'fish',target:{x:1600,y:750}},
+];
+const BOT_WAYPOINTS = [
+  // Bot 1 wandering around pond / chill zone / stage
+  [[350,900],[250,700],[700,600],[800,750],[350,1000],[500,1100],[800,1100],[1000,900],[700,700],[350,900]],
+  // Bot 2 beach/sea wandering
+  [[1600,750],[1550,400],[1700,600],[1750,900],[1650,1100],[1600,750]],
+];
+let botWpIdx = [0, 0];
+
+function spawnBots(){
+  BOTS.forEach(bot=>{
+    let el=document.createElement('div');
+    el.className=`player ${bot.gender}`;
+    el.id='player-'+bot.id;
+    el.innerHTML=`
+      <div class="player-above">
+        <div class="player-chat-bubble" id="bubble-${bot.id}"></div>
+        <div class="player-bars">
+          <div class="bar-mini"><div class="bar-fill-hp" id="hp-bar-${bot.id}" style="width:${bot.hp}%;"></div></div>
+          <div class="bar-mini"><div class="bar-fill-th" id="th-bar-${bot.id}" style="width:${bot.thirst}%;"></div></div>
+        </div>
+        <div class="player-level-tag">Lv.${bot.level}</div>
+        <div class="name-tag">${bot.username} 🤖</div>
+        <div class="player-info-tag">${bot.age} · ${bot.gender.charAt(0)}</div>
+      </div>
+      <div class="player-shadow"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="legs"><div class="leg"></div><div class="leg"></div></div>
+    `;
+    el.style.left=bot.x+'px';
+    el.style.top=bot.y+'px';
+    mapContainer.appendChild(el);
+    playersElements[bot.id]=el;
+  });
+  // Bot movement loop
+  setInterval(moveBots, 100);
+  // Bot chat loop - recursive setTimeout agar delay acak tiap kali
+  function scheduleBotChat(){setTimeout(()=>{botChat();scheduleBotChat();},12000+Math.random()*8000);}
+  scheduleBotChat();
+}
+
+const BOT_CHATS = [
+  'Wah dapat ikan nih!','Lagi mancing nih bro...','Sepi banget hari ini','Halo semua!',
+  'Cuacanya enak buat mancing','Mantap pantainya keren!','Ada yang mau adu skill?','Gue dapet ikan koi!',
+  'Selamat datang di Hangout DJ!','Siapa yang DJ malam ini?','Ayo mancing bareng!','Wkwk seru banget',
+];
+function botChat(){
+  BOTS.forEach(bot=>{
+    if(Math.random()<0.4){
+      const msg=BOT_CHATS[Math.floor(Math.random()*BOT_CHATS.length)];
+      push(ref(db,'chats'),{username:bot.username,text:msg,timestamp:Date.now(),playerId:bot.id});
+    }
+  });
+}
+
+function moveBots(){
+  BOTS.forEach((bot,i)=>{
+    const wp=BOT_WAYPOINTS[i];
+    const target=wp[botWpIdx[i]];
+    const dx=target[0]-bot.x, dy=target[1]-bot.y;
+    const dist=Math.hypot(dx,dy);
+    if(dist<8){
+      botWpIdx[i]=(botWpIdx[i]+1)%wp.length;
+    } else {
+      const spd=1.2;
+      bot.x+=dx/dist*spd;
+      bot.y+=dy/dist*spd;
+    }
+    const el=playersElements[bot.id];
+    if(el){ el.style.left=bot.x+'px'; el.style.top=bot.y+'px'; }
+  });
 }
 
 // ===== START GAME =====
@@ -745,36 +1007,33 @@ window.startGame = async () => {
   const username=document.getElementById('username').value.trim();
   const age=document.getElementById('age').value;
   const gender=document.getElementById('gender').value;
-  if(!username||!age) return alert('Username dan Umur wajib!');
+  if(!username||!age){showToast('❌ Username dan Umur wajib!','error');return;}
   requestFullScreen();
 
-  // Check if username exists in Firebase
-  const usersRef = ref(db,'usernames/'+username.toLowerCase());
-  const snap = await get(usersRef);
+  const usersRef=ref(db,'usernames/'+username.toLowerCase());
+  const snap=await get(usersRef);
+  myPlayerId='p_'+Date.now()+'_'+Math.random().toString(36).substr(2,5);
+
   if(snap.exists()){
-    // Load existing data
-    const existingData = snap.val();
-    myPlayerId = existingData.playerId;
-    myXp = existingData.xp || 0;
-    myLevel = existingData.level || 1;
-    myFishScore = existingData.fishScore || 0;
-    myFishCount = existingData.fishCount || 0;
-    mySkillPoints = existingData.skillPoints || 0;
-    spinTokens = existingData.spinTokens || 0;
-    if(existingData.unlockedSkills) unlockedSkills = new Set(existingData.unlockedSkills);
-    if(existingData.missions) savedMissions = existingData.missions;
-    // Restore missions progress
-    missions.forEach(m=>{ if(savedMissions[m.id]) Object.assign(m,savedMissions[m.id]); });
-    myData={username,age:existingData.age||age,gender:existingData.gender||gender,
-      x:window.innerWidth/2,y:window.innerHeight/2,joinTime:Date.now(),
-      hp:100,thirst:100,level:myLevel,xp:myXp,alive:true};
-  } else {
-    myPlayerId='usr_'+Math.random().toString(36).substr(2,6);
-    myData={username,age,gender,x:MAP_W/2,y:MAP_H/2,
-      joinTime:Date.now(),hp:100,thirst:100,level:1,xp:0,alive:true};
-    // Save username mapping
-    set(usersRef,{playerId:myPlayerId,age,gender,xp:0,level:1,fishScore:0,fishCount:0,skillPoints:0,spinTokens:0,unlockedSkills:['firework','teleport','love'],missions:{}});
+    const saved=snap.val();
+    myPlayerId=saved.playerId||myPlayerId;
+    myXp=saved.xp||0;myLevel=saved.level||1;
+    myFishScore=saved.fishScore||0;myFishCount=saved.fishCount||0;
+    mySkillPoints=saved.skillPoints||0;spinTokens=saved.spinTokens||0;
+    if(saved.unlockedSkills) unlockedSkills=new Set(saved.unlockedSkills);
+    if(saved.missions){
+      missions.forEach(m=>{
+        if(saved.missions[m.id]){m.progress=saved.missions[m.id].progress||0;m.completed=saved.missions[m.id].completed||false;}
+      });
+    }
+    showToast(`👋 Selamat datang kembali, ${username}!`,'success');
   }
+
+  myHp=100;myThirst=100;isAlive=true;
+  myData={username,age,gender,x:SPAWN_X,y:SPAWN_Y,
+    joinTime:Date.now(),hp:100,thirst:100,level:myLevel,xp:myXp,alive:true};
+
+  set(usersRef,{playerId:myPlayerId,age,gender,xp:myXp,level:myLevel,fishScore:myFishScore,fishCount:myFishCount,skillPoints:mySkillPoints,spinTokens,unlockedSkills:Array.from(unlockedSkills),missions:Object.fromEntries(missions.map(m=>[m.id,{progress:m.progress,completed:m.completed}]))});
 
   document.getElementById('login-screen').style.display='none';
   document.getElementById('top-bar').style.display='flex';
@@ -782,14 +1041,15 @@ window.startGame = async () => {
   document.getElementById('lb-panel').style.display='block';
   document.getElementById('player-hud').style.display='flex';
   document.getElementById('dpad').style.display='grid';
+  updateHudExtras();
 
   buildDecorations();
-  // Initialize camera position immediately
-  camX = myData.x - window.innerWidth/2 + 17;
-  camY = myData.y - window.innerHeight/2 + 30;
-  camX = Math.max(0,Math.min(MAP_W-window.innerWidth,camX));
-  camY = Math.max(0,Math.min(MAP_H-window.innerHeight,camY));
+
+  // Init camera
+  camX=Math.max(0,Math.min(MAP_W-window.innerWidth,SPAWN_X-window.innerWidth/2));
+  camY=Math.max(0,Math.min(MAP_H-window.innerHeight,SPAWN_Y-window.innerHeight/2));
   document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
+
   const myRef=ref(db,'players/'+myPlayerId);
   set(myRef,myData);
   onDisconnect(myRef).remove();
@@ -801,39 +1061,39 @@ window.startGame = async () => {
   listenToEvents();
   startGameLoop();
   startHpThirstLoop();
-  setInterval(pingTimer,60000);
-  setInterval(updateLeaderboardTime,30000);
-
-  push(ref(db,'chats'),{system:true,text:`✨ ${username} (Lv.${myLevel}) bergabung ke server.`});
+  startPlayTimeReward();
+  setInterval(()=>renderLeaderboard(),15000);
+  push(ref(db,'chats'),{system:true,text:`✨ ${username} (Lv.${myLevel}) bergabung!`});
 };
 
-// ===== SAVE USER DATA =====
 function saveUserData(){
   if(!myData) return;
   const usersRef=ref(db,'usernames/'+myData.username.toLowerCase());
-  set(usersRef,{
-    playerId:myPlayerId,age:myData.age,gender:myData.gender,
+  set(usersRef,{playerId:myPlayerId,age:myData.age,gender:myData.gender,
     xp:myXp,level:myLevel,fishScore:myFishScore,fishCount:myFishCount,
-    skillPoints:mySkillPoints,spinTokens:spinTokens,
+    skillPoints:mySkillPoints,spinTokens,
     unlockedSkills:Array.from(unlockedSkills),
     missions:Object.fromEntries(missions.map(m=>[m.id,{progress:m.progress,completed:m.completed}]))
   });
 }
 
-// ===== PANEL TOGGLE =====
-window.togglePanel=(bodyId,toggleId)=>{
-  const b=document.getElementById(bodyId),t=document.getElementById(toggleId);
-  b.classList.toggle('collapsed');
-  t.classList.toggle('open');
-};
+function updateHudExtras(){
+  let spEl=document.getElementById('hud-sp');
+  let tkEl=document.getElementById('hud-token');
+  if(spEl) spEl.innerText=`⚡${mySkillPoints}SP`;
+  if(tkEl) tkEl.innerText=`🎰${spinTokens}`;
+}
 
 // ===== LISTEN PLAYERS =====
 function listenToPlayers(){
   onValue(ref(db,'players'),(snapshot)=>{
-    playersDB=snapshot.val()||{};
+    const newDB=snapshot.val()||{};
+    // Remove players who went offline (no longer in DB)
     for(let id in playersElements){
-      if(!playersDB[id]){mapContainer.removeChild(playersElements[id]);delete playersElements[id];}
+      if(id.startsWith('bot_')) continue;
+      if(!newDB[id]){playersElements[id].remove();delete playersElements[id];}
     }
+    playersDB=newDB;
     renderLeaderboard();
     Object.keys(playersDB).forEach(id=>renderPlayer(id,playersDB[id]));
   });
@@ -853,8 +1113,8 @@ function renderPlayer(id,p){
           <div class="bar-mini"><div class="bar-fill-th" id="th-bar-${id}" style="width:${p.thirst||100}%;"></div></div>
         </div>
         <div class="player-level-tag">Lv.${p.level||1}</div>
-        <div class="name-tag">${p.username}</div>
-        <div class="player-info-tag">${p.age} · ${(p.gender||'L').charAt(0)}</div>
+        <div class="name-tag">${p.username||'?'}</div>
+        <div class="player-info-tag">${p.age||'?'} · ${(p.gender||'L').charAt(0)}</div>
       </div>
       <div class="player-shadow"></div>
       <div class="head"></div>
@@ -866,67 +1126,53 @@ function renderPlayer(id,p){
   }
   let el=playersElements[id];
   el.style.left=p.x+'px';el.style.top=p.y+'px';
-  // Update bars
-  let hpB=document.getElementById('hp-bar-'+id);
-  let thB=document.getElementById('th-bar-'+id);
-  if(hpB) hpB.style.width=(p.hp||100)+'%';
-  if(thB) thB.style.width=(p.thirst||100)+'%';
-  // Level tag update
-  let lvTag=el.querySelector('.player-level-tag');
-  if(lvTag) lvTag.innerText=`Lv.${p.level||1}`;
-  // Dead state
-  if(p.alive===false){
-    el.classList.add('player-dead');
-    if(!el.querySelector('.dead-icon')){
-      let di=document.createElement('div');di.className='dead-icon';di.innerText='💀';
-      el.appendChild(di);
-    }
-  } else {
-    el.classList.remove('player-dead');
-    let di=el.querySelector('.dead-icon');if(di)di.remove();
-  }
-  // Frozen
-  if(p.frozen) el.classList.add('player-frozen');
-  else el.classList.remove('player-frozen');
-  // Sweeping
-  if(p.sweeping){
-    if(!el.querySelector('.broom-icon')){
-      let br=document.createElement('div');br.className='broom-icon';br.innerText='🧹';
-      el.appendChild(br);
-    }
-  } else {
-    let br=el.querySelector('.broom-icon');if(br)br.remove();
-  }
+  let hpB=document.getElementById('hp-bar-'+id);if(hpB) hpB.style.width=(p.hp||100)+'%';
+  let thB=document.getElementById('th-bar-'+id);if(thB) thB.style.width=(p.thirst||100)+'%';
+  let lvTag=el.querySelector('.player-level-tag');if(lvTag) lvTag.innerText=`Lv.${p.level||1}`;
+  if(p.alive===false){el.classList.add('player-dead');if(!el.querySelector('.dead-icon')){let di=document.createElement('div');di.className='dead-icon';di.innerText='💀';el.appendChild(di);}}
+  else{el.classList.remove('player-dead');let di=el.querySelector('.dead-icon');if(di)di.remove();}
+  if(p.frozen) el.classList.add('player-frozen');else el.classList.remove('player-frozen');
+  if(p.sweeping){if(!el.querySelector('.broom-icon')){let br=document.createElement('div');br.className='broom-icon';br.innerText='🧹';el.appendChild(br);}}
+  else{let br=el.querySelector('.broom-icon');if(br)br.remove();}
+  // Emote
+  const emoteClass=p.emote?`emote-${p.emote}`:'';
+  el.classList.remove('emote-dance','emote-wiggle','emote-spin','emote-bounce','emote-floss');
+  if(emoteClass) el.classList.add(emoteClass);
+  // Emote icon above
+  let existIcon=el.querySelector('.emote-icon');
+  if(p.emote && p.emoteIcon){
+    if(!existIcon){let ic=document.createElement('div');ic.className='emote-icon';ic.style.cssText='position:absolute;top:-30px;left:50%;';ic.innerText=p.emoteIcon;el.querySelector('.player-above').appendChild(ic);}
+    else existIcon.innerText=p.emoteIcon;
+  } else {if(existIcon)existIcon.remove();}
 }
 
 // ===== LEADERBOARD =====
 function renderLeaderboard(){
   const lbList=document.getElementById('lb-list');
+  if(!lbList) return;
   lbList.innerHTML='';
   let arr=Object.keys(playersDB).map(k=>({id:k,...playersDB[k]}));
   arr.sort((a,b)=>(b.level||1)-(a.level||1)||(b.xp||0)-(a.xp||0));
-  // Update online count
   const countEl=document.getElementById('lb-online-count');
-  if(countEl) countEl.innerText=`(${arr.length} online)`;
-  arr.slice(0,15).forEach((p,i)=>{
+  if(countEl) countEl.innerText=`(${arr.length})`;
+  // Show up to 55
+  arr.slice(0,55).forEach((p,i)=>{
     let min=Math.floor((Date.now()-(p.joinTime||Date.now()))/60000);
     let hrs=Math.floor(min/60),mins=min%60;
-    let timeStr=hrs>0?`${hrs}j ${mins}m`:`${mins}m`;
+    let timeStr=hrs>0?`${hrs}j${mins}m`:`${mins}m`;
     let item=document.createElement('div');item.className='lb-item';
     let rank=['🥇','🥈','🥉'][i]||`#${i+1}`;
     let genderIcon=p.gender==='Perempuan'?'👧':'👦';
     let isMe=p.id===myPlayerId;
     item.innerHTML=`
-      <div style="display:flex;align-items:center;gap:5px;width:100%;">
-        <div class="lb-dot" style="${isMe?'background:#ffcc00;box-shadow:0 0 5px #ffcc00':''}"></div>
-        <div style="flex:1;min-width:0;">
-          <div class="lb-name" style="${isMe?'color:#ffcc00':''}">${rank} ${p.username||'?'}${isMe?' <span style="color:#ffcc00;font-size:8px;">YOU</span>':''}</div>
-          <div class="lb-detail">${genderIcon} ${p.age||'?'} thn · ⏱${timeStr}</div>
-          <div style="display:flex;gap:4px;margin-top:2px;">
-            <span style="font-size:8px;background:rgba(255,136,0,0.2);padding:1px 4px;border-radius:4px;color:#ff8800;">Lv.${p.level||1}</span>
-            <span style="font-size:8px;background:rgba(0,204,255,0.15);padding:1px 4px;border-radius:4px;color:#00ccff;">🎣${p.fishCount||0}</span>
-            <span style="font-size:8px;background:rgba(255,200,0,0.15);padding:1px 4px;border-radius:4px;color:#ffcc00;">${p.xp||0}XP</span>
-          </div>
+      <div class="lb-dot" style="${isMe?'background:#ffcc00;box-shadow:0 0 5px #ffcc00':''}"></div>
+      <div style="flex:1;min-width:0;">
+        <div class="lb-name" style="${isMe?'color:#ffcc00':''}">${rank} ${p.username||'?'}${isMe?' <span style="font-size:7px;color:#ffcc00;">YOU</span>':''}</div>
+        <div class="lb-detail">${genderIcon}${p.age||'?'}th · ⏱${timeStr}</div>
+        <div style="display:flex;gap:3px;margin-top:1px;flex-wrap:wrap;">
+          <span style="font-size:7px;background:rgba(255,136,0,0.2);padding:0 3px;border-radius:3px;color:#ff8800;">Lv.${p.level||1}</span>
+          <span style="font-size:7px;background:rgba(0,204,255,0.15);padding:0 3px;border-radius:3px;color:#00ccff;">🎣${p.fishCount||0}</span>
+          <span style="font-size:7px;background:rgba(255,200,0,0.15);padding:0 3px;border-radius:3px;color:#ffcc00;">${p.xp||0}XP</span>
         </div>
       </div>
     `;
@@ -944,40 +1190,35 @@ window.switchLbTab=(tab)=>{
 
 function renderFishLeaderboard(){
   const list=document.getElementById('lb-fish-list');
-  list.innerHTML='<div style="font-size:10px;color:#888;padding:8px;text-align:center;">Loading...</div>';
+  list.innerHTML='<div style="font-size:9px;color:#888;padding:6px;text-align:center;">Loading...</div>';
   get(ref(db,'fish_scores')).then(snap=>{
     list.innerHTML='';
     const data=snap.val()||{};
     let arr=Object.entries(data).map(([name,v])=>({name,...v}));
     arr.sort((a,b)=>(b.score||0)-(a.score||0));
-    if(!arr.length){list.innerHTML='<div style="font-size:10px;color:#888;padding:8px;text-align:center;">Belum ada data 🎣</div>';return;}
-    arr.slice(0,10).forEach((p,i)=>{
+    if(!arr.length){list.innerHTML='<div style="font-size:9px;color:#888;padding:6px;text-align:center;">Belum ada data</div>';return;}
+    arr.slice(0,20).forEach((p,i)=>{
       let item=document.createElement('div');item.className='lb-item';
       let rank=['🥇','🥈','🥉'][i]||`#${i+1}`;
-      item.innerHTML=`<div><div class="lb-name">${rank} ${p.name}</div><div class="lb-detail">${p.count||0} ikan</div></div><div class="lb-fish-score">🏆 ${p.score||0}</div>`;
+      item.innerHTML=`<div style="flex:1;"><div class="lb-name">${rank} ${p.name}</div><div class="lb-detail">${p.count||0} ikan</div></div><div style="color:#00ccff;font-weight:700;font-size:11px;">🏆${p.score||0}</div>`;
       list.appendChild(item);
     });
   });
 }
-
-function updateLeaderboardTime(){ renderLeaderboard(); }
 
 // ===== CHAT =====
 function listenToChat(){
   onValue(ref(db,'chats'),(snap)=>{
     let box=document.getElementById('chat-box');
     box.innerHTML='';
-    const chats=Object.values(snap.val()||{}).sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-30);
+    const chats=Object.values(snap.val()||{}).sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-40);
     chats.forEach(c=>{
       let div=document.createElement('div');
       if(c.system){div.className='chat-msg system-msg';div.innerHTML=`<em>${c.text}</em>`;}
-      else if(c.skill){div.className='chat-msg skill-msg';div.innerHTML=`<strong style="color:#ff00ff">[SKILL]</strong> ${escapeHtml(c.text)}`;}
-      else{div.className='chat-msg regular-msg';div.innerHTML=`<strong style="color:#00d2ff">${escapeHtml(c.username||'?')}</strong>: ${escapeHtml(c.text)}`;}
+      else if(c.skill){div.className='chat-msg skill-msg';div.innerHTML=`<strong style="color:#ff00ff">[SKILL]</strong> ${esc(c.text)}`;}
+      else{div.className='chat-msg regular-msg';div.innerHTML=`<strong style="color:#00d2ff">${esc(c.username||'?')}</strong>: ${esc(c.text)}`;}
       box.appendChild(div);
-      // Show bubble above player
-      if(!c.system && !c.skill && c.playerId){
-        showPlayerBubble(c.playerId,c.text);
-      }
+      if(!c.system&&!c.skill&&c.playerId) showPlayerBubble(c.playerId,c.text);
     });
     box.scrollTop=box.scrollHeight;
   });
@@ -990,28 +1231,25 @@ function showPlayerBubble(pid,text){
   clearTimeout(bub._t);
   bub._t=setTimeout(()=>bub.style.display='none',4000);
 }
-
-function escapeHtml(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 window.sendChat=()=>{
   let inp=document.getElementById('chat-input');
-  if(inp.value.trim()&&myData){
-    push(ref(db,'chats'),{username:myData.username,text:inp.value.trim(),timestamp:Date.now(),playerId:myPlayerId});
+  let txt=inp.value.trim();
+  if(txt&&myData){
+    push(ref(db,'chats'),{username:myData.username,text:txt,timestamp:Date.now(),playerId:myPlayerId});
     inp.value='';
     updateMission('chat10',1);
+    updateMission('chat50',1);
   }
 };
 window.handleEnter=(e)=>{if(e.key==='Enter')sendChat();};
 
-// ===== SONGS =====
+// ===== SONGS / AUTOPLAY =====
 function listenToSongs(){
   onValue(ref(db,'songs'),(snap)=>{
     const data=snap.val();
-    if(data){
-      Object.entries(data).forEach(([k,v])=>{
-        if(!localSongs.find(l=>l.name===v.name)) localSongs.push({id:k,...v});
-      });
-    }
+    if(data){Object.entries(data).forEach(([k,v])=>{if(!localSongs.find(l=>l.name===v.name))localSongs.push({id:k,...v});});}
     rebuildPlaylist();
   });
 }
@@ -1031,25 +1269,17 @@ function listenToSettings(){
   onValue(ref(db,'settings'),(snap)=>{
     const s=snap.val()||{};
     adminSettings={...adminSettings,...s};
-    if(s.autoplay && localSongs.length){
+    if(s.autoplay&&localSongs.length){
       let audio=document.getElementById('dj-audio');
-      if(!isPlaying){
-        let url=s.currentSong||localSongs[0].url;
-        audio.src=url;
-        audio.play().catch(()=>{});
-        isPlaying=true;
-        let btn=document.getElementById('btn-play-dj');
-        btn.innerHTML='⏹';btn.classList.add('active');
-        document.getElementById('visualizer').classList.add('active');
-      }
+      if(!isPlaying){let url=s.currentSong||localSongs[0].url;audio.src=url;audio.play().catch(()=>{});isPlaying=true;document.getElementById('btn-play-dj').innerHTML='⏹';document.getElementById('btn-play-dj').classList.add('active');document.getElementById('visualizer').classList.add('active');}
     }
-    document.getElementById('admin-autoplay').checked=!!s.autoplay;
-    document.getElementById('admin-loop').checked=s.loop!==false;
-    if(s.order) document.getElementById('admin-order').value=s.order;
+    const ap=document.getElementById('admin-autoplay');if(ap) ap.checked=!!s.autoplay;
+    const al=document.getElementById('admin-loop');if(al) al.checked=s.loop!==false;
+    const ao=document.getElementById('admin-order');if(ao&&s.order) ao.value=s.order;
   });
 }
 
-// ===== GAME EVENTS (skills hitting players) =====
+// ===== EVENTS (skills) =====
 function listenToEvents(){
   onValue(ref(db,'events/'+myPlayerId),(snap)=>{
     const ev=snap.val();
@@ -1061,194 +1291,176 @@ function listenToEvents(){
 
 function handleIncomingEvent(ev){
   const from=ev.from||'?';
+  const u=myData.username;
   switch(ev.type){
-    case 'explosion':
-      showEffect('💣');
-      myHp=Math.max(0,myHp-40);
-      updateMyBars();
-      showFloatingText(myPlayerId,'💣 -40 HP',myData.x,myData.y);
-      push(ref(db,'chats'),{system:true,text:`💣 ${from} meledakkan ${myData.username}!`});
-      checkDeath();break;
-    case 'nuke':
-      showEffect('☢️');
-      myHp=Math.max(0,myHp-80);
-      updateMyBars();
-      showFloatingText(myPlayerId,'☢️ -80 HP',myData.x,myData.y);
-      push(ref(db,'chats'),{system:true,text:`☢️ ${from} mengirim NUKLIR ke ${myData.username}!`});
-      checkDeath();break;
-    case 'grenade':
-      showEffect('💥');myHp=Math.max(0,myHp-30);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`💥 ${from} melempar granat ke ${myData.username}!`});
-      checkDeath();break;
-    case 'firework':
-      showEffect('🎆');
-      push(ref(db,'chats'),{system:true,text:`🎆 ${from} mengirim kembang api ke ${myData.username}!`});break;
-    case 'freeze':
-      showEffect('🧊');isFrozen=true;
-      set(ref(db,'players/'+myPlayerId+'/frozen'),true);
-      push(ref(db,'chats'),{system:true,text:`🧊 ${from} membekukan ${myData.username} selama 5 detik!`});
-      setTimeout(()=>{isFrozen=false;set(ref(db,'players/'+myPlayerId+'/frozen'),false);},5000);break;
-    case 'bazooka':
-      showEffect('🚀');myHp=Math.max(0,myHp-50);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`🚀 ${from} menembak bazooka ke ${myData.username}!`});
-      checkDeath();break;
-    case 'santet':
-      showEffect('🪄');myHp=Math.max(0,myHp-25);myThirst=Math.max(0,myThirst-30);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`🪄 ${from} menyantet ${myData.username}!`});
-      checkDeath();break;
-    case 'kill':
-      showEffect('☠️');myHp=0;updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`☠️ ${from} membunuh ${myData.username}!`});
-      checkDeath();break;
-    case 'teleport':
-      // Teleport sender to me - no harm
-      showEffect('🌀');
-      push(ref(db,'chats'),{system:true,text:`🌀 ${from} teleport ke ${myData.username}!`});break;
-    case 'shoot':
-      showEffect('🔫');myHp=Math.max(0,myHp-20);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`🔫 ${from} menembak ${myData.username}!`});
-      checkDeath();break;
-    case 'sweep':
-      showEffect('🧹');
-      if(!isSweeping){startSweep();}
-      push(ref(db,'chats'),{system:true,text:`🧹 ${from} menghukum ${myData.username} untuk menyapu!`});break;
-    case 'love':
-      showEffect('💖');myHp=Math.min(100,myHp+10);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`💖 ${from} mengirim cinta ke ${myData.username}! +10 HP`});break;
-    case 'heal_self':
-      showEffect('💊');myHp=Math.min(100,myHp+50);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`💊 ${myData.username} menyembuhkan diri sendiri! +50 HP`});break;
-    case 'shield':
-      showEffect('🛡️');myHp=Math.min(100,myHp+20);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`🛡️ ${from} melindungi ${myData.username}! +20 HP`});break;
-    case 'thunder':
-      showEffect('⚡');myHp=Math.max(0,myHp-45);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`⚡ ${from} menyambar ${myData.username} dengan petir! -45 HP`});
-      checkDeath();break;
-    case 'poison':
-      showEffect('🐍');
-      push(ref(db,'chats'),{system:true,text:`🐍 ${from} meracuni ${myData.username}!`});
-      let poisonTick=0;
-      let poisonInterval=setInterval(()=>{
-        myHp=Math.max(0,myHp-5);updateMyBars();showFloatingText(myPlayerId,'🐍 -5HP',myData.x,myData.y);
-        poisonTick++;if(poisonTick>=3||myHp<=0){clearInterval(poisonInterval);checkDeath();}
-      },2000);
-      break;
-    case 'ghost':
-      showEffect('👻');
-      push(ref(db,'chats'),{system:true,text:`👻 ${from} mengirim hantu ke ${myData.username}! BOO!`});break;
-    case 'rainbow':
-      showEffect('🌈');addSkillPoints(10);
-      push(ref(db,'chats'),{system:true,text:`🌈 ${from} memberi keberuntungan ke ${myData.username}! +10 SP`});break;
-    case 'curse':
-      showEffect('💀');myHp=Math.max(0,myHp-30);myThirst=Math.max(0,myThirst-30);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`💀 ${from} mengutuk ${myData.username}! -30HP -30Thirst`});
-      checkDeath();break;
-    case 'star':
-      showEffect('⭐');addXp(20);
-      push(ref(db,'chats'),{system:true,text:`⭐ ${from} memberi bintang ke ${myData.username}! +20 XP`});break;
-    case 'timebomb':
-      showEffect('⏱️');
-      push(ref(db,'chats'),{system:true,text:`⏱️ ${from} pasang bom waktu ke ${myData.username}!`});
-      setTimeout(()=>{
-        showEffect('💣');myHp=Math.max(0,myHp-45);updateMyBars();
-        push(ref(db,'chats'),{system:true,text:`💥 BOM WAKTU meledak di ${myData.username}! -45 HP`});
-        checkDeath();
-      },3000);
-      break;
-    case 'dance':
-      showEffect('💃');
-      push(ref(db,'chats'),{system:true,text:`💃 ${from} memaksa ${myData.username} untuk dansa! 🕺`});break;
-    case 'prank':
-      showEffect('🤡');
-      push(ref(db,'chats'),{system:true,text:`🤡 ${from} memprank ${myData.username}! HAHAHA`});break;
-    case 'dragon':
-      showEffect('🐉');myHp=Math.max(0,myHp-70);updateMyBars();
-      push(ref(db,'chats'),{system:true,text:`🐉 ${from} melepas naga api ke ${myData.username}! -70 HP`});
-      checkDeath();break;
+    case 'explosion': showEffect('💣');myHp=Math.max(0,myHp-40);updateMyBars();showFloatingText('💣 -40HP',myData.x,myData.y);push(ref(db,'chats'),{system:true,text:`💣 ${from} meledakkan ${u}!`});checkDeath();break;
+    case 'nuke': showEffect('☢️');myHp=Math.max(0,myHp-80);updateMyBars();push(ref(db,'chats'),{system:true,text:`☢️ ${from} nuklir ke ${u}!`});checkDeath();break;
+    case 'grenade': showEffect('💥');myHp=Math.max(0,myHp-30);updateMyBars();push(ref(db,'chats'),{system:true,text:`💥 ${from} granat ke ${u}!`});checkDeath();break;
+    case 'firework': showEffect('🎆');push(ref(db,'chats'),{system:true,text:`🎆 ${from} kembang api ke ${u}!`});break;
+    case 'freeze': showEffect('🧊');isFrozen=true;set(ref(db,'players/'+myPlayerId+'/frozen'),true);push(ref(db,'chats'),{system:true,text:`🧊 ${from} membekukan ${u}!`});setTimeout(()=>{isFrozen=false;set(ref(db,'players/'+myPlayerId+'/frozen'),false);},5000);break;
+    case 'bazooka': showEffect('🚀');myHp=Math.max(0,myHp-50);updateMyBars();push(ref(db,'chats'),{system:true,text:`🚀 ${from} bazooka ke ${u}!`});checkDeath();break;
+    case 'santet': showEffect('🪄');myHp=Math.max(0,myHp-25);myThirst=Math.max(0,myThirst-30);updateMyBars();push(ref(db,'chats'),{system:true,text:`🪄 ${from} santet ${u}!`});checkDeath();break;
+    case 'kill': showEffect('☠️');myHp=0;updateMyBars();push(ref(db,'chats'),{system:true,text:`☠️ ${from} membunuh ${u}!`});checkDeath();break;
+    case 'teleport': showEffect('🌀');push(ref(db,'chats'),{system:true,text:`🌀 ${from} teleport ke ${u}!`});break;
+    case 'shoot': showEffect('🔫');myHp=Math.max(0,myHp-20);updateMyBars();push(ref(db,'chats'),{system:true,text:`🔫 ${from} tembak ${u}!`});checkDeath();break;
+    case 'sweep': showEffect('🧹');if(!isSweeping)startSweep();push(ref(db,'chats'),{system:true,text:`🧹 ${from} suruh ${u} menyapu!`});break;
+    case 'love': showEffect('💖');myHp=Math.min(100,myHp+10);updateMyBars();push(ref(db,'chats'),{system:true,text:`💖 ${from} kirim cinta ke ${u}! +10HP`});break;
+    case 'heal_self': showEffect('💊');myHp=Math.min(100,myHp+50);updateMyBars();showToast('💊 +50 HP!','success');break;
+    case 'shield': showEffect('🛡️');myHp=Math.min(100,myHp+20);updateMyBars();push(ref(db,'chats'),{system:true,text:`🛡️ ${from} lindungi ${u}! +20HP`});break;
+    case 'thunder': showEffect('⚡');myHp=Math.max(0,myHp-45);updateMyBars();push(ref(db,'chats'),{system:true,text:`⚡ ${from} petir ke ${u}!`});checkDeath();break;
+    case 'poison': showEffect('🐍');push(ref(db,'chats'),{system:true,text:`🐍 ${from} racun ke ${u}!`});let pt=0,pi=setInterval(()=>{myHp=Math.max(0,myHp-5);updateMyBars();pt++;if(pt>=3||myHp<=0){clearInterval(pi);checkDeath();}},2000);break;
+    case 'ghost': showEffect('👻');push(ref(db,'chats'),{system:true,text:`👻 ${from} kirim hantu ke ${u}! BOO!`});break;
+    case 'rainbow': showEffect('🌈');addSkillPoints(10);push(ref(db,'chats'),{system:true,text:`🌈 ${from} beri keberuntungan ke ${u}! +10SP`});break;
+    case 'curse': showEffect('💀');myHp=Math.max(0,myHp-30);myThirst=Math.max(0,myThirst-30);updateMyBars();push(ref(db,'chats'),{system:true,text:`💀 ${from} kutuk ${u}!`});checkDeath();break;
+    case 'star': showEffect('⭐');addXp(20);push(ref(db,'chats'),{system:true,text:`⭐ ${from} beri bintang ke ${u}! +20XP`});break;
+    case 'timebomb': showEffect('⏱️');push(ref(db,'chats'),{system:true,text:`⏱️ ${from} pasang bom ke ${u}!`});setTimeout(()=>{showEffect('💣');myHp=Math.max(0,myHp-45);updateMyBars();push(ref(db,'chats'),{system:true,text:`💥 BOM MELEDAK di ${u}! -45HP`});checkDeath();},3000);break;
+    case 'dragon': showEffect('🐉');myHp=Math.max(0,myHp-70);updateMyBars();push(ref(db,'chats'),{system:true,text:`🐉 ${from} semburan naga ke ${u}! -70HP`});checkDeath();break;
+    case 'prank': showEffect('🤡');push(ref(db,'chats'),{system:true,text:`🤡 ${from} prank ${u}! HAHAHA`});break;
+    // Emote events
+    case 'emote_dance': triggerEmote('dance','💃',5000);push(ref(db,'chats'),{system:true,text:`💃 ${from} paksa ${u} joget dansa!`});break;
+    case 'emote_wiggle': triggerEmote('wiggle','🕺',4000);push(ref(db,'chats'),{system:true,text:`🕺 ${from} paksa ${u} goyang!`});break;
+    case 'emote_spin': triggerEmote('spin','🌀',3000);push(ref(db,'chats'),{system:true,text:`🌀 ${from} paksa ${u} muter!`});break;
+    case 'emote_bounce': triggerEmote('bounce','🐸',4000);push(ref(db,'chats'),{system:true,text:`🐸 ${from} paksa ${u} loncat!`});break;
+    case 'emote_floss': triggerEmote('floss','✌️',5000);push(ref(db,'chats'),{system:true,text:`✌️ ${from} paksa ${u} floss!`});break;
   }
 }
 
-function showEffect(emoji){
-  let el=document.createElement('div');el.className='explosion';el.innerText=emoji;
-  el.style.cssText=`left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;`;
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),1000);
+function triggerEmote(name, icon, duration){
+  isEmoting=true;
+  const myEl=document.getElementById('player-'+myPlayerId);
+  if(myEl){
+    myEl.classList.remove('emote-dance','emote-wiggle','emote-spin','emote-bounce','emote-floss');
+    myEl.classList.add('emote-'+name);
+    let ic=myEl.querySelector('.emote-icon');
+    if(!ic){ic=document.createElement('div');ic.className='emote-icon';ic.style.cssText='position:absolute;top:-30px;left:50%;';myEl.querySelector('.player-above').appendChild(ic);}
+    ic.innerText=icon;
+  }
+  set(ref(db,'players/'+myPlayerId+'/emote'),name);
+  set(ref(db,'players/'+myPlayerId+'/emoteIcon'),icon);
+  updateMission('emote5',1);
+  setTimeout(()=>{
+    isEmoting=false;
+    if(myEl){myEl.classList.remove('emote-dance','emote-wiggle','emote-spin','emote-bounce','emote-floss');let ic=myEl.querySelector('.emote-icon');if(ic)ic.remove();}
+    set(ref(db,'players/'+myPlayerId+'/emote'),null);
+    set(ref(db,'players/'+myPlayerId+'/emoteIcon'),null);
+  },duration);
 }
 
-function showFloatingText(pid,text,wx,wy){
-  // Convert world coords to screen coords
-  let sx=(wx||MAP_W/2)-camX;
-  let sy=(wy||MAP_H/2)-camY-40;
-  let el=document.createElement('div');el.className='status-effect';
-  el.innerText=text;el.style.cssText=`position:fixed;left:${sx}px;top:${sy}px;font-size:14px;font-weight:700;color:#ff4444;pointer-events:none;z-index:400;`;
+// ===== SKILLS =====
+window.openSkills=()=>{
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='skills-overlay';
+  let spHtml=`<div style="text-align:center;margin-bottom:10px;font-size:11px;color:#ffcc00;">⚡ Skill Poin: <strong>${mySkillPoints}</strong>
+    ${myActiveSkill?`<span style="color:#ff88ff;margin-left:8px;">✅ Aktif: ${myActiveSkill.name}</span>`:''}
+  </div>`;
+  let grid='<div class="skills-grid">';
+  SKILLS_DEF.forEach(s=>{
+    const unlocked=unlockedSkills.has(s.id)||['love','firework','teleport','dance','wiggle','spin_emote','bounce','floss','prank'].includes(s.id);
+    const isEmote=s.effect.startsWith('emote_');
+    const active=myActiveSkill&&myActiveSkill.id===s.id;
+    grid+=`<div class="skill-card ${unlocked?'':'locked'} ${active?'active-skill':''}" onclick="${unlocked?`selectSkill('${s.id}')`:''}">
+      <span class="skill-icon">${s.icon}</span>
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-desc">${s.desc}</div>
+      <div class="skill-cost">${isEmote?`${s.cost}SP · Self`:`${s.cost}SP`}</div>
+    </div>`;
+  });
+  grid+='</div>';
+  ov.innerHTML=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('skills-overlay').remove()">✕</button><h3>⚡ SKILL</h3>${spHtml}${grid}</div>`;
+  document.body.appendChild(ov);
+};
+
+window.selectSkill=(id)=>{
+  const sk=SKILLS_DEF.find(s=>s.id===id);
+  if(!sk) return;
+  document.getElementById('skills-overlay')&&document.getElementById('skills-overlay').remove();
+
+  // Emote skills: trigger on self immediately
+  if(sk.effect.startsWith('emote_')){
+    if(mySkillPoints<sk.cost){showToast('⚡ Skill Poin tidak cukup!','error');return;}
+    addSkillPoints(-sk.cost);
+    triggerEmote(sk.effect.replace('emote_',''), sk.icon, 5000);
+    showToast(`${sk.icon} ${sk.name}!`,'success');
+    updateMission('skill10',1);
+    updateMission('emote5',1);
+    return;
+  }
+
+  // heal_self - no target needed
+  if(sk.effect==='heal_self'){
+    if(mySkillPoints<sk.cost){showToast('⚡ Skill Poin tidak cukup!','error');return;}
+    addSkillPoints(-sk.cost);myHp=Math.min(100,myHp+50);updateMyBars();showToast('💊 +50 HP!','success');
+    updateMission('skill10',1);updateMission('kill_skill',1);
+    set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp,fishCount:myFishCount});
+    return;
+  }
+
+  myActiveSkill=sk;
+  showToast(`${sk.icon} Pilih target!`,'warning');
+  // Show target selector
+  let ov2=document.createElement('div');ov2.className='popup-overlay';ov2.id='target-overlay';
+  let targets=Object.values(playersDB).filter(p=>p&&p.alive&&p.username!==myData.username);
+  if(!targets.length){showToast('Tidak ada target!','error');myActiveSkill=null;return;}
+  let html=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('target-overlay').remove();myActiveSkill=null;">✕</button>
+    <h3>${sk.icon} PILIH TARGET</h3>
+    <div style="font-size:10px;color:#ffcc00;text-align:center;margin-bottom:8px;">Biaya: ${sk.cost} SP (Poin kamu: ${mySkillPoints})</div>
+    <div class="target-list">`;
+  targets.forEach(p=>{
+    html+=`<div class="target-item" onclick="executeSkill('${p.username}')">
+      <div><strong>${p.username}</strong><div style="font-size:9px;color:#888;">Lv.${p.level||1} · HP:${Math.round(p.hp||100)}</div></div>
+      <div style="font-size:18px;">${p.gender==='Perempuan'?'👧':'👦'}</div></div>`;
+  });
+  html+='</div></div>';
+  ov2.innerHTML=html;
+  document.body.appendChild(ov2);
+};
+
+window.executeSkill=(targetUsername)=>{
+  document.getElementById('target-overlay')&&document.getElementById('target-overlay').remove();
+  if(!myActiveSkill){return;}
+  if(mySkillPoints<myActiveSkill.cost){showToast('⚡ Skill Poin tidak cukup!','error');myActiveSkill=null;return;}
+  let targetPlayer=Object.values(playersDB).find(p=>p&&p.username===targetUsername);
+  let targetId=Object.keys(playersDB).find(k=>playersDB[k]&&playersDB[k].username===targetUsername);
+  if(!targetPlayer||!targetId){showToast('Target tidak ditemukan','error');myActiveSkill=null;return;}
+  addSkillPoints(-myActiveSkill.cost);
+  const ev={type:myActiveSkill.effect,from:myData.username,skill:myActiveSkill.name};
+  if(myActiveSkill.effect==='teleport'){
+    myData.x=targetPlayer.x+40;myData.y=targetPlayer.y;
+    set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp,fishCount:myFishCount});
+  }
+  set(ref(db,'events/'+targetId),ev);
+  push(ref(db,'chats'),{skill:true,text:`${myData.username} pakai ${myActiveSkill.icon}${myActiveSkill.name} ke ${targetUsername}!`});
+  showToast(`${myActiveSkill.icon} Skill terkirim ke ${targetUsername}!`,'success');
+  updateMission('skill10',1);updateMission('kill_skill',1);
+  myActiveSkill=null;
+};
+
+function showEffect(e){
+  let d=document.createElement('div');d.className='explosion';d.innerText=e;
+  d.style.cssText=`left:${window.innerWidth/2-20}px;top:${window.innerHeight/2-20}px;`;
+  document.body.appendChild(d);setTimeout(()=>d.remove(),1000);
+}
+
+function showFloatingText(text,wx,wy){
+  let sx=(wx||MAP_W/2)-camX;let sy=(wy||MAP_H/2)-camY-40;
+  let el=document.createElement('div');el.className='status-effect';el.innerText=text;
+  el.style.cssText=`left:${sx}px;top:${sy}px;color:#ff4444;`;
   document.body.appendChild(el);setTimeout(()=>el.remove(),2000);
 }
 
-function checkDeath(){
-  if(myHp<=0&&isAlive){
-    isAlive=false;
-    myData.alive=false;
-    set(ref(db,'players/'+myPlayerId),myData);
-    push(ref(db,'chats'),{system:true,text:`💀 ${myData.username} telah mati! Respawn dalam 5 detik...`});
-    setTimeout(respawn,5000);
-  }
+// ===== XP / LEVEL =====
+function addXp(amount){
+  myXp+=amount;
+  const xpNeeded=myLevel*100;
+  if(myXp>=xpNeeded){myXp-=xpNeeded;myLevel++;showToast(`🎉 Level Up! Lv.${myLevel}`,'success');push(ref(db,'chats'),{system:true,text:`🎉 ${myData.username} naik ke Level ${myLevel}!`});updateMission('level5',myLevel>=5?1:0);updateMission('level10',myLevel>=10?1:0);updateMission('level20',myLevel>=20?1:0);}
+  saveUserData();
 }
-
-function respawn(){
-  myHp=100;myThirst=100;isAlive=true;isFrozen=false;isSweeping=false;
-  myData.x=MAP_W/2;myData.y=MAP_H/2;
-  myData.hp=100;myData.thirst=100;myData.alive=true;myData.frozen=false;myData.sweeping=false;
-  set(ref(db,'players/'+myPlayerId),myData);
-  updateMyBars();
-  push(ref(db,'chats'),{system:true,text:`✨ ${myData.username} telah respawn!`});
-}
-
-function startSweep(){
-  isSweeping=true;sweepCount=0;
-  set(ref(db,'players/'+myPlayerId+'/sweeping'),true);
-  let si=setInterval(()=>{
-    sweepCount++;
-    if(sweepCount>=5){clearInterval(si);isSweeping=false;set(ref(db,'players/'+myPlayerId+'/sweeping'),false);}
-  },1500);
-}
-
-// ===== HP / THIRST LOOP =====
-function startHpThirstLoop(){
-  setInterval(()=>{
-    if(!myData||!isAlive) return;
-    // Drain thirst
-    myThirst=Math.max(0,myThirst-1);
-    // If at chill zone, restore
-    if(isNearChillZone()){
-      myHp=Math.min(100,myHp+2);
-      myThirst=Math.min(100,myThirst+5);
-    }
-    // Thirst hurts HP
-    if(myThirst<=0) myHp=Math.max(0,myHp-2);
-    updateMyBars();
-    myData.hp=myHp;myData.thirst=myThirst;
-    checkDeath();
-  },3000);
-}
-
-function updateMyBars(){
-  document.getElementById('hp-fill').style.width=myHp+'%';
-  document.getElementById('th-fill').style.width=myThirst+'%';
-  document.getElementById('hp-val').innerText=Math.round(myHp);
-  document.getElementById('th-val').innerText=Math.round(myThirst);
-}
-
-function isNearChillZone(){
-  if(!myData) return false;
-  // Chill zone center in world coords: right:120px from right of 3000px map = left:2540, top:1300, size 340px
-  const cx=2540+170, cy=1300+170;
-  return Math.hypot(myData.x-cx,myData.y-cy)<200;
+function addSkillPoints(n){
+  mySkillPoints=Math.max(0,mySkillPoints+n);
+  updateHudExtras();saveUserData();
 }
 
 // ===== MOVEMENT =====
 let moveDir=null,keys={};
-let isPlaying=false;
 window.addEventListener('keydown',e=>{
   if(['chat-input','admin-pass','admin-song-name','admin-song-url'].includes(document.activeElement.id)) return;
   keys[e.key.toLowerCase()]=true;
@@ -1259,14 +1471,13 @@ window.move=d=>moveDir=d;
 window.stopMove=()=>moveDir=null;
 
 function getFenceBounds(){
-  return{minX:50,maxX:MAP_W-60,minY:50,maxY:MAP_H-70};
+  return{minX:35,maxX:MAP_W-35,minY:35,maxY:MAP_H-35};
 }
 
 function startGameLoop(){
   const speed=5;
   setInterval(()=>{
-    if(!myData||!isAlive) return;
-    if(isFrozen||isSweeping) return;
+    if(!myData||!isAlive||isFrozen||isSweeping) return;
     let moved=false;
     const b=getFenceBounds();
     let nx=myData.x,ny=myData.y;
@@ -1277,347 +1488,250 @@ function startGameLoop(){
     if(moved){
       myData.x=Math.max(b.minX,Math.min(b.maxX-34,nx));
       myData.y=Math.max(b.minY,Math.min(b.maxY-54,ny));
-      // Chill zone check (use world coords)
-      if(isNearChillZone()){
-        if(!myData._lastChill||Date.now()-myData._lastChill>8000){
-          myData._lastChill=Date.now();
-          chillVisits++;updateMission('chill3',1);
-          updateMission('chill10',1);
-        }
-      }
+      checkNearChillZone();
+      checkNearWaterStation();
       set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp,fishCount:myFishCount||0});
     }
-    // Always update camera (smooth follow)
     updateCamera();
   },30);
 }
 
-// Camera follow system
-let camX=0,camY=0;
 function updateCamera(){
   if(!myData) return;
   const vw=window.innerWidth,vh=window.innerHeight;
-  // Center player on screen
-  let targetCamX=myData.x - vw/2 + 17;
-  let targetCamY=myData.y - vh/2 + 30;
-  // Clamp so we don't show outside map
-  targetCamX=Math.max(0,Math.min(MAP_W-vw,targetCamX));
-  targetCamY=Math.max(0,Math.min(MAP_H-vh,targetCamY));
-  // Smooth interpolation
-  camX+=(targetCamX-camX)*0.12;
-  camY+=(targetCamY-camY)*0.12;
+  let tx=myData.x-vw/2+17;
+  let ty=myData.y-vh/2+30;
+  tx=Math.max(0,Math.min(MAP_W-vw,tx));
+  ty=Math.max(0,Math.min(MAP_H-vh,ty));
+  camX+=(tx-camX)*0.14;camY+=(ty-camY)*0.14;
   document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
+}
+
+function checkNearChillZone(){
+  if(!myData) return;
+  if(Math.hypot(myData.x-CHILL_CX,myData.y-CHILL_CY)<160){
+    if(!myData._lastChill||Date.now()-myData._lastChill>8000){
+      myData._lastChill=Date.now();
+      chillVisits++;updateMission('chill3',1);updateMission('chill10',1);
+    }
+  }
+}
+
+let _lastWaterTime=0;
+function checkNearWaterStation(){
+  if(!myData||Date.now()-_lastWaterTime<5000) return;
+  for(const ws of WATER_STATIONS){
+    if(Math.hypot(myData.x-ws.x,myData.y-ws.y)<60){
+      myThirst=Math.min(100,myThirst+25);
+      myHp=Math.min(100,myHp+5);
+      updateMyBars();
+      _lastWaterTime=Date.now();
+      showToast('🚰 Minum air! +25 Thirst +5HP','success');
+      break;
+    }
+  }
+}
+
+// ===== HP / THIRST (lebih lambat) =====
+function startHpThirstLoop(){
+  setInterval(()=>{
+    if(!myData||!isAlive) return;
+    // Drain thirst slower (every 6s = -1, was 3s)
+    myThirst=Math.max(0,myThirst-1);
+    if(isNearChillZone()){myHp=Math.min(100,myHp+2);myThirst=Math.min(100,myThirst+4);}
+    if(myThirst<=0) myHp=Math.max(0,myHp-1); // damage slower
+    if(myThirst<20) showToast('💧 Haus! Cari air minum!','warning');
+    updateMyBars();
+    myData.hp=myHp;myData.thirst=myThirst;
+    checkDeath();
+  },6000); // every 6 seconds
+}
+
+function isNearChillZone(){
+  if(!myData) return false;
+  return Math.hypot(myData.x-CHILL_CX,myData.y-CHILL_CY)<160;
+}
+
+function isNearPond(){
+  if(!myData) return false;
+  return Math.hypot(myData.x-POND_CX,myData.y-POND_CY)<200;
+}
+
+function isNearSea(){
+  if(!myData) return false;
+  return myData.x>SEA_START_X;
+}
+
+function updateMyBars(){
+  document.getElementById('hp-fill').style.width=myHp+'%';
+  document.getElementById('th-fill').style.width=myThirst+'%';
+  document.getElementById('hp-val').innerText=Math.round(myHp);
+  document.getElementById('th-val').innerText=Math.round(myThirst);
+  // Color warning
+  document.getElementById('hp-fill').style.background=myHp<30?'linear-gradient(90deg,#ff2222,#aa0000)':'linear-gradient(90deg,#ff6666,#ff0000)';
+  document.getElementById('th-fill').style.background=myThirst<30?'linear-gradient(90deg,#0066ff,#003399)':'linear-gradient(90deg,#00ccff,#0066ff)';
+}
+
+function checkDeath(){
+  if(myHp<=0&&isAlive){
+    isAlive=false;myData.alive=false;
+    set(ref(db,'players/'+myPlayerId),myData);
+    push(ref(db,'chats'),{system:true,text:`💀 ${myData.username} mati! Respawn 5 detik...`});
+    showToast('💀 Kamu mati! Respawn dalam 5 detik...','error',5000);
+    setTimeout(respawn,5000);
+  }
+}
+
+function respawn(){
+  myHp=100;myThirst=100;isAlive=true;isFrozen=false;isSweeping=false;isEmoting=false;
+  // Respawn di air mancur
+  myData.x=SPAWN_X;myData.y=SPAWN_Y;
+  myData.hp=100;myData.thirst=100;myData.alive=true;myData.frozen=false;myData.sweeping=false;myData.emote=null;
+  set(ref(db,'players/'+myPlayerId),myData);
+  updateMyBars();
+  showToast('✨ Respawn di air mancur!','success');
+  push(ref(db,'chats'),{system:true,text:`✨ ${myData.username} respawn!`});
+  updateMission('respawn3',1);
+}
+
+function startSweep(){
+  isSweeping=true;sweepCount=0;
+  set(ref(db,'players/'+myPlayerId+'/sweeping'),true);
+  let si=setInterval(()=>{sweepCount++;if(sweepCount>=5){clearInterval(si);isSweeping=false;set(ref(db,'players/'+myPlayerId+'/sweeping'),false);}},1500);
+}
+
+// ===== PLAY TIME REWARD (setiap 1 menit) =====
+function startPlayTimeReward(){
+  setInterval(()=>{
+    if(!myData||!isAlive) return;
+    playMinutes++;
+    // Reward setiap menit
+    const spReward=5+Math.floor(playMinutes/5)*2; // meningkat setiap 5 menit
+    addSkillPoints(spReward);
+    addXp(10);
+    showToast(`⏱️ +${spReward}SP +10XP reward bermain ${playMinutes} menit!`,'success',3000);
+    updateMission('play_time', 1);
+    set(ref(db,'players/'+myPlayerId+'/playMinutes'),playMinutes);
+  },60000); // every 1 minute
 }
 
 // ===== FISHING =====
 const fishPool=[
   {name:'Ikan Mas',emoji:'🐟',rarity:'Biasa',points:5,xp:3},
   {name:'Ikan Koi',emoji:'🐠',rarity:'Langka',points:20,xp:15},
-  {name:'Ikan Hiu Mini',emoji:'🦈',rarity:'Epik',points:50,xp:30},
+  {name:'Hiu Mini',emoji:'🦈',rarity:'Epik',points:50,xp:30},
   {name:'Ikan Buntal',emoji:'🐡',rarity:'Biasa',points:8,xp:5},
-  {name:'Lumba-lumba!',emoji:'🐬',rarity:'Legendaris',points:100,xp:60},
+  {name:'Lumba-lumba',emoji:'🐬',rarity:'Legendaris',points:100,xp:60},
   {name:'Sampah...',emoji:'🥾',rarity:'Sampah',points:0,xp:0},
-  {name:'Batu',emoji:'🪨',rarity:'Sampah',points:0,xp:0},
   {name:'Ikan Salmon',emoji:'🐟',rarity:'Biasa',points:7,xp:4},
   {name:'Ikan Nemo',emoji:'🐠',rarity:'Langka',points:25,xp:18},
   {name:'Paus Mini',emoji:'🐳',rarity:'Legendaris',points:120,xp:70},
-  {name:'Ikan Tuna',emoji:'🐟',rarity:'Biasa',points:10,xp:6},
-  {name:'Ikan Lele',emoji:'🐟',rarity:'Biasa',points:6,xp:3},
+  {name:'Tuna',emoji:'🐟',rarity:'Biasa',points:10,xp:6},
+  {name:'Lele',emoji:'🐟',rarity:'Biasa',points:6,xp:3},
   {name:'Kepiting',emoji:'🦀',rarity:'Langka',points:30,xp:20},
-  {name:'Udang Raksasa',emoji:'🦐',rarity:'Langka',points:28,xp:17},
+  {name:'Udang',emoji:'🦐',rarity:'Langka',points:28,xp:17},
   {name:'Gurita',emoji:'🐙',rarity:'Epik',points:60,xp:38},
   {name:'Penyu Emas',emoji:'🐢',rarity:'Epik',points:55,xp:35},
   {name:'Hiu Putih',emoji:'🦈',rarity:'Legendaris',points:150,xp:90},
   {name:'Naga Laut',emoji:'🐲',rarity:'Mitos',points:300,xp:200},
   {name:'Peri Air',emoji:'🧚',rarity:'Mitos',points:250,xp:180},
   {name:'Kaleng Rusak',emoji:'🥫',rarity:'Sampah',points:0,xp:0},
-  {name:'Sepatu Bolong',emoji:'👟',rarity:'Sampah',points:0,xp:0},
   {name:'Mutiara',emoji:'🪨',rarity:'Langka',points:35,xp:22},
   {name:'Ikan Dori',emoji:'🐠',rarity:'Biasa',points:9,xp:5},
   {name:'Belut Listrik',emoji:'🐍',rarity:'Epik',points:70,xp:45},
   {name:'Ikan Pelangi',emoji:'🌈',rarity:'Legendaris',points:130,xp:80},
+  // Sea-exclusive
+  {name:'Hiu Martil',emoji:'🦈',rarity:'Epik',points:80,xp:50,seaOnly:true},
+  {name:'Ikan Swordfish',emoji:'🐟',rarity:'Legendaris',points:160,xp:100,seaOnly:true},
+  {name:'Kraken',emoji:'🐙',rarity:'Mitos',points:500,xp:300,seaOnly:true},
+  {name:'Duyung',emoji:'🧜',rarity:'Mitos',points:400,xp:250,seaOnly:true},
 ];
 let isFishing=false;
 
-function isNearPond(){
-  if(!myData) return false;
-  // Pond: left:60, top:1300, width:440, height:280 -> center approx 280,1440
-  const cx=60+220, cy=1300+140;
-  return Math.hypot(myData.x-cx,myData.y-cy)<280;
-}
-
 window.tryFish=()=>{
   if(!myData||isFishing||!isAlive) return;
-  if(!isNearPond()){showFishStatus('🚶 Dekati kolam untuk mancing! (Tekan F)');return;}
+  const nearPond=isNearPond();
+  const nearSea=isNearSea();
+  if(!nearPond&&!nearSea){showFishStatus('🚶 Dekati kolam atau laut untuk mancing! (F)');return;}
   isFishing=true;
-  showFishStatus('🎣 Melempar kail... sabar!');
+  const inSea=nearSea;
+  showFishStatus(inSea?'🌊 Mancing di laut...':'🎣 Mancing di kolam...');
   setTimeout(()=>{
     let roll=Math.random();
+    let pool=inSea?fishPool:fishPool.filter(f=>!f.seaOnly);
     let fish;
-    if(roll<0.01) fish=fishPool[17]; // Naga Laut Mitos
-    else if(roll<0.02) fish=fishPool[18]; // Peri Air Mitos
-    else if(roll<0.04) fish=fishPool[4]; // Lumba-lumba Legendaris
-    else if(roll<0.06) fish=fishPool[9]; // Paus Mini Legendaris
-    else if(roll<0.08) fish=fishPool[24]; // Ikan Pelangi Legendaris
-    else if(roll<0.10) fish=fishPool[16]; // Hiu Putih Legendaris
-    else if(roll<0.13) fish=fishPool[2]; // Hiu Mini Epik
-    else if(roll<0.16) fish=fishPool[14]; // Gurita Epik
-    else if(roll<0.19) fish=fishPool[15]; // Penyu Emas Epik
-    else if(roll<0.22) fish=fishPool[23]; // Belut Listrik Epik
-    else if(roll<0.26) fish=fishPool[1]; // Koi Langka
-    else if(roll<0.30) fish=fishPool[8]; // Nemo Langka
-    else if(roll<0.34) fish=fishPool[12]; // Kepiting Langka
-    else if(roll<0.38) fish=fishPool[13]; // Udang Langka
-    else if(roll<0.42) fish=fishPool[21]; // Mutiara Langka
-    else if(roll<0.48) fish=fishPool[3]; // Buntal Biasa
-    else if(roll<0.54) fish=fishPool[7]; // Salmon Biasa
-    else if(roll<0.58) fish=fishPool[22]; // Dori Biasa
-    else if(roll<0.62) fish=fishPool[10]; // Tuna Biasa
-    else if(roll<0.66) fish=fishPool[11]; // Lele Biasa
-    else if(roll<0.70) fish=fishPool[0]; // Mas Biasa
-    else if(roll<0.74) fish=fishPool[5]; // Sampah
-    else if(roll<0.78) fish=fishPool[6]; // Batu
-    else if(roll<0.84) fish=fishPool[19]; // Kaleng
-    else fish=fishPool[20]; // Sepatu
-    showFishResult(fish);
-    isFishing=false;hideFishStatus();
-    // Update missions
+    if(inSea){
+      if(roll<0.005) fish=fishPool.find(f=>f.name==='Kraken');
+      else if(roll<0.015) fish=fishPool.find(f=>f.name==='Duyung');
+      else if(roll<0.03) fish=fishPool.find(f=>f.name==='Ikan Swordfish');
+      else if(roll<0.06) fish=fishPool.find(f=>f.name==='Hiu Martil');
+      else fish=pool[Math.floor(Math.random()*pool.length)];
+    } else {
+      if(roll<0.01) fish=fishPool.find(f=>f.name==='Naga Laut');
+      else if(roll<0.02) fish=fishPool.find(f=>f.name==='Peri Air');
+      else if(roll<0.05) fish=fishPool.find(f=>f.name==='Lumba-lumba');
+      else if(roll<0.09) fish=fishPool.find(f=>f.name==='Paus Mini'||f.rarity==='Legendaris');
+      else if(roll<0.14) fish=pool.filter(f=>f.rarity==='Epik')[Math.floor(Math.random()*pool.filter(f=>f.rarity==='Epik').length)];
+      else if(roll<0.28) fish=pool.filter(f=>f.rarity==='Langka')[Math.floor(Math.random()*pool.filter(f=>f.rarity==='Langka').length)];
+      else if(roll<0.38) fish=pool.filter(f=>f.rarity==='Sampah')[Math.floor(Math.random()*pool.filter(f=>f.rarity==='Sampah').length)];
+      else fish=pool.filter(f=>f.rarity==='Biasa')[Math.floor(Math.random()*pool.filter(f=>f.rarity==='Biasa').length)];
+    }
+    if(!fish) fish=pool[Math.floor(Math.random()*pool.length)];
+    isFishing=false;
+    const rarityColors={Biasa:'#aaa',Langka:'#00ccff',Epik:'#aa00ff',Legendaris:'#ffaa00',Mitos:'#ff4400',Sampah:'#666'};
+    const rc=rarityColors[fish.rarity]||'#aaa';
     if(fish.points>0){
-      updateMission('fish5',1);updateMission('fish10',1);updateMission('fish20',1);updateMission('fish50',1);
-      myFishCount++;myFishScore+=fish.points;
-      if(fish.rarity==='Langka') updateMission('fish_rare',1);
-      if(fish.rarity==='Epik'){updateMission('fish_rare',1);updateMission('fish_epik',1);}
-      if(fish.rarity==='Legendaris'){updateMission('fish_rare',1);}
-      if(fish.rarity==='Mitos'){updateMission('fish_rare',1);updateMission('fish_myth',1);}
+      myFishScore+=fish.points;myFishCount++;
       addXp(fish.xp);
-      // Save fish score
-      set(ref(db,'fish_scores/'+myData.username),{score:myFishScore,count:myFishCount});
-      // Also store fishCount in player data for leaderboard
-      myData.fishCount=myFishCount;
-      saveUserData();
+      set(ref(db,'fish_scores/'+myData.username),{score:myFishScore,count:myFishCount,username:myData.username});
+      set(ref(db,'players/'+myPlayerId+'/fishCount'),myFishCount);
+      updateMission('fish5',1);updateMission('fish10',1);updateMission('fish20',1);updateMission('fish50',1);
+      if(fish.rarity!=='Biasa'&&fish.rarity!=='Sampah') updateMission('fish_rare',1);
+      if(fish.rarity==='Epik') updateMission('fish_epik',1);
+      if(fish.rarity==='Mitos') updateMission('fish_myth',1);
+      if(inSea) updateMission('sea_fish',1);
+      showFishStatus(`${fish.emoji} ${fish.name}! <span style="color:${rc}">[${fish.rarity}]</span> +${fish.points}pts`);
+      showToast(`${fish.emoji} ${fish.name} [${fish.rarity}] +${fish.points}pts +${fish.xp}XP`,'success');
+      push(ref(db,'chats'),{system:true,text:`🎣 ${myData.username} dapat ${fish.emoji} ${fish.name} [${fish.rarity}]!`});
+    } else {
+      showFishStatus(`${fish.emoji} ${fish.name}... `);
     }
-    if(fish.points>0){
-      push(ref(db,'chats'),{system:true,text:`🎣 ${myData.username} dapat ${fish.name} ${fish.emoji}! (+${fish.points}🏆)`});
-    }
-  },3000+Math.random()*4000);
+    updateHudExtras();
+    saveUserData();
+  },2500+Math.random()*2000);
 };
 
-function showFishStatus(msg){let s=document.getElementById('fish-status');s.innerText=msg;s.style.display='block';}
-function hideFishStatus(){setTimeout(()=>document.getElementById('fish-status').style.display='none',300);}
-
-function showFishResult(fish){
-  let ov=document.createElement('div');ov.className='popup-overlay';
-  const cols={Biasa:'#aaa',Langka:'#00ccff',Epik:'#cc00ff',Legendaris:'#ffcc00',Mitos:'#ff4400',Sampah:'#888'};
-  ov.innerHTML=`<div class="popup-box" style="max-width:300px;text-align:center;">
-    <button class="popup-close" onclick="this.closest('.popup-overlay').remove()">✕</button>
-    <h3>🎣 HASIL MANCING!</h3>
-    <div style="font-size:50px;margin:10px 0;animation:fishJump 0.5s ease infinite alternate;">${fish.emoji}</div>
-    <div style="font-size:17px;font-weight:700;color:${cols[fish.rarity]||'#fff'};">${fish.name}</div>
-    <div style="font-size:10px;color:${cols[fish.rarity]};letter-spacing:2px;margin:4px 0;">[${fish.rarity.toUpperCase()}]</div>
-    ${fish.points>0?`<div style="color:#ffcc00;font-size:12px;">+${fish.points} 🏆 | +${fish.xp} XP</div>`:'<div style="color:#888;font-size:11px;">Mending buang lagi...</div>'}
-    <button class="btn-primary" style="margin-top:12px;" onclick="this.closest('.popup-overlay').remove()">✅ OK!</button>
-  </div>`;
-  ov.style.cssText+='z-index:250;';
-  document.body.appendChild(ov);
+function showFishStatus(msg){
+  let el=document.getElementById('fish-status');
+  el.innerHTML=msg;el.style.display='block';
+  clearTimeout(el._t);el._t=setTimeout(()=>el.style.display='none',4000);
 }
 
-// ===== XP / LEVEL =====
-function addXp(amount){
-  myXp+=amount;
-  let needed=myLevel*100;
-  while(myXp>=needed){myXp-=needed;myLevel++;needed=myLevel*100;addSkillPoints(10);}
-  myData.xp=myXp;myData.level=myLevel;
-  updateMission('level5',myLevel>=5?5:myLevel);
-  updateMission('level10',myLevel>=10?10:myLevel);
-  updateMission('level20',myLevel>=20?20:myLevel);
-  saveUserData();
-}
-function addSkillPoints(n){mySkillPoints+=n;saveUserData();}
-
-// ===== SKILLS POPUP =====
-window.openSkills=()=>{
-  let ov=document.createElement('div');ov.className='popup-overlay';
-  ov.id='skills-overlay';
-  let html=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('skills-overlay').remove()">✕</button>
-    <h3>⚡ SKILL</h3>
-    <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-      <div style="font-size:11px;color:#ffcc00;">⭐ ${mySkillPoints} Skill Poin</div>
-      <div style="font-size:11px;color:#aaa;">Aktif: ${myActiveSkill?SKILLS_DEF.find(s=>s.id===myActiveSkill)?.icon+' '+SKILLS_DEF.find(s=>s.id===myActiveSkill)?.name:'Tidak ada'}</div>
-    </div>
-    <div style="font-size:10px;color:#888;margin-bottom:8px;">Klik skill untuk aktifkan, lalu pilih target di map atau tekan tombol Use.</div>
-    <div class="skills-grid">`;
-  SKILLS_DEF.forEach(sk=>{
-    let locked=!unlockedSkills.has(sk.id);
-    html+=`<div class="skill-card${locked?' locked':''}${myActiveSkill===sk.id?' active-skill':''}" onclick="selectSkill('${sk.id}',${locked})">
-      <span class="skill-icon">${sk.icon}</span>
-      <div class="skill-name">${sk.name}</div>
-      <div class="skill-desc">${sk.desc}</div>
-      <div class="skill-cost">💰 ${sk.cost} SP</div>
-    </div>`;
-  });
-  html+=`</div>
-    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;">
-      <button class="btn-primary" onclick="useActiveSkill()">🎯 Gunakan Skill</button>
-      <button class="btn-warn" onclick="openSpinWheel()">🎰 Spin (${spinTokens}x)</button>
-    </div>
-  </div>`;
-  ov.innerHTML=html;
-  document.body.appendChild(ov);
-};
-
-window.selectSkill=(id,locked)=>{
-  if(locked){alert('🔒 Skill ini belum terbuka! Spin atau selesaikan misi.');return;}
-  myActiveSkill=id;
-  document.querySelectorAll('.skill-card').forEach(c=>c.classList.remove('active-skill'));
-  event.currentTarget.classList.add('active-skill');
-};
-
-window.useActiveSkill=()=>{
-  if(!myActiveSkill){alert('Pilih skill dulu!');return;}
-  const sk=SKILLS_DEF.find(s=>s.id===myActiveSkill);
-  if(!sk) return;
-  if(mySkillPoints<sk.cost){alert(`Butuh ${sk.cost} SP! Kamu punya ${mySkillPoints} SP.`);return;}
-  openTargetSelector(sk);
-};
-
-function openTargetSelector(sk){
-  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='target-ov';
-  let others=Object.entries(playersDB).filter(([id])=>id!==myPlayerId).map(([id,p])=>({id,...p}));
-  let html=`<div class="popup-box" style="max-width:320px;"><button class="popup-close" onclick="document.getElementById('target-ov').remove()">✕</button>
-    <h3>${sk.icon} ${sk.name}</h3>
-    <div style="font-size:11px;color:#888;margin-bottom:8px;">${sk.desc} — Biaya: ${sk.cost} SP</div>
-    <div class="target-list">`;
-  if(!others.length) html+=`<div style="color:#888;font-size:11px;text-align:center;padding:12px;">Tidak ada player lain di server.</div>`;
-  others.forEach(p=>{
-    html+=`<div class="target-item" onclick="executeSkill('${sk.id}','${p.id}','${p.username}');document.getElementById('target-ov').remove();document.getElementById('skills-overlay')&&document.getElementById('skills-overlay').remove();">
-      <span>${p.gender==='Perempuan'?'👧':'👦'} ${p.username} (Lv.${p.level||1})</span>
-      <span style="font-size:18px;">${sk.icon}</span>
-    </div>`;
-  });
-  html+=`</div></div>`;
-  ov.innerHTML=html;document.body.appendChild(ov);
-}
-
-window.executeSkill=(skillId,targetId,targetName)=>{
-  const sk=SKILLS_DEF.find(s=>s.id===skillId);if(!sk) return;
-  if(mySkillPoints<sk.cost){alert('SP tidak cukup!');return;}
-  mySkillPoints-=sk.cost;
-  if(skillId==='teleport'){
-    // Teleport self to target
-    const tp=playersDB[targetId];
-    if(tp){myData.x=tp.x+30;myData.y=tp.y;set(ref(db,'players/'+myPlayerId),myData);}
-  }
-  // Send event to target
-  push(ref(db,'events/'+targetId),{type:sk.effect,from:myData.username});
-  updateMission('kill_skill',1);updateMission('skill10',1);updateMission('chat_skill',1);
-  saveUserData();
-  push(ref(db,'chats'),{skill:true,text:`${myData.username} menggunakan ${sk.icon}${sk.name} ke ${targetName}!`});
-};
-
-// ===== SPIN WHEEL =====
-window.openSpinWheel=()=>{
-  if(document.getElementById('skills-overlay')) document.getElementById('skills-overlay').remove();
-  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='spin-overlay';
-  ov.innerHTML=`<div class="popup-box" style="max-width:280px;text-align:center;">
-    <button class="popup-close" onclick="document.getElementById('spin-overlay').remove()">✕</button>
-    <h3>🎰 SPIN WHEEL</h3>
-    <div style="font-size:11px;color:#aaa;margin-bottom:8px;">Token spin: <strong style="color:#ffcc00">${spinTokens}x</strong></div>
-    <div id="spin-container">
-      <div id="spin-wheel"><canvas id="spin-canvas" width="200" height="200"></canvas><div id="spin-pointer">▼</div></div>
-    </div>
-    <button id="btn-spin" onclick="doSpin()" ${spinTokens<=0?'disabled':''}>🎰 SPIN!</button>
-    <div class="spin-result" id="spin-result"></div>
-  </div>`;
-  document.body.appendChild(ov);
-  drawSpinWheel();
-};
-
-function drawSpinWheel(){
-  const canvas=document.getElementById('spin-canvas');if(!canvas) return;
-  const ctx=canvas.getContext('2d');
-  const n=SPIN_REWARDS.length,arc=2*Math.PI/n;
-  const colors=['#1a0a2e','#0a1a2e','#2e1a0a','#0a2e1a','#2e0a1a','#1a2e0a','#2e2e0a','#0a0a2e','#2e0a2e','#0a2e2e'];
-  SPIN_REWARDS.forEach((r,i)=>{
-    ctx.beginPath();ctx.moveTo(100,100);ctx.arc(100,100,95,arc*i-Math.PI/2,arc*(i+1)-Math.PI/2);
-    ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
-    ctx.strokeStyle='rgba(0,210,255,0.3)';ctx.lineWidth=1;ctx.stroke();
-    ctx.save();ctx.translate(100,100);ctx.rotate(arc*i+arc/2-Math.PI/2);
-    ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 9px Rajdhani';
-    ctx.fillText(r.label,88,4);ctx.restore();
-  });
-}
-
-let isSpinning=false;
-window.doSpin=()=>{
-  if(spinTokens<=0||isSpinning) return;
-  spinTokens--;isSpinning=true;
-  updateMission('spin5',1);
-  document.getElementById('btn-spin').disabled=true;
-  const canvas=document.getElementById('spin-canvas');
-  const ctx=canvas.getContext('2d');
-  const n=SPIN_REWARDS.length;
-  let targetIdx=Math.floor(Math.random()*n);
-  let totalRot=360*5+targetIdx*(360/n)+(360/n/2);
-  let start=null,duration=4000,curRot=0;
-  function animate(ts){
-    if(!start) start=ts;
-    let elapsed=ts-start;
-    let progress=Math.min(elapsed/duration,1);
-    let ease=1-(1-progress)*(1-progress)*(1-progress);
-    curRot=totalRot*ease;
-    ctx.clearRect(0,0,200,200);
-    ctx.save();ctx.translate(100,100);ctx.rotate(curRot*Math.PI/180);ctx.translate(-100,-100);
-    const arc=2*Math.PI/n;
-    const colors=['#1a0a2e','#0a1a2e','#2e1a0a','#0a2e1a','#2e0a1a','#1a2e0a','#2e2e0a','#0a0a2e','#2e0a2e','#0a2e2e'];
-    SPIN_REWARDS.forEach((r,i)=>{
-      ctx.beginPath();ctx.moveTo(100,100);ctx.arc(100,100,95,arc*i-Math.PI/2,arc*(i+1)-Math.PI/2);
-      ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
-      ctx.strokeStyle='rgba(0,210,255,0.3)';ctx.lineWidth=1;ctx.stroke();
-      ctx.save();ctx.translate(100,100);ctx.rotate(arc*i+arc/2-Math.PI/2);
-      ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 9px Rajdhani';ctx.fillText(r.label,88,4);ctx.restore();
-    });
-    ctx.restore();
-    if(progress<1) requestAnimationFrame(animate);
-    else{isSpinning=false;applySpinReward(SPIN_REWARDS[targetIdx]);document.getElementById('spin-result').innerText='🎉 '+SPIN_REWARDS[targetIdx].label;}
-  }
-  requestAnimationFrame(animate);
-};
-
-function applySpinReward(reward){
-  const a=reward.action;
-  if(a.startsWith('unlock_')) unlockedSkills.add(a.replace('unlock_',''));
-  else if(a==='sp20') addSkillPoints(20);
-  else if(a==='sp50') addSkillPoints(50);
-  else if(a==='sp100') addSkillPoints(100);
-  if(document.getElementById('btn-spin')) document.getElementById('btn-spin').disabled=spinTokens<=0;
-  saveUserData();
-}
-
-// ===== MISSIONS POPUP =====
+// ===== MISSIONS =====
 window.openMissions=()=>{
   let ov=document.createElement('div');ov.className='popup-overlay';ov.id='mission-overlay';
   let html=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('mission-overlay').remove()">✕</button>
-    <h3>🎯 MISI</h3>
-    <div style="font-size:10px;color:#aaa;margin-bottom:10px;">Selesaikan misi untuk dapat spin & skill poin!</div>`;
+  <h3>🎯 MISI</h3><div style="text-align:center;margin-bottom:10px;font-size:10px;color:#888;">Selesaikan misi untuk reward!</div>`;
   missions.forEach(m=>{
-    let prog=Math.min(m.progress,m.target);
-    let pct=prog/m.target*100;
-    let canClaim=prog>=m.target&&!m.completed;
-    html+=`<div class="mission-item${m.completed?' completed':''}">
-      <div class="mission-header">
-        <div class="mission-title">${m.completed?'✅ ':''} ${m.title}</div>
-        <div class="mission-reward">${m.reward}</div>
+    let pct=Math.min(100,Math.round(m.progress/m.target*100));
+    html+=`<div class="mission-item ${m.completed?'completed':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="mission-title">${m.completed?'✅':''} ${m.title}</div>
+        <div class="mission-reward">🎁 ${m.reward}</div>
       </div>
       <div class="mission-desc">${m.desc}</div>
-      <div class="mission-progress"><div class="mission-bar" style="width:${pct}%;"></div></div>
-      <div style="font-size:9px;color:#888;margin-top:3px;">${prog}/${m.target}</div>
-      <button class="mission-action" onclick="claimMission('${m.id}')" ${!canClaim?'disabled':''}>${m.completed?'Sudah Diklaim':canClaim?'🎁 KLAIM REWARD':'Belum Selesai'}</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <div style="font-size:8px;color:#888;">${m.progress}/${m.target}</div>
+        <div style="font-size:8px;color:#00d2ff;">${pct}%</div>
+      </div>
+      <div class="mission-progress"><div class="mission-bar" style="width:${pct}%"></div></div>
+      ${!m.completed&&m.progress>=m.target?`<button class="mission-action" onclick="claimMission('${m.id}')">🎉 KLAIM REWARD</button>`:''}
+      ${m.completed?`<button class="mission-action" disabled>✅ Selesai</button>`:''}
     </div>`;
   });
-  html+=`<div style="margin-top:10px;text-align:center;">
-    <button class="btn-warn" style="font-size:11px;padding:8px 16px;" onclick="openAdWatchMission()">📺 Tonton Iklan (+Reward)</button>
-  </div></div>`;
-  ov.innerHTML=html;document.body.appendChild(ov);
+  html+=`</div>`;
+  ov.innerHTML=html;
+  document.body.appendChild(ov);
 };
 
 window.claimMission=(id)=>{
@@ -1625,18 +1739,19 @@ window.claimMission=(id)=>{
   if(!m||m.completed||m.progress<m.target) return;
   m.completed=true;
   const a=m.action;
-  // Parse spin count: spin, spin2, spin3, spin10, spin15, spin20
-  let spinMatch=a.match(/spin(\d*)/);
-  if(spinMatch) spinTokens+=parseInt(spinMatch[1]||'1')||1;
-  // Parse sp count: sp50, sp80, sp100, sp150, sp200, sp500
-  let spMatch=a.match(/sp(\d+)/);
-  if(spMatch) addSkillPoints(parseInt(spMatch[1]));
-  // Legacy skillpoints format
-  if(a.startsWith('skillpoints')) addSkillPoints(parseInt(a.replace('skillpoints',''))||0);
-  saveUserData();
+  // Parse spin tokens: match spin diikuti angka (harus bukan bagian dari 'skillpoints')
+  let spinMatch=a.match(/(^|_)spin(\d+)/);
+  if(spinMatch) spinTokens+=parseInt(spinMatch[2])||1;
+  // Parse SP: match sp diikuti angka di akhir atau sebelum underscore (bukan 'skillpoints')
+  let spMatch=a.match(/(^|_)sp(\d+)/);
+  if(spMatch) addSkillPoints(parseInt(spMatch[2]));
+  // Parse skillpoints
+  if(a.startsWith('skillpoints')) addSkillPoints(parseInt(a.replace('skillpoints','').split('_')[0])||0);
+  updateHudExtras();saveUserData();
   document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
+  showToast(`🎉 Misi "${m.title}" selesai!`,'success');
+  push(ref(db,'chats'),{system:true,text:`🎯 ${myData.username} selesaikan misi: "${m.title}"!`});
   openMissions();
-  push(ref(db,'chats'),{system:true,text:`🎯 ${myData.username} menyelesaikan misi: "${m.title}"!`});
 };
 
 function updateMission(id,amount){
@@ -1646,27 +1761,21 @@ function updateMission(id,amount){
   saveUserData();
 }
 
-// ===== AD WEBVIEW MISSION =====
+// ===== AD WEBVIEW =====
 window.openAdWatchMission=()=>{
   document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
   openAdWebview(()=>{
     updateMission('watch_ad',1);
     updateMission('watch_ad3',1);
+    spinTokens+=1;
+    addSkillPoints(50);
+    updateHudExtras();
     saveUserData();
-    alert('🎉 Reward diklaim! Cek misi untuk klaim hadiah.');
-    // Refresh ad (without page reload)
-    let iframe=document.getElementById('ad-iframe');
-    if(iframe) iframe.src='about:blank';
-    setTimeout(()=>{
-      let s1=document.createElement('script');
-      s1.text="atOptions={'key':'93587828435852943b1acdaa744d23ee','format':'iframe','height':250,'width':320,'params':{}};";
-      let s2=document.createElement('script');
-      s2.src='https://www.highperformanceformat.com/93587828435852943b1acdaa744d23ee/invoke.js';
-      document.body.appendChild(s1);document.body.appendChild(s2);
-    },1000);
+    showToast('🎉 Reward diklaim! +50SP +1 Spin Token','success',4000);
   });
 };
 
+let _adInterval=null;
 function openAdWebview(onComplete){
   const ov=document.getElementById('ad-webview-overlay');
   ov.style.display='flex';
@@ -1675,131 +1784,191 @@ function openAdWebview(onComplete){
   let t=23;
   document.getElementById('ad-timer').innerText=t;
   document.getElementById('ad-skip-btn').style.display='none';
+  document.getElementById('ad-close-x').style.display='none';
   let cd=document.getElementById('ad-countdown');
-  cd.style.display='block';
-  cd.innerHTML='Tonton iklan 23 detik... ⏳ <span id="ad-timer">'+t+'</span>s';
+  cd.innerHTML=`⏳ <span id="ad-timer">${t}</span>s lagi...`;
   window._adCallback=onComplete;
-  let ti=setInterval(()=>{
+  if(_adInterval) clearInterval(_adInterval);
+  _adInterval=setInterval(()=>{
     t--;
-    let timerEl=document.getElementById('ad-timer');
-    if(timerEl) timerEl.innerText=t;
+    let te=document.getElementById('ad-timer');if(te) te.innerText=t;
     if(t<=0){
-      clearInterval(ti);
+      clearInterval(_adInterval);_adInterval=null;
       document.getElementById('ad-skip-btn').style.display='block';
-      cd.innerText='✅ Iklan selesai! Klik KLAIM REWARD untuk ambil hadiah.';
+      cd.innerText='✅ Iklan selesai! Klik KLAIM REWARD';
     }
   },1000);
-  // Store interval ref to clear if needed
-  ov._timerInterval=ti;
+  // Show force-close after 30 seconds
+  setTimeout(()=>{
+    let xBtn=document.getElementById('ad-close-x');
+    if(xBtn) xBtn.style.display='block';
+  },30000);
 }
 
 window.closeAdWebview=()=>{
   const ov=document.getElementById('ad-webview-overlay');
   ov.style.display='none';
-  // Auto-refresh iframe (generate new ad impression)
+  if(_adInterval){clearInterval(_adInterval);_adInterval=null;}
+  // Reload iframe for next ad (don't reload page!)
   let iframe=document.getElementById('ad-iframe');
-  if(iframe){
-    setTimeout(()=>{
-      iframe.src='about:blank';
-      setTimeout(()=>{ iframe.src='https://hangoutdj.vercel.app/iklan.html'; },300);
-    },500);
+  if(iframe){iframe.src='about:blank';}
+  // Fire callback WITHOUT page reload
+  if(window._adCallback){
+    const cb=window._adCallback;
+    window._adCallback=null;
+    setTimeout(()=>cb(),100);
   }
-  if(window._adCallback){window._adCallback();window._adCallback=null;}
 };
 
-// closeAdWebview defined above with openAdWebview
+window.forceCloseAd=()=>{
+  const ov=document.getElementById('ad-webview-overlay');
+  ov.style.display='none';
+  if(_adInterval){clearInterval(_adInterval);_adInterval=null;}
+  window._adCallback=null;
+  let iframe=document.getElementById('ad-iframe');
+  if(iframe) iframe.src='about:blank';
+  showToast('Iklan ditutup (tanpa reward)','warning');
+};
 
-// ===== PROFILE POPUP =====
+// ===== SPIN WHEEL =====
+window.openSpin=()=>{
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='spin-overlay';
+  let html=`<div class="popup-box" style="max-width:300px;"><button class="popup-close" onclick="document.getElementById('spin-overlay').remove()">✕</button>
+  <h3>🎰 SPIN WHEEL</h3>
+  <div style="text-align:center;margin-bottom:8px;font-size:11px;color:#ffcc00;">Token Spin: <strong>${spinTokens}</strong></div>
+  <div id="spin-container">
+    <div id="spin-wheel"><canvas id="spin-canvas" width="190" height="190"></canvas><div id="spin-pointer">▼</div></div>
+    <div class="spin-result" id="spin-result"></div>
+    <button id="btn-spin" onclick="doSpin()" ${spinTokens<=0?'disabled':''}>🎰 PUTAR!</button>
+  </div></div>`;
+  ov.innerHTML=html;document.body.appendChild(ov);
+  drawWheel();
+};
+
+function drawWheel(){
+  const canvas=document.getElementById('spin-canvas');if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const cx=95,cy=95,r=90;
+  const n=SPIN_REWARDS.length;
+  const colors=['#ff4444','#ff8800','#ffcc00','#00cc44','#00ccff','#0066ff','#aa00ff','#ff00aa','#ff6644','#44aa88'];
+  SPIN_REWARDS.forEach((rw,i)=>{
+    const a1=(i/n)*Math.PI*2-Math.PI/2, a2=((i+1)/n)*Math.PI*2-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a1,a2);ctx.closePath();
+    ctx.fillStyle=colors[i%colors.length];ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,0.3)';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate((a1+a2)/2);
+    ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 8px Rajdhani';
+    ctx.fillText(rw.label.slice(0,14),r-4,3);ctx.restore();
+  });
+}
+
+window.doSpin=()=>{
+  if(spinTokens<=0){showToast('Token Spin habis!','error');return;}
+  spinTokens--;updateHudExtras();
+  const n=SPIN_REWARDS.length;
+  const winner=Math.floor(Math.random()*n);
+  const canvas=document.getElementById('spin-canvas');if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  let angle=0,speed=0.3,spins=0,maxSpins=3+Math.random()*3;
+  const targetAngle=(2*Math.PI*maxSpins)+((winner/n)*Math.PI*2)+Math.PI*2-Math.PI/2;
+  let cur=0,spinInterval=null;
+  let frame=()=>{
+    cur+=speed;speed*=0.995;
+    if(cur>=targetAngle||speed<0.002){
+      clearInterval(spinInterval);
+      const rw=SPIN_REWARDS[winner];
+      document.getElementById('spin-result').innerText='🎊 '+rw.label;
+      applySpinReward(rw);
+      updateMission('spin5',1);
+      saveUserData();return;
+    }
+    ctx.clearRect(0,0,190,190);
+    ctx.save();ctx.translate(95,95);ctx.rotate(cur);ctx.translate(-95,-95);drawWheel();ctx.restore();
+  };
+  spinInterval=setInterval(frame,16);
+};
+
+function applySpinReward(rw){
+  const a=rw.action;
+  if(a.startsWith('unlock_')){
+    const id=a.replace('unlock_','');unlockedSkills.add(id);showToast(`🔓 Skill ${id} terbuka!`,'success');}
+  else if(a.startsWith('sp')){addSkillPoints(parseInt(a.replace('sp',''))||0);showToast(`⚡ +${a.replace('sp','')} Skill Poin!`,'success');}
+  else if(a==='nothing'){showToast('😅 Coba lagi!','warning');}
+  updateHudExtras();
+}
+
+// ===== PROFILE =====
 window.openProfile=()=>{
   if(!myData) return;
   let ov=document.createElement('div');ov.className='popup-overlay';ov.id='profile-overlay';
   ov.innerHTML=`<div class="popup-box" style="max-width:320px;">
-    <button class="popup-close" onclick="document.getElementById('profile-overlay').remove()">✕</button>
-    <h3>👤 PROFIL</h3>
-    <div class="profile-avatar">${myData.gender==='Perempuan'?'👧':'👦'}</div>
-    <div style="text-align:center;margin-bottom:12px;">
-      <div style="font-family:Orbitron,sans-serif;font-size:15px;color:#00d2ff;">${myData.username}</div>
-      <div style="font-size:10px;color:#888;margin-top:2px;">ID: ${myPlayerId}</div>
-    </div>
-    <div class="stat-grid">
-      <div class="stat-box"><div class="stat-val">Lv.${myLevel}</div><div class="stat-label">Level</div></div>
-      <div class="stat-box"><div class="stat-val">${myXp}</div><div class="stat-label">Total XP</div></div>
-      <div class="stat-box"><div class="stat-val">${myFishScore}</div><div class="stat-label">Fish Score</div></div>
-      <div class="stat-box"><div class="stat-val">${mySkillPoints}</div><div class="stat-label">Skill Poin</div></div>
-    </div>
-    <div style="border-top:1px solid rgba(255,255,255,0.08);margin:14px 0;"></div>
-    <div class="profile-field"><label>UBAH NAMA</label><input type="text" id="prof-name" value="${myData.username}" maxlength="18"></div>
-    <div class="profile-field"><label>UMUR</label><input type="number" id="prof-age" value="${myData.age}" min="1" max="99"></div>
-    <div class="profile-field"><label>GENDER</label>
-      <select id="prof-gender"><option value="Laki-laki"${myData.gender==='Laki-laki'?' selected':''}>🚹 Laki-laki</option><option value="Perempuan"${myData.gender==='Perempuan'?' selected':''}>🚺 Perempuan</option></select>
-    </div>
-    <button class="btn-primary" style="width:100%;margin-top:4px;" onclick="saveProfile()">💾 SIMPAN</button>
+  <button class="popup-close" onclick="document.getElementById('profile-overlay').remove()">✕</button>
+  <h3>👤 PROFIL</h3>
+  <div class="profile-avatar">${myData.gender==='Perempuan'?'👧':'👦'}</div>
+  <div style="text-align:center;margin-bottom:10px;"><div style="font-family:Orbitron,sans-serif;font-size:14px;color:#00d2ff;">${myData.username}</div><div style="font-size:9px;color:#888;margin-top:2px;">ID: ${myPlayerId}</div></div>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="stat-val">Lv.${myLevel}</div><div class="stat-label">Level</div></div>
+    <div class="stat-box"><div class="stat-val">${myXp}</div><div class="stat-label">XP</div></div>
+    <div class="stat-box"><div class="stat-val">${myFishScore}</div><div class="stat-label">Fish Score</div></div>
+    <div class="stat-box"><div class="stat-val">${mySkillPoints}</div><div class="stat-label">Skill Poin</div></div>
+    <div class="stat-box"><div class="stat-val">${spinTokens}</div><div class="stat-label">Spin Token</div></div>
+    <div class="stat-box"><div class="stat-val">${playMinutes}m</div><div class="stat-label">Waktu Main</div></div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);margin:12px 0;"></div>
+  <div class="profile-field"><label>UBAH NAMA</label><input type="text" id="prof-name" value="${myData.username}" maxlength="18"></div>
+  <div class="profile-field"><label>UMUR</label><input type="number" id="prof-age" value="${myData.age}" min="1" max="99"></div>
+  <div class="profile-field"><label>GENDER</label><select id="prof-gender"><option value="Laki-laki"${myData.gender==='Laki-laki'?' selected':''}>🚹 Laki-laki</option><option value="Perempuan"${myData.gender==='Perempuan'?' selected':''}>🚺 Perempuan</option></select></div>
+  <button class="btn-primary" style="width:100%;margin-top:4px;" onclick="saveProfile()">💾 SIMPAN</button>
+  <button class="btn-primary" style="width:100%;margin-top:6px;background:linear-gradient(90deg,#ff8800,#cc5500);" onclick="document.getElementById('profile-overlay').remove();openSpin()">🎰 SPIN WHEEL (${spinTokens} token)</button>
   </div>`;
   document.body.appendChild(ov);
 };
 
 window.saveProfile=()=>{
-  let newName=document.getElementById('prof-name').value.trim();
-  let newAge=document.getElementById('prof-age').value;
-  let newGender=document.getElementById('prof-gender').value;
-  if(!newName) return alert('Nama tidak boleh kosong!');
-  myData.username=newName;myData.age=newAge;myData.gender=newGender;
+  let n=document.getElementById('prof-name').value.trim();
+  let a=document.getElementById('prof-age').value;
+  let g=document.getElementById('prof-gender').value;
+  if(!n){showToast('Nama kosong!','error');return;}
+  myData.username=n;myData.age=a;myData.gender=g;
   set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp});
   saveUserData();
   document.getElementById('profile-overlay').remove();
+  showToast('✅ Profil disimpan!','success');
 };
 
-// ===== OWNER POPUP =====
+// ===== OWNER =====
 window.openOwner=()=>{
   let ov=document.createElement('div');ov.className='popup-overlay';ov.id='owner-overlay';
-  ov.innerHTML=`<div class="popup-box" style="max-width:320px;">
-    <button class="popup-close" onclick="document.getElementById('owner-overlay').remove()">✕</button>
-    <h3>👑 DEVELOPER</h3>
-    <div class="owner-card">
-      <div class="owner-avatar">👨‍💻</div>
-      <div class="owner-name">RAIHAN FAJAR FA'IQ NABIL</div>
-      <div style="font-size:10px;color:#888;margin-top:4px;letter-spacing:1px;">GAME DEVELOPER · CREATOR</div>
-      <div class="owner-socials">
-        <div class="owner-social">
-          <div class="owner-social-icon">📸</div>
-          <div class="owner-social-info">
-            <div class="owner-social-label">Instagram</div>
-            <div class="owner-social-value">@raihanforever</div>
-          </div>
-        </div>
-        <div class="owner-social">
-          <div class="owner-social-icon">▶️</div>
-          <div class="owner-social-info">
-            <div class="owner-social-label">YouTube</div>
-            <div class="owner-social-value">Raihan Forever</div>
-          </div>
-        </div>
-        <div class="owner-social">
-          <div class="owner-social-icon">🎮</div>
-          <div class="owner-social-info">
-            <div class="owner-social-label">Game</div>
-            <div class="owner-social-value">Hangout DJ World v2.0</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>`;
+  ov.innerHTML=`<div class="popup-box" style="max-width:300px;"><button class="popup-close" onclick="document.getElementById('owner-overlay').remove()">✕</button>
+  <h3>👑 DEVELOPER</h3><div class="owner-card">
+  <div class="owner-avatar">👨‍💻</div>
+  <div class="owner-name">RAIHAN FAJAR FA'IQ NABIL</div>
+  <div style="font-size:9px;color:#888;margin-top:3px;letter-spacing:1px;">GAME DEVELOPER · CREATOR</div>
+  <div class="owner-socials">
+    <div class="owner-social"><div class="owner-social-icon">📸</div><div><div class="owner-social-label">Instagram</div><div class="owner-social-value">@raihanforever</div></div></div>
+    <div class="owner-social"><div class="owner-social-icon">▶️</div><div><div class="owner-social-label">YouTube</div><div class="owner-social-value">Raihan Forever</div></div></div>
+    <div class="owner-social"><div class="owner-social-icon">🎮</div><div><div class="owner-social-label">Game</div><div class="owner-social-value">Hangout DJ World v3.0</div></div></div>
+  </div></div></div>`;
   document.body.appendChild(ov);
 };
 
-// ===== DJ AUDIO =====
+// ===== DJ AUDIO / AUTOPLAY =====
 let audio=document.getElementById('dj-audio');
 let btnPlay=document.getElementById('btn-play-dj');
 audio.volume=0.7;
+// Auto-play next song when ended
 audio.addEventListener('ended',()=>{
   if(adminSettings.loop){
     if(adminSettings.order==='random') currentSongIndex=Math.floor(Math.random()*localSongs.length);
     else currentSongIndex=(currentSongIndex+1)%localSongs.length;
     if(localSongs[currentSongIndex]){
-      audio.src=localSongs[currentSongIndex].url;audio.play().catch(()=>{});
-      let sel=document.getElementById('playlist');sel.value=localSongs[currentSongIndex].url;
+      audio.src=localSongs[currentSongIndex].url;
+      audio.play().catch(()=>{});
+      let sel=document.getElementById('playlist');
+      if(sel) sel.value=localSongs[currentSongIndex].url;
+      showToast(`🎵 Next: ${localSongs[currentSongIndex].name}`,'success',2000);
     }
-  }
+  } else {isPlaying=false;btnPlay.innerHTML='▶';btnPlay.classList.remove('active');document.getElementById('visualizer').classList.remove('active');}
 });
 
 window.toggleDJ=()=>{
@@ -1817,15 +1986,14 @@ window.toggleDJ=()=>{
 };
 
 document.getElementById('playlist').addEventListener('change',()=>{
-  if(isPlaying){audio.src=document.getElementById('playlist').value;audio.play();}
+  const sel=document.getElementById('playlist');
+  currentSongIndex=localSongs.findIndex(s=>s.url===sel.value);
+  if(isPlaying){audio.src=sel.value;audio.play();}
 });
-
 window.setVolume=v=>audio.volume=parseFloat(v);
 
 // ===== ADMIN =====
-const ADMIN_PASS='hangout';
-let isAdminLogged=false;
-
+const ADMIN_PASS='hangout';let isAdminLogged=false;
 window.openAdmin=()=>{
   document.getElementById('admin-overlay').style.display='flex';
   document.getElementById('admin-login-view').style.display=isAdminLogged?'none':'block';
@@ -1835,8 +2003,7 @@ window.openAdmin=()=>{
 window.closeAdmin=()=>document.getElementById('admin-overlay').style.display='none';
 window.adminEnter=e=>{if(e.key==='Enter')doAdminLogin();};
 window.doAdminLogin=()=>{
-  let p=document.getElementById('admin-pass').value;
-  if(p===ADMIN_PASS){
+  if(document.getElementById('admin-pass').value===ADMIN_PASS){
     isAdminLogged=true;
     document.getElementById('admin-login-view').style.display='none';
     document.getElementById('admin-main-view').style.display='block';
@@ -1846,21 +2013,16 @@ window.doAdminLogin=()=>{
     setTimeout(()=>document.getElementById('admin-status-msg').innerText='',2000);
   }
 };
-
 window.adminAddSong=()=>{
   let name=document.getElementById('admin-song-name').value.trim();
   let url=document.getElementById('admin-song-url').value.trim();
   let msg=document.getElementById('admin-status-msg2');
   if(!name||!url){msg.style.color='#ff8888';msg.innerText='❌ Isi nama dan URL!';return;}
   push(ref(db,'songs'),{name,url});
-  localSongs.push({name,url});
-  rebuildPlaylist();
-  document.getElementById('admin-song-name').value='';
-  document.getElementById('admin-song-url').value='';
-  msg.style.color='#88ff88';msg.innerText='✅ Lagu ditambahkan!';
-  setTimeout(()=>msg.innerText='',3000);
+  localSongs.push({name,url});rebuildPlaylist();
+  document.getElementById('admin-song-name').value='';document.getElementById('admin-song-url').value='';
+  msg.style.color='#88ff88';msg.innerText='✅ Ditambahkan!';setTimeout(()=>msg.innerText='',3000);
 };
-
 function renderAdminSongList(){
   let list=document.getElementById('admin-song-list');if(!list) return;
   list.innerHTML='';
@@ -1870,29 +2032,19 @@ function renderAdminSongList(){
     list.appendChild(item);
   });
 }
-
-window.adminDelSong=i=>{
-  let s=localSongs[i];
-  if(s.id) remove(ref(db,'songs/'+s.id));
-  localSongs.splice(i,1);rebuildPlaylist();
-};
-
-window.adminSetAutoplay=v=>{
-  adminSettings.autoplay=v;
-  update(ref(db,'settings'),{autoplay:v,currentSong:localSongs[0]?.url||''});
-};
+window.adminDelSong=i=>{let s=localSongs[i];if(s.id)remove(ref(db,'songs/'+s.id));localSongs.splice(i,1);rebuildPlaylist();};
+window.adminSetAutoplay=v=>{adminSettings.autoplay=v;update(ref(db,'settings'),{autoplay:v,currentSong:localSongs[0]?.url||''});};
 window.adminSetLoop=v=>{adminSettings.loop=v;update(ref(db,'settings'),{loop:v});};
 window.adminSetOrder=v=>{adminSettings.order=v;update(ref(db,'settings'),{order:v});};
-
 document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 
 // ===== UTILS =====
-function pingTimer(){if(myData) set(ref(db,'players/'+myPlayerId+'/lastPing'),Date.now());}
+function pingTimer(){if(myData)set(ref(db,'players/'+myPlayerId+'/lastPing'),Date.now());}
+setInterval(pingTimer,60000);
 </script>
 
 <style>
 @keyframes fishJump{from{transform:translateY(0)}to{transform:translateY(-8px)}}
-@keyframes adBtnPulse{from{box-shadow:0 0 4px rgba(255,200,0,0.3)}to{box-shadow:0 0 12px rgba(255,200,0,0.8);}}
 </style>
 </body>
 </html>
