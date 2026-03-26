@@ -1,58 +1,1898 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mengalihkan Halaman...</title>
-    
-    <meta http-equiv="refresh" content="0; url=https://raihandigital.vercel.app">
-    
-    <script>
-        window.location.href = "https://raihandigital.vercel.app";
-    </script>
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
-        }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Hangout DJ World</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;font-family:'Rajdhani',sans-serif;}
+body{background:#000;color:#fff;overflow:hidden;touch-action:none;}
+
+/* ROTATE */
+#rotate-overlay{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:9999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;}
+#rotate-overlay h2{color:#00d2ff;font-family:'Orbitron',sans-serif;font-size:22px;margin-bottom:10px;}
+.rotate-icon{font-size:60px;animation:rotAnim 2s infinite linear;display:block;}
+@keyframes rotAnim{0%{transform:rotate(0deg)}100%{transform:rotate(90deg)}}
+@media(orientation:portrait){#rotate-overlay{display:flex;}#app{display:none!important;}}
+
+/* APP */
+#app{width:100vw;height:100vh;position:relative;overflow:hidden;display:flex;background:#1a1a2e;}
+
+/* LOGIN */
+#login-screen{position:absolute;inset:0;z-index:1000;background:radial-gradient(ellipse at 50% 0%,#0d2444 0%,#060610 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+.login-logo{font-family:'Orbitron',sans-serif;font-size:clamp(18px,4vw,40px);color:#00d2ff;text-shadow:0 0 20px #00d2ff,0 0 40px #006eff;letter-spacing:4px;}
+.login-sub{color:#8888aa;font-size:12px;letter-spacing:2px;margin-bottom:6px;}
+.login-card{background:rgba(0,210,255,0.04);border:1px solid rgba(0,210,255,0.2);border-radius:14px;padding:24px;width:min(320px,90vw);display:flex;flex-direction:column;gap:10px;box-shadow:0 0 40px rgba(0,100,200,0.1);}
+.login-card input,.login-card select{width:100%;padding:10px 13px;border-radius:7px;border:1px solid rgba(0,210,255,0.25);background:rgba(255,255,255,0.04);color:white;outline:none;font-size:13px;font-family:'Rajdhani',sans-serif;transition:border-color 0.2s;}
+.login-card input:focus,.login-card select:focus{border-color:#00d2ff;}
+.login-card select option{background:#0d1a2e;}
+.btn-start{width:100%;padding:13px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;font-size:15px;cursor:pointer;letter-spacing:2px;font-family:'Orbitron',sans-serif;box-shadow:0 0 20px rgba(0,180,255,0.4);}
+.login-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:1}}
+
+/* MAP */
+#map-container{position:absolute;inset:0;z-index:1;overflow:hidden;}
+/* Map world is LARGE - camera will move it via transform */
+#map-world{position:absolute;width:3000px;height:2000px;background:#1c2a1c;transform-origin:0 0;}
+.floor-grass{position:absolute;top:0;left:0;width:3000px;height:2000px;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,0.08) 40px),linear-gradient(160deg,#1e3a1e 0%,#2a4a20 40%,#1a3018 100%);}
+.grass-patch{position:absolute;border-radius:50%;background:radial-gradient(circle,#2d5a20,transparent 70%);pointer-events:none;}
+.fence{position:absolute;pointer-events:none;z-index:5;}
+.fence-h{height:16px;background:repeating-linear-gradient(90deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-top:3px solid #6B3410;border-bottom:3px solid #4A1E07;box-shadow:0 3px 8px rgba(0,0,0,0.5);}
+.fence-v{width:16px;background:repeating-linear-gradient(180deg,#8B4513 0px,#8B4513 14px,#5C2C0A 14px,#5C2C0A 16px,#A0522D 16px,#A0522D 30px,#5C2C0A 30px,#5C2C0A 32px);border-left:3px solid #6B3410;border-right:3px solid #4A1E07;box-shadow:3px 0 8px rgba(0,0,0,0.5);}
+
+/* STAGE */
+#stage-area{position:absolute;top:80px;left:900px;width:1200px;height:320px;border-radius:0 0 50% 50%/0 0 30px 30px;background:repeating-linear-gradient(90deg,rgba(0,0,0,0.1) 0px,rgba(0,0,0,0.1) 1px,transparent 1px,transparent 30px),linear-gradient(180deg,#1a0a2e 0%,#2d1b4e 50%,#1e1438 100%);border:3px solid rgba(120,0,255,0.5);box-shadow:0 0 30px rgba(100,0,255,0.3),inset 0 0 20px rgba(100,0,255,0.1);z-index:3;overflow:hidden;}
+.stage-lights{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#ff00ff,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff);background-size:200%;animation:lightBar 2s linear infinite;}
+@keyframes lightBar{0%{background-position:0%}100%{background-position:200%}}
+.stage-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'Orbitron',sans-serif;color:#cc00ff;font-size:clamp(9px,1.6vw,16px);text-shadow:0 0 10px #cc00ff;letter-spacing:3px;white-space:nowrap;}
+.dj-booth{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:clamp(70px,14vw,140px);height:clamp(28px,5vw,50px);background:linear-gradient(180deg,#222,#111);border-radius:8px 8px 4px 4px;border:2px solid #444;box-shadow:0 0 15px rgba(0,210,255,0.4);}
+.dj-booth::before{content:'';position:absolute;top:5px;left:10%;right:10%;height:40%;background:linear-gradient(90deg,#00d2ff22,#ff00ff22,#00d2ff22);border-radius:4px;animation:djPulse 1s ease-in-out infinite alternate;}
+@keyframes djPulse{from{opacity:0.3}to{opacity:1}}
+.speaker{position:absolute;width:clamp(18px,3.5vw,36px);height:clamp(36px,7vw,72px);background:radial-gradient(circle at 50% 40%,#333,#111);border-radius:6px;border:2px solid #444;box-shadow:0 0 10px rgba(0,0,0,0.8);}
+.speaker::before{content:'';position:absolute;top:20%;left:15%;right:15%;bottom:20%;border-radius:50%;background:radial-gradient(circle,#555,#222);border:1px solid #666;}
+#spk-left{bottom:18px;left:4%;}#spk-right{bottom:18px;right:4%;}
+.spotlight{position:absolute;bottom:22px;border-bottom:180px solid;border-left:36px solid transparent;border-right:36px solid transparent;opacity:0.08;animation:spotMove 4s ease-in-out infinite alternate;pointer-events:none;}
+#spot1{left:30%;border-bottom-color:#ff00ff;animation-delay:0s;}
+#spot2{left:45%;border-bottom-color:#00ffff;animation-delay:1s;}
+#spot3{right:30%;border-bottom-color:#ffff00;animation-delay:2s;}
+@keyframes spotMove{0%{transform:rotate(-15deg)}100%{transform:rotate(15deg)}}
+
+/* CHILL ZONE */
+#chill-zone{position:absolute;top:1300px;right:120px;width:340px;height:340px;background:radial-gradient(circle,rgba(255,100,100,0.18) 0%,rgba(255,180,100,0.1) 50%,transparent 80%);border:3px dashed rgba(255,100,100,0.6);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ff8888;font-size:12px;text-align:center;z-index:3;pointer-events:none;}
+.chill-icon{font-size:clamp(18px,2.8vw,30px);margin-bottom:3px;}
+
+/* POND */
+#pond{position:absolute;top:1300px;left:60px;width:440px;height:280px;background:radial-gradient(ellipse at 40% 40%,rgba(0,180,255,0.75) 0%,rgba(0,120,220,0.65) 50%,rgba(0,60,160,0.85) 100%);border-radius:50%;border:3px solid rgba(0,200,255,0.5);box-shadow:0 0 30px rgba(0,150,255,0.5),inset 0 0 40px rgba(0,0,100,0.5);z-index:3;overflow:hidden;}
+.pond-shimmer{position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(255,255,255,0.05) 9px);animation:shimmer 3s linear infinite;}
+@keyframes shimmer{0%{transform:translateY(0)}100%{transform:translateY(9px)}}
+.pond-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);color:#00ccff;font-size:clamp(8px,1vw,11px);white-space:nowrap;text-shadow:0 0 8px #00ccff;font-weight:700;}
+.pond-lily{position:absolute;background:#2d8a2d;border-radius:50%;border:1px solid #1a5a1a;}
+.pond-lily::after{content:'🌺';position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:9px;}
+.fish{position:absolute;font-size:clamp(9px,1.4vw,13px);animation:fishSwim 6s ease-in-out infinite;pointer-events:none;z-index:4;}
+@keyframes fishSwim{0%{transform:translateX(0) scaleX(1)}40%{transform:translateX(40px) scaleX(1)}50%{transform:translateX(40px) scaleX(-1)}90%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+
+/* PATH */
+.path{position:absolute;z-index:2;background:#3a3020;}
+.path-h{height:26px;border-top:2px solid #4a4030;border-bottom:2px solid #4a4030;}
+.path-v{width:26px;border-left:2px solid #4a4030;border-right:2px solid #4a4030;}
+
+/* TREES / LAMPS */
+.tree{position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.tree-top{background:radial-gradient(circle,#2d7a2d,#1a5a1a);border-radius:50% 50% 40% 40%;border:1px solid #1a4a1a;box-shadow:0 0 12px rgba(50,200,50,0.3);}
+.tree-trunk{background:linear-gradient(180deg,#8B5E3C,#6B4423);border-radius:2px;}
+.lamp-post{position:absolute;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.lamp-pole{width:4px;background:linear-gradient(180deg,#aaa,#666);border-radius:2px;}
+.lamp-light{width:15px;height:8px;background:radial-gradient(circle,#fffbe0,#ffcc00);border-radius:50% 50% 0 0;box-shadow:0 0 12px #ffcc0088,0 0 24px #ffcc0044;animation:lampFlicker 4s ease-in-out infinite alternate;}
+@keyframes lampFlicker{0%,90%{opacity:1}95%{opacity:0.8}100%{opacity:1}}
+
+/* FIREWORK TOOL on map */
+.firework-tool{position:absolute;font-size:28px;z-index:4;cursor:pointer;animation:fwFloat 2s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #ffcc00);}
+@keyframes fwFloat{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-6px) rotate(5deg)}}
+
+/* PLAYER */
+.player{position:absolute;width:34px;display:flex;flex-direction:column;align-items:center;z-index:10;transition:top 0.08s linear,left 0.08s linear;}
+.player-above{position:absolute;top:-52px;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;min-width:80px;transform:translateX(-50%);left:17px;}
+.name-tag{background:rgba(0,0,0,0.75);padding:2px 7px;border-radius:20px;color:white;font-size:9px;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);letter-spacing:0.5px;}
+.player-info-tag{background:rgba(0,0,0,0.6);padding:1px 6px;border-radius:10px;font-size:8px;color:#aaa;white-space:nowrap;}
+.player-chat-bubble{background:rgba(30,30,50,0.9);border:1px solid rgba(0,210,255,0.4);padding:3px 8px;border-radius:10px 10px 10px 0;font-size:10px;color:#fff;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.5);}
+.player-level-tag{background:linear-gradient(90deg,#ff8800,#cc4400);padding:1px 6px;border-radius:10px;font-size:8px;color:#fff;font-weight:700;letter-spacing:1px;}
+.head{width:22px;height:22px;background:#ffcc99;border-radius:50%;border:1.5px solid #cc9966;position:relative;}
+.head::before{content:'';position:absolute;bottom:6px;left:4px;width:5px;height:5px;background:#444;border-radius:50%;box-shadow:9px 0 0 #444;}
+.body{width:26px;height:24px;border-radius:6px 6px 0 0;border:1.5px solid rgba(0,0,0,0.4);margin-top:-2px;position:relative;}
+.legs{display:flex;gap:4px;margin-top:1px;}
+.leg{width:10px;height:10px;background:#1a1a2e;border-radius:0 0 4px 4px;border:1px solid rgba(0,0,0,0.4);}
+.Laki-laki .body{background:linear-gradient(180deg,#3498db,#2170a8);}
+.Perempuan .body{background:linear-gradient(180deg,#e74c3c,#a82020);}
+.Perempuan .body::after{content:'';position:absolute;bottom:-6px;left:-3px;right:-3px;height:8px;background:linear-gradient(180deg,#e74c3c,#c0392b);border-radius:0 0 8px 8px;}
+.player-shadow{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:26px;height:7px;background:radial-gradient(ellipse,rgba(0,0,0,0.4),transparent 70%);border-radius:50%;}
+.my-player .name-tag{background:rgba(0,80,150,0.85);border-color:#00d2ff;color:#00d2ff;}
+
+/* HEALTH / THIRST BAR (above player) */
+.player-bars{display:flex;gap:3px;margin-bottom:1px;}
+.bar-mini{width:36px;height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.bar-fill-hp{height:100%;background:linear-gradient(90deg,#ff4444,#ff0000);border-radius:2px;transition:width 0.3s;}
+.bar-fill-th{height:100%;background:linear-gradient(90deg,#00ccff,#0066ff);border-radius:2px;transition:width 0.3s;}
+
+/* DEAD OVERLAY */
+.player-dead{opacity:0.3;filter:grayscale(1);}
+.dead-icon{position:absolute;top:-30px;left:50%;transform:translateX(-50%);font-size:20px;animation:deadBounce 0.5s infinite alternate;}
+@keyframes deadBounce{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-4px)}}
+
+/* FROZEN */
+.player-frozen .body,.player-frozen .head,.player-frozen .leg{filter:hue-rotate(200deg) brightness(1.5)!important;background:linear-gradient(180deg,#aaeeff,#66ccff)!important;}
+
+/* SWEEPING */
+.broom-icon{position:absolute;font-size:18px;animation:sweep 0.4s ease-in-out infinite alternate;}
+@keyframes sweep{from{transform:rotate(-20deg)}to{transform:rotate(20deg)}}
+
+/* STATUS EFFECT LABEL */
+.status-effect{position:absolute;top:-70px;left:50%;transform:translateX(-50%);font-size:16px;white-space:nowrap;pointer-events:none;animation:effectFloat 2s ease-out forwards;}
+@keyframes effectFloat{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-40px)}}
+
+/* VISUALIZER */
+#visualizer{position:absolute;top:390px;left:900px;width:1200px;height:28px;display:flex;align-items:flex-end;justify-content:center;gap:3px;z-index:4;pointer-events:none;opacity:0;transition:opacity 0.5s;}
+#visualizer.active{opacity:1;}
+.viz-bar{width:4px;background:linear-gradient(180deg,#ff00ff,#00d2ff);border-radius:2px 2px 0 0;animation:vizAnim 0.5s ease-in-out infinite alternate;}
+@keyframes vizAnim{0%{height:4px}100%{height:var(--h,20px)}}
+
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:2;animation:particleFly linear infinite;}
+@keyframes particleFly{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:0.8}100%{transform:translateY(-80px) translateX(var(--dx,20px));opacity:0}}
+
+/* ===== SIDEBAR UI (LEFT) ===== */
+#sidebar-left{position:fixed;top:0;left:0;bottom:0;width:clamp(200px,20vw,260px);z-index:50;display:flex;flex-direction:column;gap:0;pointer-events:none;}
+
+/* TOP BAR (DJ controls) */
+#top-bar{position:fixed;top:0;left:0;right:0;height:44px;z-index:55;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.82);padding:0 10px;border-bottom:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(6px);}
+#playlist{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(0,210,255,0.3);padding:4px 7px;border-radius:6px;outline:none;font-size:10px;font-family:'Rajdhani',sans-serif;max-width:clamp(80px,12vw,170px);}
+#playlist option{background:#0d1a2e;}
+.btn-ui{padding:4px 10px;border-radius:6px;border:none;font-weight:700;cursor:pointer;color:white;font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all 0.2s;white-space:nowrap;}
+#btn-play-dj{background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;box-shadow:0 0 10px rgba(0,180,255,0.3);}
+#btn-play-dj.active{background:linear-gradient(90deg,#ff4444,#cc0000);}
+#vol-wrap{display:flex;align-items:center;gap:4px;}
+#vol-wrap span{font-size:11px;color:#aaa;}
+#vol-slider{width:50px;height:4px;accent-color:#00d2ff;}
+#btn-admin{background:rgba(255,150,0,0.2);border:1px solid rgba(255,150,0,0.4);color:#ffaa00;font-size:9px;}
+#btn-skills{background:rgba(150,0,255,0.25);border:1px solid rgba(180,0,255,0.4);color:#cc88ff;font-size:9px;}
+#btn-missions{background:rgba(0,200,100,0.2);border:1px solid rgba(0,200,100,0.4);color:#00ff88;font-size:9px;}
+#btn-profile{background:rgba(255,200,0,0.15);border:1px solid rgba(255,200,0,0.3);color:#ffdd44;font-size:9px;}
+#btn-owner{background:rgba(255,50,150,0.15);border:1px solid rgba(255,50,150,0.3);color:#ff88cc;font-size:9px;}
+
+/* PANEL BOXES (collapsible) */
+.panel-box{background:rgba(0,0,0,0.65);border:1px solid rgba(0,210,255,0.15);backdrop-filter:blur(5px);pointer-events:auto;overflow:hidden;}
+.panel-header{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;font-family:'Orbitron',sans-serif;color:#00d2ff;letter-spacing:1px;background:rgba(0,210,255,0.05);}
+.panel-header:hover{background:rgba(0,210,255,0.1);}
+.panel-toggle{font-size:10px;color:#888;transition:transform 0.2s;}
+.panel-toggle.open{transform:rotate(180deg);}
+.panel-body{overflow:hidden;transition:max-height 0.3s ease;}
+.panel-body.collapsed{max-height:0!important;}
+
+/* CHAT PANEL */
+#chat-panel{position:fixed;left:0;bottom:0;width:clamp(220px,22vw,290px);z-index:50;}
+#chat-box{overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding:6px;scrollbar-width:thin;scrollbar-color:#333 transparent;}
+.chat-msg{background:rgba(0,0,0,0.5);padding:4px 8px;border-radius:5px;width:fit-content;font-size:11px;text-shadow:1px 1px 0 #000;word-wrap:break-word;max-width:100%;border-left:2px solid transparent;max-width:220px;}
+.chat-msg.system-msg{border-left-color:#ffcc00;color:#ffd700;font-style:italic;}
+.chat-msg.regular-msg{border-left-color:#00d2ff;}
+.chat-msg.skill-msg{border-left-color:#ff00ff;color:#ff88ff;}
+#chat-input-wrapper{display:flex;background:rgba(0,0,0,0.5);border-top:1px solid rgba(255,255,255,0.06);padding:5px;}
+#chat-input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:11px;font-family:'Rajdhani',sans-serif;}
+#btn-send{background:linear-gradient(90deg,#00d2ff,#0066ff);border:none;padding:4px 9px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:700;color:#fff;}
+
+/* LEADERBOARD PANEL */
+#lb-panel{position:fixed;right:0;top:44px;width:clamp(200px,22vw,280px);z-index:50;}
+#lb-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.06);}
+.lb-tab{flex:1;padding:5px;text-align:center;font-size:9px;cursor:pointer;color:#888;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
+.lb-tab.active{color:#00d2ff;border-bottom:2px solid #00d2ff;}
+#lb-list,#lb-fish-list{overflow-y:auto;padding:5px;display:flex;flex-direction:column;gap:4px;scrollbar-width:thin;scrollbar-color:#333 transparent;}
+.lb-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);padding:5px 7px;border-radius:5px;border:1px solid rgba(255,255,255,0.04);}
+.lb-name{font-weight:700;color:#fff;font-size:11px;}
+.lb-detail{font-size:9px;color:#888;}
+.lb-right{text-align:right;}
+.lb-time{color:#00d2ff;font-weight:700;font-size:10px;}
+.lb-level{color:#ff8800;font-size:9px;}
+.lb-fish-score{color:#00ccff;font-weight:700;font-size:11px;}
+.lb-dot{width:7px;height:7px;border-radius:50%;background:#00ff88;box-shadow:0 0 5px #00ff88;margin-right:5px;flex-shrink:0;}
+
+/* STATUS BARS (player HUD) */
+#player-hud{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);z-index:60;display:none;flex-direction:column;align-items:center;gap:4px;}
+.hud-bar-wrap{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.6);padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
+.hud-icon{font-size:13px;}
+.hud-bar{width:80px;height:7px;background:#333;border-radius:4px;overflow:hidden;}
+.hud-bar-fill{height:100%;border-radius:4px;transition:width 0.5s;}
+#hp-fill{background:linear-gradient(90deg,#ff4444,#ff0000);}
+#th-fill{background:linear-gradient(90deg,#00ccff,#0066ff);}
+.hud-val{font-size:10px;font-weight:700;min-width:24px;text-align:right;}
+
+/* FISH STATUS */
+#fish-status{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:5px 14px;border-radius:20px;font-size:11px;color:#00ccff;display:none;z-index:60;border:1px solid rgba(0,200,255,0.3);backdrop-filter:blur(4px);}
+
+/* DPAD */
+#dpad{position:fixed;bottom:14px;left:clamp(210px,21vw,270px);display:grid;grid-template-columns:repeat(3,42px);grid-gap:5px;z-index:60;}
+.dir-btn{width:42px;height:42px;background:rgba(255,255,255,0.12);border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:15px;color:white;font-weight:700;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);}
+.dir-btn:active{background:rgba(255,255,255,0.4);transform:scale(0.9);}
+#btn-u{grid-column:2;grid-row:1;}#btn-l{grid-column:1;grid-row:2;}#btn-r{grid-column:3;grid-row:2;}#btn-d{grid-column:2;grid-row:3;}
+#btn-fish-action{grid-column:2;grid-row:2;font-size:17px;background:rgba(0,150,255,0.25);border-color:rgba(0,200,255,0.4);}
+@media(min-width:1024px){#dpad{display:none;}}
+
+/* ===== POPUPS ===== */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
+.popup-box{background:linear-gradient(135deg,#0d1a2e,#1a0d2e);border:1px solid rgba(0,210,255,0.3);border-radius:16px;padding:22px;width:min(420px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(0,100,255,0.3);animation:popIn 0.3s ease;position:relative;scrollbar-width:thin;scrollbar-color:#333 transparent;}
+@keyframes popIn{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+.popup-box h3{font-family:'Orbitron',sans-serif;color:#00d2ff;margin-bottom:14px;text-align:center;font-size:14px;letter-spacing:2px;}
+.popup-close{position:absolute;top:10px;right:14px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;z-index:2;}
+.popup-close:hover{color:white;}
+
+/* SKILLS POPUP */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.skill-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 6px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;}
+.skill-card:hover{background:rgba(0,210,255,0.1);border-color:#00d2ff;transform:scale(1.04);}
+.skill-card.locked{opacity:0.4;cursor:not-allowed;}
+.skill-card.locked::after{content:'🔒';position:absolute;top:4px;right:4px;font-size:10px;}
+.skill-icon{font-size:26px;display:block;margin-bottom:4px;}
+.skill-name{font-size:9px;font-weight:700;color:#ddd;letter-spacing:0.5px;}
+.skill-desc{font-size:8px;color:#888;margin-top:2px;}
+.skill-cost{font-size:8px;color:#ffcc00;margin-top:3px;}
+.skill-card.active-skill{border-color:#ff00ff;background:rgba(255,0,255,0.1);}
+
+/* MISSIONS POPUP */
+.mission-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;}
+.mission-item:hover{background:rgba(0,210,255,0.07);}
+.mission-item.completed{border-color:#00ff88;opacity:0.7;}
+.mission-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.mission-title{font-weight:700;font-size:12px;color:#fff;}
+.mission-reward{font-size:10px;color:#ffcc00;}
+.mission-desc{font-size:10px;color:#888;margin-bottom:6px;}
+.mission-progress{height:5px;background:#333;border-radius:3px;overflow:hidden;}
+.mission-bar{height:100%;background:linear-gradient(90deg,#00d2ff,#00ff88);border-radius:3px;transition:width 0.5s;}
+.mission-action{width:100%;padding:6px;border-radius:6px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-size:10px;margin-top:8px;font-family:'Orbitron',sans-serif;}
+.mission-action:disabled{background:#333;color:#666;cursor:not-allowed;}
+
+/* SPIN WHEEL */
+#spin-container{text-align:center;padding:10px 0;}
+#spin-wheel{width:200px;height:200px;border-radius:50%;position:relative;margin:0 auto 12px;border:4px solid rgba(0,210,255,0.4);overflow:hidden;cursor:pointer;box-shadow:0 0 20px rgba(0,100,255,0.3);}
+#spin-canvas{width:200px;height:200px;}
+#spin-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:24px;filter:drop-shadow(0 0 4px #ff0);}
+#btn-spin{padding:10px 30px;border-radius:20px;border:none;background:linear-gradient(90deg,#ff8800,#cc4400);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:12px;box-shadow:0 0 15px rgba(255,100,0,0.4);}
+#btn-spin:disabled{background:#333;color:#666;cursor:not-allowed;}
+.spin-result{font-size:13px;color:#ffcc00;font-weight:700;margin-top:8px;min-height:20px;}
+
+/* TARGET SELECTOR (skill use) */
+.target-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;margin-top:8px;}
+.target-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);transition:all 0.2s;}
+.target-item:hover{background:rgba(255,50,50,0.15);border-color:#ff4444;}
+
+/* PROFILE POPUP */
+.profile-field{margin-bottom:10px;}
+.profile-field label{display:block;font-size:10px;color:#aaa;margin-bottom:4px;letter-spacing:1px;}
+.profile-field input,.profile-field select{width:100%;padding:8px 11px;border-radius:7px;border:1px solid rgba(0,210,255,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;font-family:'Rajdhani',sans-serif;}
+.profile-field input:focus{border-color:#00d2ff;}
+.profile-avatar{width:70px;height:70px;border-radius:50%;border:3px solid #00d2ff;display:flex;align-items:center;justify-content:center;font-size:32px;background:rgba(0,100,200,0.2);margin:0 auto 14px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.stat-box{background:rgba(255,255,255,0.04);border-radius:8px;padding:8px;text-align:center;border:1px solid rgba(255,255,255,0.07);}
+.stat-box .stat-val{font-size:18px;font-weight:700;color:#00d2ff;font-family:'Orbitron',sans-serif;}
+.stat-box .stat-label{font-size:9px;color:#888;margin-top:2px;}
+
+/* ADMIN PANEL */
+#admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+#admin-panel{background:linear-gradient(135deg,#0a0f1a,#1a0a2e);border:1px solid rgba(255,150,0,0.4);border-radius:16px;padding:22px;width:min(440px,93vw);max-height:85vh;overflow-y:auto;box-shadow:0 0 40px rgba(255,100,0,0.2);position:relative;animation:popIn 0.3s ease;scrollbar-width:thin;}
+#admin-panel h3{font-family:'Orbitron',sans-serif;color:#ffaa00;margin-bottom:16px;text-align:center;font-size:14px;letter-spacing:2px;}
+.admin-field{margin-bottom:10px;}
+.admin-field label{display:block;font-size:10px;color:#aaa;margin-bottom:4px;letter-spacing:1px;}
+.admin-field input,.admin-field select{width:100%;padding:8px 11px;border-radius:7px;border:1px solid rgba(255,150,0,0.25);background:rgba(255,255,255,0.05);color:white;outline:none;font-size:12px;font-family:'Rajdhani',sans-serif;}
+#admin-song-list{max-height:150px;overflow-y:auto;margin-top:8px;display:flex;flex-direction:column;gap:5px;}
+.admin-song-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.04);padding:6px 9px;border-radius:6px;font-size:11px;}
+.admin-song-item span{color:#ddd;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.admin-song-del{background:rgba(255,50,50,0.2);border:1px solid rgba(255,50,50,0.4);color:#ff6666;border-radius:4px;padding:2px 7px;cursor:pointer;font-size:10px;flex-shrink:0;}
+.btn-admin-add{width:100%;padding:9px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff8800,#cc5500);color:white;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px;margin-top:8px;}
+.admin-section{margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:12px;}
+.admin-section-title{font-size:10px;color:#ffaa00;letter-spacing:2px;margin-bottom:8px;font-family:'Orbitron',sans-serif;}
+.btn-close-admin{position:absolute;top:12px;right:16px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
+#admin-status-msg{font-size:10px;color:#ff8888;text-align:center;min-height:14px;margin-top:5px;}
+#admin-status-msg2{font-size:10px;color:#88ff88;text-align:center;margin-top:5px;min-height:14px;}
+.toggle-switch{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.toggle-switch input[type="checkbox"]{width:36px;height:20px;cursor:pointer;accent-color:#00d2ff;}
+.toggle-switch label{font-size:11px;color:#ccc;}
+
+/* OWNER POPUP */
+.owner-card{text-align:center;padding:10px 0;}
+.owner-avatar{font-size:60px;margin-bottom:10px;animation:ownerPulse 2s ease-in-out infinite alternate;}
+@keyframes ownerPulse{from{transform:scale(1)}to{transform:scale(1.05)}}
+.owner-name{font-family:'Orbitron',sans-serif;font-size:16px;color:#00d2ff;text-shadow:0 0 10px #00d2ff;margin-bottom:4px;}
+.owner-socials{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+.owner-social{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,0.08);}
+.owner-social-icon{font-size:20px;}
+.owner-social-info{display:flex;flex-direction:column;}
+.owner-social-label{font-size:10px;color:#888;}
+.owner-social-value{font-size:13px;color:#fff;font-weight:700;}
+
+/* AD WEBVIEW */
+#ad-webview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
+#ad-frame-wrap{background:#111;border:2px solid rgba(0,210,255,0.3);border-radius:12px;overflow:hidden;position:relative;}
+#ad-iframe{width:min(640px,95vw);height:400px;border:none;display:block;}
+#ad-countdown{font-family:'Orbitron',sans-serif;color:#00d2ff;font-size:13px;letter-spacing:2px;}
+#ad-skip-btn{padding:8px 24px;border-radius:20px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;display:none;}
+.ad-label{font-size:10px;color:#888;letter-spacing:2px;}
+
+/* FIREWORK EXPLOSION */
+.explosion{position:fixed;pointer-events:none;z-index:400;font-size:40px;animation:explode 1s ease-out forwards;}
+@keyframes explode{0%{transform:scale(0);opacity:1}50%{transform:scale(2);opacity:1}100%{transform:scale(3);opacity:0}}
+
+/* BUTTONS */
+.btn-primary{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d2ff,#0066ff);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1px;}
+.btn-danger{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff4444,#cc0000);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
+.btn-warn{padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(90deg,#ff8800,#cc5500);color:#fff;font-weight:700;cursor:pointer;font-family:'Orbitron',sans-serif;font-size:11px;}
+
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#333;border-radius:2px;}
+</style>
 </head>
 <body>
 
-    <div class="loader"></div>
-    <h2>Sedang mengalihkan ke Raihan Digital...</h2>
-    <p>Jika Anda tidak dialihkan secara otomatis, silakan klik tautan di bawah ini:</p>
-    <a href="https://raihandigital.vercel.app">Buka Raihan Digital Sekarang</a>
+<div id="rotate-overlay">
+  <span class="rotate-icon">📱</span>
+  <h2>Putar HP Kamu!</h2>
+  <p style="color:#888;font-size:12px;margin-top:8px;">Mode Landscape wajib untuk game ini.</p>
+</div>
 
+<div id="app">
+
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-stars" id="login-stars"></div>
+    <div class="login-logo">🎧 HANGOUT DJ</div>
+    <div class="login-sub">VIRTUAL WORLD · REAL VIBES</div>
+    <div class="login-card">
+      <input type="text" id="username" placeholder="Username (unik, 1x pakai)" autocomplete="off" maxlength="18">
+      <input type="number" id="age" placeholder="Umur" min="1" max="99">
+      <select id="gender">
+        <option value="Laki-laki">🚹 Laki-laki</option>
+        <option value="Perempuan">🚺 Perempuan</option>
+      </select>
+      <button class="btn-start" onclick="startGame()">⚡ MASUK DUNIA</button>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div id="map-container">
+    <div id="map-world">
+      <div class="floor-grass"></div>
+      <div id="stage-area">
+        <div class="stage-lights"></div>
+        <div id="spot1" class="spotlight"></div>
+        <div id="spot2" class="spotlight"></div>
+        <div id="spot3" class="spotlight"></div>
+        <div id="spk-left" class="speaker"></div>
+        <div id="spk-right" class="speaker"></div>
+        <div class="dj-booth"></div>
+        <div class="stage-label">🎵 DJ STAGE</div>
+      </div>
+      <div id="visualizer"></div>
+      <div id="chill-zone">
+        <div class="chill-icon">☕</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;">Chill Zone</div>
+        <div style="font-size:8px;color:#ffaaaa;margin-top:2px;">+HP +Thirst</div>
+        <div style="font-size:14px;margin-top:3px;">🛋️ 🪴 🎵</div>
+        <div style="font-size:8px;color:#ffccaa;margin-top:1px;">Santai & Relax</div>
+      </div>
+      <div id="pond">
+        <div class="pond-shimmer"></div>
+        <div class="pond-lily" style="width:18px;height:18px;top:25%;left:15%;"></div>
+        <div class="pond-lily" style="width:13px;height:13px;top:60%;left:60%;"></div>
+        <div class="pond-label">🎣 Kolam Mancing</div>
+      </div>
+      <div class="fence fence-h" style="top:30px;left:40px;right:40px;position:absolute;"></div>
+      <div class="fence fence-h" style="top:1950px;left:40px;right:40px;position:absolute;"></div>
+      <div class="fence fence-v" style="left:30px;top:30px;bottom:30px;position:absolute;"></div>
+      <div class="fence fence-v" style="right:30px;top:30px;bottom:30px;position:absolute;"></div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div id="top-bar" style="display:none;">
+    <select id="playlist"><option value="">🎵 Lagu...</option></select>
+    <button id="btn-play-dj" class="btn-ui" onclick="toggleDJ()">▶</button>
+    <div id="vol-wrap"><span>🔊</span><input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.7" oninput="setVolume(this.value)"></div>
+    <button id="btn-missions" class="btn-ui" onclick="openMissions()">🎯 MISI</button>
+    <button id="btn-ad-watch" class="btn-ui" onclick="openAdWatchMission()" style="background:rgba(255,200,0,0.2);border:1px solid rgba(255,200,0,0.5);color:#ffdd00;font-size:9px;animation:adBtnPulse 2s ease-in-out infinite alternate;">📺 TONTON IKLAN</button>
+    <button id="btn-skills" class="btn-ui" onclick="openSkills()">⚡ SKILL</button>
+    <button id="btn-profile" class="btn-ui" onclick="openProfile()">👤 PROFIL</button>
+    <button id="btn-owner" class="btn-ui" onclick="openOwner()">👑 OWNER</button>
+    <button id="btn-admin" class="btn-ui" onclick="openAdmin()">⚙</button>
+  </div>
+
+  <!-- CHAT PANEL (bottom-left) -->
+  <div id="chat-panel" style="display:none;" class="panel-box">
+    <div class="panel-header" onclick="togglePanel('chat-body','chat-toggle')">
+      <span>💬 GLOBAL CHAT</span>
+      <span class="panel-toggle" id="chat-toggle">▼</span>
+    </div>
+    <div class="panel-body" id="chat-body" style="max-height:180px;">
+      <div id="chat-box" style="max-height:140px;"></div>
+      <div id="chat-input-wrapper">
+        <input type="text" id="chat-input" placeholder="Ketik pesan..." onkeypress="handleEnter(event)" maxlength="120">
+        <button id="btn-send" onclick="sendChat()">KIRIM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD PANEL (right) - SERVER ONLINE -->
+  <div id="lb-panel" style="display:none;" class="panel-box">
+    <div class="panel-header" onclick="togglePanel('lb-body','lb-toggle')">
+      <span>🌐 SERVER ONLINE <span id="lb-online-count" style="color:#00ff88;font-size:9px;"></span></span>
+      <span class="panel-toggle open" id="lb-toggle">▼</span>
+    </div>
+    <div class="panel-body" id="lb-body" style="max-height:350px;">
+      <div id="lb-tabs">
+        <div class="lb-tab active" onclick="switchLbTab('players')">👥 Online</div>
+        <div class="lb-tab" onclick="switchLbTab('fish')">🎣 Mancing</div>
+      </div>
+      <div id="lb-list" style="max-height:290px;"></div>
+      <div id="lb-fish-list" style="max-height:290px;display:none;"></div>
+    </div>
+  </div>
+
+  <!-- PLAYER HUD -->
+  <div id="player-hud">
+    <div class="hud-bar-wrap">
+      <span class="hud-icon">❤️</span>
+      <div class="hud-bar"><div class="hud-bar-fill" id="hp-fill" style="width:100%;"></div></div>
+      <span class="hud-val" id="hp-val">100</span>
+    </div>
+    <div class="hud-bar-wrap">
+      <span class="hud-icon">💧</span>
+      <div class="hud-bar"><div class="hud-bar-fill" id="th-fill" style="width:100%;"></div></div>
+      <span class="hud-val" id="th-val">100</span>
+    </div>
+  </div>
+
+  <!-- FISH STATUS -->
+  <div id="fish-status"></div>
+
+  <!-- DPAD -->
+  <div id="dpad" style="display:none;">
+    <div class="dir-btn" id="btn-u" onmousedown="move('up')" onmouseup="stopMove()" ontouchstart="move('up')" ontouchend="stopMove()">▲</div>
+    <div class="dir-btn" id="btn-l" onmousedown="move('left')" onmouseup="stopMove()" ontouchstart="move('left')" ontouchend="stopMove()">◀</div>
+    <div class="dir-btn" id="btn-fish-action" onmousedown="tryFish()" ontouchstart="tryFish()">🎣</div>
+    <div class="dir-btn" id="btn-r" onmousedown="move('right')" onmouseup="stopMove()" ontouchstart="move('right')" ontouchend="stopMove()">▶</div>
+    <div class="dir-btn" id="btn-d" onmousedown="move('down')" onmouseup="stopMove()" ontouchstart="move('down')" ontouchend="stopMove()">▼</div>
+  </div>
+
+  <audio id="dj-audio" loop></audio>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-overlay">
+  <div id="admin-panel">
+    <button class="btn-close-admin" onclick="closeAdmin()">✕</button>
+    <h3>⚙ ADMIN PANEL</h3>
+    <div id="admin-login-view">
+      <div class="admin-field"><label>PASSWORD</label><input type="password" id="admin-pass" placeholder="Password admin..." onkeypress="adminEnter(event)"></div>
+      <div id="admin-status-msg"></div>
+      <button class="btn-admin-add" onclick="doAdminLogin()">🔓 LOGIN</button>
+    </div>
+    <div id="admin-main-view" style="display:none;">
+      <div class="admin-section">
+        <div class="admin-section-title">🎵 TAMBAH LAGU</div>
+        <div class="admin-field"><label>NAMA LAGU</label><input type="text" id="admin-song-name" placeholder="Nama lagu..."></div>
+        <div class="admin-field"><label>URL AUDIO (MP3)</label><input type="text" id="admin-song-url" placeholder="https://..."></div>
+        <button class="btn-admin-add" onclick="adminAddSong()">➕ TAMBAH</button>
+        <div id="admin-status-msg2"></div>
+        <div id="admin-song-list"></div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-section-title">🔁 AUTOPLAY SETTINGS</div>
+        <div class="toggle-switch"><input type="checkbox" id="admin-autoplay" onchange="adminSetAutoplay(this.checked)"><label>Autoplay Music (semua user)</label></div>
+        <div class="toggle-switch"><input type="checkbox" id="admin-loop" onchange="adminSetLoop(this.checked)" checked><label>Loop Playlist</label></div>
+        <div class="admin-field" style="margin-top:8px;"><label>URUTAN PUTAR</label>
+          <select id="admin-order" onchange="adminSetOrder(this.value)">
+            <option value="sequence">Berurutan</option>
+            <option value="random">Acak</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AD WEBVIEW OVERLAY -->
+<div id="ad-webview-overlay">
+  <div class="ad-label">TONTON IKLAN UNTUK DAPAT REWARD</div>
+  <div id="ad-frame-wrap">
+    <iframe id="ad-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+  </div>
+  <div id="ad-countdown">Tonton iklan 23 detik... ⏳ <span id="ad-timer">23</span>s</div>
+  <button id="ad-skip-btn" onclick="closeAdWebview()">✅ KLAIM REWARD / AMBIL REWARD</button>
+</div>
+
+<script>
+// AD INJECT
+(function(){
+  var s1=document.createElement('script');
+  s1.text="atOptions={'key':'93587828435852943b1acdaa744d23ee','format':'iframe','height':50,'width':320,'params':{}};";
+  var s2=document.createElement('script');
+  s2.src='https://www.highperformanceformat.com/93587828435852943b1acdaa744d23ee/invoke.js';
+  document.body.appendChild(s1);document.body.appendChild(s2);
+})();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, push, onDisconnect, remove, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyAu2N0A9UXuq0qtg5YQeNxXb87OajlhhgE",
+  authDomain:"raihanmoney.firebaseapp.com",
+  databaseURL:"https://raihanmoney-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"raihanmoney",storageBucket:"raihanmoney.firebasestorage.app",
+  messagingSenderId:"223564302261",appId:"1:223564302261:web:e44269bb41e18078ecbbfc"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// ===== STATE =====
+let myPlayerId = null;
+let myData = null;
+let playersDB = {}; // full snapshot
+let playersElements = {};
+let mapContainer = document.getElementById('map-world');
+let localSongs = [
+  {name:'Lagu Chill 1',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'},
+  {name:'Lagu Chill 2',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'},
+  {name:'Lagu Santai 3',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'},
+  {name:'Beat Malam',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3'},
+];
+let currentSongIndex = 0;
+let adminSettings = { autoplay: false, loop: true, order: 'sequence' };
+
+// Skills system
+const SKILLS_DEF = [
+  {id:'explode',name:'Ledakin!',icon:'💣',desc:'Ledakkan player -40HP',cost:30,effect:'explosion'},
+  {id:'nuke',name:'Nuklir',icon:'☢️',desc:'Kirim nuklir -80HP',cost:80,effect:'nuke'},
+  {id:'grenade',name:'Granat',icon:'💥',desc:'Lempar granat -30HP',cost:25,effect:'grenade'},
+  {id:'firework',name:'Mercon',icon:'🎆',desc:'Kirim kembang api',cost:15,effect:'firework'},
+  {id:'freeze',name:'Bekukan',icon:'🧊',desc:'Bekukan player 5 detik',cost:20,effect:'freeze'},
+  {id:'bazooka',name:'Bazooka',icon:'🚀',desc:'Tembak bazooka -50HP',cost:35,effect:'bazooka'},
+  {id:'santet',name:'Santet',icon:'🪄',desc:'Santet mystik -25HP',cost:40,effect:'santet'},
+  {id:'kill',name:'Kill',icon:'☠️',desc:'Bunuh player seketika',cost:60,effect:'kill'},
+  {id:'teleport',name:'Teleport',icon:'🌀',desc:'Teleport ke player',cost:10,effect:'teleport'},
+  {id:'shoot',name:'Tembak',icon:'🔫',desc:'Tembak player -20HP',cost:20,effect:'shoot'},
+  {id:'punish',name:'Hukum Sapu',icon:'🧹',desc:'Suruh nyapu 5x',cost:15,effect:'sweep'},
+  {id:'love',name:'Cinta',icon:'💖',desc:'Kirim cinta +10HP',cost:5,effect:'love'},
+  {id:'heal',name:'Sembuh',icon:'💊',desc:'Sembuhkan diri +50HP',cost:25,effect:'heal_self'},
+  {id:'shield',name:'Tameng',icon:'🛡️',desc:'Lindungi player +20HP',cost:18,effect:'shield'},
+  {id:'thunder',name:'Petir',icon:'⚡',desc:'Sambaran petir -45HP',cost:38,effect:'thunder'},
+  {id:'poison',name:'Racun',icon:'🐍',desc:'Racuni player -15HP/tik',cost:30,effect:'poison'},
+  {id:'ghost',name:'Hantu',icon:'👻',desc:'Kirim hantu menakut',cost:12,effect:'ghost'},
+  {id:'rainbow',name:'Pelangi',icon:'🌈',desc:'Kirim keberuntungan +SP',cost:20,effect:'rainbow'},
+  {id:'curse',name:'Kutuk',icon:'💀',desc:'Kutuk -semua stat',cost:50,effect:'curse'},
+  {id:'star',name:'Bintang',icon:'⭐',desc:'Beri bintang +XP bonus',cost:10,effect:'star'},
+  {id:'bomb',name:'Bom Waktu',icon:'⏱️',desc:'Bom meledak 3 detik',cost:45,effect:'timebomb'},
+  {id:'dance',name:'Paksa Dansa',icon:'💃',desc:'Paksa player dansa',cost:8,effect:'dance'},
+  {id:'prank',name:'Prank',icon:'🤡',desc:'Prank kocak ke player',cost:6,effect:'prank'},
+  {id:'dragon',name:'Naga Api',icon:'🐉',desc:'Semburan naga -70HP',cost:90,effect:'dragon'},
+];
+let myActiveSkill = null;
+let mySkillPoints = 0;
+
+// Missions
+let missions = [
+  {id:'fish5',title:'Pemancing Handal',desc:'Tangkap 5 ikan apapun',reward:'🎰 1x Spin',progress:0,target:5,completed:false,action:'spin'},
+  {id:'fish_rare',title:'Ikan Langka',desc:'Tangkap 1 ikan Langka/Epik/Legendaris',reward:'⚡ 30 Skill Poin',progress:0,target:1,completed:false,action:'skillpoints30'},
+  {id:'chat10',title:'Rajin Ngobrol',desc:'Kirim 10 pesan chat',reward:'🎰 2x Spin',progress:0,target:10,completed:false,action:'spin2'},
+  {id:'chill3',title:'Santai Dulu',desc:'Kunjungi Chill Zone 3x',reward:'⚡ 20 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints20'},
+  {id:'watch_ad',title:'Nonton Iklan',desc:'Tonton 1 iklan full 23 detik',reward:'🎰 3x Spin + 50 SP',progress:0,target:1,completed:false,action:'spin3_sp50'},
+  {id:'fish10',title:'Master Pancing',desc:'Tangkap 10 ikan',reward:'⚡ 60 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints60'},
+  {id:'level5',title:'Naik Level',desc:'Capai Level 5',reward:'🎰 5x Spin',progress:0,target:5,completed:false,action:'spin5'},
+  {id:'kill_skill',title:'Jagoan Jahat',desc:'Gunakan skill ke player lain 3x',reward:'⚡ 40 Skill Poin',progress:0,target:3,completed:false,action:'skillpoints40'},
+  // NEW MISSIONS
+  {id:'fish20',title:'Legenda Pancing',desc:'Tangkap 20 ikan total',reward:'🎰 3x Spin + 80 SP',progress:0,target:20,completed:false,action:'spin3_sp80'},
+  {id:'fish_myth',title:'Pemburu Mitos',desc:'Tangkap ikan Mitos (Naga Laut/Peri Air)',reward:'🎰 10x Spin',progress:0,target:1,completed:false,action:'spin10'},
+  {id:'chat50',title:'Chatmaster',desc:'Kirim 50 pesan chat',reward:'⚡ 100 Skill Poin',progress:0,target:50,completed:false,action:'skillpoints100'},
+  {id:'chill10',title:'Raja Chill',desc:'Kunjungi Chill Zone 10x',reward:'🎰 3x Spin',progress:0,target:10,completed:false,action:'spin3'},
+  {id:'watch_ad3',title:'Nonton Iklan 3x',desc:'Tonton 3 iklan penuh',reward:'🎰 10x Spin + 150 SP',progress:0,target:3,completed:false,action:'spin10_sp150'},
+  {id:'level10',title:'Veteran',desc:'Capai Level 10',reward:'🎰 8x Spin + 200 SP',progress:0,target:10,completed:false,action:'spin8_sp200'},
+  {id:'skill10',title:'Dukun Sakti',desc:'Gunakan skill 10x',reward:'⚡ 80 Skill Poin',progress:0,target:10,completed:false,action:'skillpoints80'},
+  {id:'spin5',title:'Penjudi Handal',desc:'Lakukan 5x spin wheel',reward:'⚡ 50 Skill Poin',progress:0,target:5,completed:false,action:'skillpoints50'},
+  {id:'respawn3',title:'Pantang Menyerah',desc:'Respawn sebanyak 3x',reward:'🎰 2x Spin + 30 SP',progress:0,target:3,completed:false,action:'spin2_sp30'},
+  {id:'fish_epik',title:'Kolektor Epik',desc:'Tangkap 3 ikan Epik',reward:'🎰 4x Spin',progress:0,target:3,completed:false,action:'spin4'},
+  {id:'login7',title:'Setia',desc:'Login selama 7 sesi',reward:'⚡ 120 Skill Poin',progress:0,target:7,completed:false,action:'skillpoints120'},
+  {id:'chat_skill',title:'Jago Skill Chat',desc:'Gunakan skill sambil chat 5x',reward:'🎰 3x Spin',progress:0,target:5,completed:false,action:'spin3'},
+  {id:'fish50',title:'Dewa Pancing',desc:'Tangkap 50 ikan total',reward:'🎰 15x Spin',progress:0,target:50,completed:false,action:'spin15'},
+  {id:'level20',title:'Sultan Level',desc:'Capai Level 20',reward:'🎰 20x Spin + 500 SP',progress:0,target:20,completed:false,action:'spin20_sp500'},
+];
+let savedMissions = {};
+let spinTokens = 0;
+const SPIN_REWARDS = [
+  {label:'💣 Skill Explode',action:'unlock_explode'},
+  {label:'☢️ Skill Nuklir',action:'unlock_nuke'},
+  {label:'🧊 Skill Freeze',action:'unlock_freeze'},
+  {label:'☠️ Skill Kill',action:'unlock_kill'},
+  {label:'20 Skill Poin',action:'sp20'},
+  {label:'50 Skill Poin',action:'sp50'},
+  {label:'100 SP JACKPOT!',action:'sp100'},
+  {label:'🧹 Skill Sapu',action:'unlock_sweep'},
+  {label:'💖 Skill Cinta',action:'unlock_love'},
+  {label:'Coba Lagi 😅',action:'nothing'},
+];
+let unlockedSkills = new Set(['firework','teleport','love']); // default unlocked
+
+// HP / Thirst system
+let myHp = 100, myThirst = 100;
+let chillVisits = 0;
+let isFrozen = false, isSweeping = false;
+let sweepCount = 0;
+let isAlive = true;
+
+// Fish leaderboard
+let myFishScore = 0;
+let myFishCount = 0;
+
+// Level system
+let myXp = 0, myLevel = 1;
+
+// ===== LOGIN STARS =====
+(function buildLoginStars(){
+  const c = document.getElementById('login-stars');
+  for(let i=0;i<60;i++){
+    let s=document.createElement('div');s.className='star';
+    let sz=Math.random()*3;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s;`;
+    c.appendChild(s);
+  }
+})();
+
+// ===== FULLSCREEN =====
+function requestFullScreen(){
+  let e=document.documentElement;
+  (e.requestFullscreen||e.webkitRequestFullscreen||e.msRequestFullscreen||function(){}).call(e);
+}
+
+// ===== BUILD DECORATIONS =====
+const MAP_W=3000, MAP_H=2000;
+function buildDecorations(){
+  const world=document.getElementById('map-world');
+  // Grass patches
+  for(let i=0;i<60;i++){
+    let g=document.createElement('div');g.className='grass-patch';
+    let s=28+Math.random()*90;
+    g.style.cssText=`position:absolute;width:${s}px;height:${s}px;left:${60+Math.random()*(MAP_W-120)}px;top:${60+Math.random()*(MAP_H-120)}px;opacity:0.5;z-index:2;`;
+    world.appendChild(g);
+  }
+  // Trees (pixel positions)
+  const treePos=[
+    {x:90,y:120},{x:90,y:400},{x:90,y:700},{x:90,y:1000},{x:90,y:1300},{x:90,y:1700},
+    {x:300,y:1850},{x:600,y:1880},{x:1000,y:1880},{x:1400,y:1880},{x:1800,y:1880},{x:2200,y:1870},{x:2600,y:1860},{x:2880,y:1800},
+    {x:2880,y:1500},{x:2880,y:1200},{x:2880,y:900},{x:2880,y:600},{x:2880,y:300},{x:2700,y:90},{x:2400,y:80},{x:2000,y:70},
+    {x:1600,y:70},{x:1200,y:70},{x:800,y:70},{x:400,y:80},
+    // Extra interior trees
+    {x:500,y:500},{x:1500,y:500},{x:2400,y:600},{x:600,y:1100},{x:2300,y:1200},{x:1200,y:1500},
+  ];
+  treePos.forEach(pos=>{
+    let t=document.createElement('div');t.className='tree';
+    let tw=24+Math.random()*16,th=tw*1.1;
+    t.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
+    t.innerHTML=`<div class="tree-top" style="width:${tw}px;height:${th}px;"></div><div class="tree-trunk" style="width:${tw*0.3}px;height:${tw*0.4}px;"></div>`;
+    world.appendChild(t);
+  });
+  // Lamp posts (pixel positions)
+  const lampPos=[
+    {x:450,y:450},{x:900,y:450},{x:1500,y:450},{x:2100,y:450},{x:2600,y:450},
+    {x:450,y:950},{x:900,y:950},{x:1500,y:950},{x:2100,y:950},{x:2600,y:950},
+    {x:450,y:1200},{x:900,y:1200},{x:1500,y:1200},{x:2100,y:1200},{x:2600,y:1200},
+  ];
+  lampPos.forEach(pos=>{
+    let l=document.createElement('div');l.className='lamp-post';
+    l.style.cssText=`position:absolute;left:${pos.x}px;top:${pos.y}px;z-index:4;pointer-events:none;`;
+    l.innerHTML=`<div class="lamp-light"></div><div class="lamp-pole" style="height:33px;"></div>`;
+    world.appendChild(l);
+  });
+  // Fish in pond
+  const pond=document.getElementById('pond');
+  ['🐟','🐠','🐡','🐟','🐠','🦈'].forEach((f,i)=>{
+    let fe=document.createElement('div');fe.className='fish';
+    fe.innerText=f;
+    fe.style.cssText=`left:${10+Math.random()*60}%;top:${20+Math.random()*50}%;animation-delay:${i*1.5}s;animation-duration:${5+Math.random()*3}s;`;
+    pond.appendChild(fe);
+  });
+  // Paths (pixel)
+  let ph=document.createElement('div');ph.className='path path-h';
+  ph.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.5}px;z-index:2;`;
+  world.appendChild(ph);
+  let ph2=document.createElement('div');ph2.className='path path-h';
+  ph2.style.cssText=`position:absolute;left:50px;right:50px;top:${MAP_H*0.72}px;z-index:2;`;
+  world.appendChild(ph2);
+  let pv=document.createElement('div');pv.className='path path-v';
+  pv.style.cssText=`position:absolute;left:${MAP_W*0.5}px;top:400px;height:${MAP_H-450}px;z-index:2;`;
+  world.appendChild(pv);
+  let pv2=document.createElement('div');pv2.className='path path-v';
+  pv2.style.cssText=`position:absolute;left:${MAP_W*0.3}px;top:400px;height:400px;z-index:2;`;
+  world.appendChild(pv2);
+  // Particles near stage
+  for(let i=0;i<18;i++){
+    let p=document.createElement('div');p.className='particle';
+    let cols=['#00d2ff','#ff00ff','#ffcc00','#00ff88'];
+    p.style.cssText=`position:absolute;left:${900+Math.random()*1200}px;top:${200+Math.random()*200}px;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${(Math.random()-0.5)*40}px;animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;`;
+    world.appendChild(p);
+  }
+  // Firework tool on map
+  let fw=document.createElement('div');fw.className='firework-tool';
+  fw.innerText='🎆';fw.title='Kembang Api';
+  fw.style.cssText=`position:absolute;left:1700px;top:600px;z-index:4;`;
+  world.appendChild(fw);
+  // Visualizer bars (under stage)
+  const viz=document.getElementById('visualizer');
+  for(let i=0;i<28;i++){
+    let b=document.createElement('div');b.className='viz-bar';
+    b.style.setProperty('--h',(8+Math.random()*22)+'px');
+    b.style.animationDelay=(Math.random()*0.5)+'s';
+    b.style.animationDuration=(0.3+Math.random()*0.4)+'s';
+    viz.appendChild(b);
+  }
+  // Extra: benches in chill zone
+  let bench=document.createElement('div');
+  bench.style.cssText=`position:absolute;top:1380px;right:200px;font-size:24px;z-index:4;pointer-events:none;`;
+  bench.innerText='🪑🪑';world.appendChild(bench);
+  let bench2=document.createElement('div');
+  bench2.style.cssText=`position:absolute;top:1460px;right:220px;font-size:20px;z-index:4;pointer-events:none;`;
+  bench2.innerText='☕🍵🧋';world.appendChild(bench2);
+  let bench3=document.createElement('div');
+  bench3.style.cssText=`position:absolute;top:1430px;right:320px;font-size:18px;z-index:4;pointer-events:none;`;
+  bench3.innerText='🪴🌿';world.appendChild(bench3);
+}
+
+// ===== START GAME =====
+window.startGame = async () => {
+  const username=document.getElementById('username').value.trim();
+  const age=document.getElementById('age').value;
+  const gender=document.getElementById('gender').value;
+  if(!username||!age) return alert('Username dan Umur wajib!');
+  requestFullScreen();
+
+  // Check if username exists in Firebase
+  const usersRef = ref(db,'usernames/'+username.toLowerCase());
+  const snap = await get(usersRef);
+  if(snap.exists()){
+    // Load existing data
+    const existingData = snap.val();
+    myPlayerId = existingData.playerId;
+    myXp = existingData.xp || 0;
+    myLevel = existingData.level || 1;
+    myFishScore = existingData.fishScore || 0;
+    myFishCount = existingData.fishCount || 0;
+    mySkillPoints = existingData.skillPoints || 0;
+    spinTokens = existingData.spinTokens || 0;
+    if(existingData.unlockedSkills) unlockedSkills = new Set(existingData.unlockedSkills);
+    if(existingData.missions) savedMissions = existingData.missions;
+    // Restore missions progress
+    missions.forEach(m=>{ if(savedMissions[m.id]) Object.assign(m,savedMissions[m.id]); });
+    myData={username,age:existingData.age||age,gender:existingData.gender||gender,
+      x:window.innerWidth/2,y:window.innerHeight/2,joinTime:Date.now(),
+      hp:100,thirst:100,level:myLevel,xp:myXp,alive:true};
+  } else {
+    myPlayerId='usr_'+Math.random().toString(36).substr(2,6);
+    myData={username,age,gender,x:MAP_W/2,y:MAP_H/2,
+      joinTime:Date.now(),hp:100,thirst:100,level:1,xp:0,alive:true};
+    // Save username mapping
+    set(usersRef,{playerId:myPlayerId,age,gender,xp:0,level:1,fishScore:0,fishCount:0,skillPoints:0,spinTokens:0,unlockedSkills:['firework','teleport','love'],missions:{}});
+  }
+
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('top-bar').style.display='flex';
+  document.getElementById('chat-panel').style.display='block';
+  document.getElementById('lb-panel').style.display='block';
+  document.getElementById('player-hud').style.display='flex';
+  document.getElementById('dpad').style.display='grid';
+
+  buildDecorations();
+  // Initialize camera position immediately
+  camX = myData.x - window.innerWidth/2 + 17;
+  camY = myData.y - window.innerHeight/2 + 30;
+  camX = Math.max(0,Math.min(MAP_W-window.innerWidth,camX));
+  camY = Math.max(0,Math.min(MAP_H-window.innerHeight,camY));
+  document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
+  const myRef=ref(db,'players/'+myPlayerId);
+  set(myRef,myData);
+  onDisconnect(myRef).remove();
+
+  listenToPlayers();
+  listenToChat();
+  listenToSongs();
+  listenToSettings();
+  listenToEvents();
+  startGameLoop();
+  startHpThirstLoop();
+  setInterval(pingTimer,60000);
+  setInterval(updateLeaderboardTime,30000);
+
+  push(ref(db,'chats'),{system:true,text:`✨ ${username} (Lv.${myLevel}) bergabung ke server.`});
+};
+
+// ===== SAVE USER DATA =====
+function saveUserData(){
+  if(!myData) return;
+  const usersRef=ref(db,'usernames/'+myData.username.toLowerCase());
+  set(usersRef,{
+    playerId:myPlayerId,age:myData.age,gender:myData.gender,
+    xp:myXp,level:myLevel,fishScore:myFishScore,fishCount:myFishCount,
+    skillPoints:mySkillPoints,spinTokens:spinTokens,
+    unlockedSkills:Array.from(unlockedSkills),
+    missions:Object.fromEntries(missions.map(m=>[m.id,{progress:m.progress,completed:m.completed}]))
+  });
+}
+
+// ===== PANEL TOGGLE =====
+window.togglePanel=(bodyId,toggleId)=>{
+  const b=document.getElementById(bodyId),t=document.getElementById(toggleId);
+  b.classList.toggle('collapsed');
+  t.classList.toggle('open');
+};
+
+// ===== LISTEN PLAYERS =====
+function listenToPlayers(){
+  onValue(ref(db,'players'),(snapshot)=>{
+    playersDB=snapshot.val()||{};
+    for(let id in playersElements){
+      if(!playersDB[id]){mapContainer.removeChild(playersElements[id]);delete playersElements[id];}
+    }
+    renderLeaderboard();
+    Object.keys(playersDB).forEach(id=>renderPlayer(id,playersDB[id]));
+  });
+}
+
+function renderPlayer(id,p){
+  if(!p) return;
+  if(!playersElements[id]){
+    let el=document.createElement('div');
+    el.className=`player ${p.gender||'Laki-laki'}${id===myPlayerId?' my-player':''}`;
+    el.id='player-'+id;
+    el.innerHTML=`
+      <div class="player-above">
+        <div class="player-chat-bubble" id="bubble-${id}"></div>
+        <div class="player-bars">
+          <div class="bar-mini"><div class="bar-fill-hp" id="hp-bar-${id}" style="width:${p.hp||100}%;"></div></div>
+          <div class="bar-mini"><div class="bar-fill-th" id="th-bar-${id}" style="width:${p.thirst||100}%;"></div></div>
+        </div>
+        <div class="player-level-tag">Lv.${p.level||1}</div>
+        <div class="name-tag">${p.username}</div>
+        <div class="player-info-tag">${p.age} · ${(p.gender||'L').charAt(0)}</div>
+      </div>
+      <div class="player-shadow"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="legs"><div class="leg"></div><div class="leg"></div></div>
+    `;
+    mapContainer.appendChild(el);
+    playersElements[id]=el;
+  }
+  let el=playersElements[id];
+  el.style.left=p.x+'px';el.style.top=p.y+'px';
+  // Update bars
+  let hpB=document.getElementById('hp-bar-'+id);
+  let thB=document.getElementById('th-bar-'+id);
+  if(hpB) hpB.style.width=(p.hp||100)+'%';
+  if(thB) thB.style.width=(p.thirst||100)+'%';
+  // Level tag update
+  let lvTag=el.querySelector('.player-level-tag');
+  if(lvTag) lvTag.innerText=`Lv.${p.level||1}`;
+  // Dead state
+  if(p.alive===false){
+    el.classList.add('player-dead');
+    if(!el.querySelector('.dead-icon')){
+      let di=document.createElement('div');di.className='dead-icon';di.innerText='💀';
+      el.appendChild(di);
+    }
+  } else {
+    el.classList.remove('player-dead');
+    let di=el.querySelector('.dead-icon');if(di)di.remove();
+  }
+  // Frozen
+  if(p.frozen) el.classList.add('player-frozen');
+  else el.classList.remove('player-frozen');
+  // Sweeping
+  if(p.sweeping){
+    if(!el.querySelector('.broom-icon')){
+      let br=document.createElement('div');br.className='broom-icon';br.innerText='🧹';
+      el.appendChild(br);
+    }
+  } else {
+    let br=el.querySelector('.broom-icon');if(br)br.remove();
+  }
+}
+
+// ===== LEADERBOARD =====
+function renderLeaderboard(){
+  const lbList=document.getElementById('lb-list');
+  lbList.innerHTML='';
+  let arr=Object.keys(playersDB).map(k=>({id:k,...playersDB[k]}));
+  arr.sort((a,b)=>(b.level||1)-(a.level||1)||(b.xp||0)-(a.xp||0));
+  // Update online count
+  const countEl=document.getElementById('lb-online-count');
+  if(countEl) countEl.innerText=`(${arr.length} online)`;
+  arr.slice(0,15).forEach((p,i)=>{
+    let min=Math.floor((Date.now()-(p.joinTime||Date.now()))/60000);
+    let hrs=Math.floor(min/60),mins=min%60;
+    let timeStr=hrs>0?`${hrs}j ${mins}m`:`${mins}m`;
+    let item=document.createElement('div');item.className='lb-item';
+    let rank=['🥇','🥈','🥉'][i]||`#${i+1}`;
+    let genderIcon=p.gender==='Perempuan'?'👧':'👦';
+    let isMe=p.id===myPlayerId;
+    item.innerHTML=`
+      <div style="display:flex;align-items:center;gap:5px;width:100%;">
+        <div class="lb-dot" style="${isMe?'background:#ffcc00;box-shadow:0 0 5px #ffcc00':''}"></div>
+        <div style="flex:1;min-width:0;">
+          <div class="lb-name" style="${isMe?'color:#ffcc00':''}">${rank} ${p.username||'?'}${isMe?' <span style="color:#ffcc00;font-size:8px;">YOU</span>':''}</div>
+          <div class="lb-detail">${genderIcon} ${p.age||'?'} thn · ⏱${timeStr}</div>
+          <div style="display:flex;gap:4px;margin-top:2px;">
+            <span style="font-size:8px;background:rgba(255,136,0,0.2);padding:1px 4px;border-radius:4px;color:#ff8800;">Lv.${p.level||1}</span>
+            <span style="font-size:8px;background:rgba(0,204,255,0.15);padding:1px 4px;border-radius:4px;color:#00ccff;">🎣${p.fishCount||0}</span>
+            <span style="font-size:8px;background:rgba(255,200,0,0.15);padding:1px 4px;border-radius:4px;color:#ffcc00;">${p.xp||0}XP</span>
+          </div>
+        </div>
+      </div>
+    `;
+    lbList.appendChild(item);
+  });
+}
+
+window.switchLbTab=(tab)=>{
+  document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`.lb-tab[onclick="switchLbTab('${tab}')"]`).classList.add('active');
+  document.getElementById('lb-list').style.display=tab==='players'?'flex':'none';
+  document.getElementById('lb-fish-list').style.display=tab==='fish'?'flex':'none';
+  if(tab==='fish') renderFishLeaderboard();
+};
+
+function renderFishLeaderboard(){
+  const list=document.getElementById('lb-fish-list');
+  list.innerHTML='<div style="font-size:10px;color:#888;padding:8px;text-align:center;">Loading...</div>';
+  get(ref(db,'fish_scores')).then(snap=>{
+    list.innerHTML='';
+    const data=snap.val()||{};
+    let arr=Object.entries(data).map(([name,v])=>({name,...v}));
+    arr.sort((a,b)=>(b.score||0)-(a.score||0));
+    if(!arr.length){list.innerHTML='<div style="font-size:10px;color:#888;padding:8px;text-align:center;">Belum ada data 🎣</div>';return;}
+    arr.slice(0,10).forEach((p,i)=>{
+      let item=document.createElement('div');item.className='lb-item';
+      let rank=['🥇','🥈','🥉'][i]||`#${i+1}`;
+      item.innerHTML=`<div><div class="lb-name">${rank} ${p.name}</div><div class="lb-detail">${p.count||0} ikan</div></div><div class="lb-fish-score">🏆 ${p.score||0}</div>`;
+      list.appendChild(item);
+    });
+  });
+}
+
+function updateLeaderboardTime(){ renderLeaderboard(); }
+
+// ===== CHAT =====
+function listenToChat(){
+  onValue(ref(db,'chats'),(snap)=>{
+    let box=document.getElementById('chat-box');
+    box.innerHTML='';
+    const chats=Object.values(snap.val()||{}).sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-30);
+    chats.forEach(c=>{
+      let div=document.createElement('div');
+      if(c.system){div.className='chat-msg system-msg';div.innerHTML=`<em>${c.text}</em>`;}
+      else if(c.skill){div.className='chat-msg skill-msg';div.innerHTML=`<strong style="color:#ff00ff">[SKILL]</strong> ${escapeHtml(c.text)}`;}
+      else{div.className='chat-msg regular-msg';div.innerHTML=`<strong style="color:#00d2ff">${escapeHtml(c.username||'?')}</strong>: ${escapeHtml(c.text)}`;}
+      box.appendChild(div);
+      // Show bubble above player
+      if(!c.system && !c.skill && c.playerId){
+        showPlayerBubble(c.playerId,c.text);
+      }
+    });
+    box.scrollTop=box.scrollHeight;
+  });
+}
+
+function showPlayerBubble(pid,text){
+  let bub=document.getElementById('bubble-'+pid);
+  if(!bub) return;
+  bub.innerText=text;bub.style.display='block';
+  clearTimeout(bub._t);
+  bub._t=setTimeout(()=>bub.style.display='none',4000);
+}
+
+function escapeHtml(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+window.sendChat=()=>{
+  let inp=document.getElementById('chat-input');
+  if(inp.value.trim()&&myData){
+    push(ref(db,'chats'),{username:myData.username,text:inp.value.trim(),timestamp:Date.now(),playerId:myPlayerId});
+    inp.value='';
+    updateMission('chat10',1);
+  }
+};
+window.handleEnter=(e)=>{if(e.key==='Enter')sendChat();};
+
+// ===== SONGS =====
+function listenToSongs(){
+  onValue(ref(db,'songs'),(snap)=>{
+    const data=snap.val();
+    if(data){
+      Object.entries(data).forEach(([k,v])=>{
+        if(!localSongs.find(l=>l.name===v.name)) localSongs.push({id:k,...v});
+      });
+    }
+    rebuildPlaylist();
+  });
+}
+
+function rebuildPlaylist(){
+  let sel=document.getElementById('playlist');
+  let cur=sel.value;
+  sel.innerHTML='<option value="">🎵 Pilih Lagu...</option>';
+  localSongs.forEach((s,i)=>{
+    let o=document.createElement('option');o.value=s.url;o.text=s.name;o.dataset.idx=i;sel.appendChild(o);
+  });
+  if(cur) sel.value=cur;
+  renderAdminSongList();
+}
+
+function listenToSettings(){
+  onValue(ref(db,'settings'),(snap)=>{
+    const s=snap.val()||{};
+    adminSettings={...adminSettings,...s};
+    if(s.autoplay && localSongs.length){
+      let audio=document.getElementById('dj-audio');
+      if(!isPlaying){
+        let url=s.currentSong||localSongs[0].url;
+        audio.src=url;
+        audio.play().catch(()=>{});
+        isPlaying=true;
+        let btn=document.getElementById('btn-play-dj');
+        btn.innerHTML='⏹';btn.classList.add('active');
+        document.getElementById('visualizer').classList.add('active');
+      }
+    }
+    document.getElementById('admin-autoplay').checked=!!s.autoplay;
+    document.getElementById('admin-loop').checked=s.loop!==false;
+    if(s.order) document.getElementById('admin-order').value=s.order;
+  });
+}
+
+// ===== GAME EVENTS (skills hitting players) =====
+function listenToEvents(){
+  onValue(ref(db,'events/'+myPlayerId),(snap)=>{
+    const ev=snap.val();
+    if(!ev) return;
+    remove(ref(db,'events/'+myPlayerId));
+    handleIncomingEvent(ev);
+  });
+}
+
+function handleIncomingEvent(ev){
+  const from=ev.from||'?';
+  switch(ev.type){
+    case 'explosion':
+      showEffect('💣');
+      myHp=Math.max(0,myHp-40);
+      updateMyBars();
+      showFloatingText(myPlayerId,'💣 -40 HP',myData.x,myData.y);
+      push(ref(db,'chats'),{system:true,text:`💣 ${from} meledakkan ${myData.username}!`});
+      checkDeath();break;
+    case 'nuke':
+      showEffect('☢️');
+      myHp=Math.max(0,myHp-80);
+      updateMyBars();
+      showFloatingText(myPlayerId,'☢️ -80 HP',myData.x,myData.y);
+      push(ref(db,'chats'),{system:true,text:`☢️ ${from} mengirim NUKLIR ke ${myData.username}!`});
+      checkDeath();break;
+    case 'grenade':
+      showEffect('💥');myHp=Math.max(0,myHp-30);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💥 ${from} melempar granat ke ${myData.username}!`});
+      checkDeath();break;
+    case 'firework':
+      showEffect('🎆');
+      push(ref(db,'chats'),{system:true,text:`🎆 ${from} mengirim kembang api ke ${myData.username}!`});break;
+    case 'freeze':
+      showEffect('🧊');isFrozen=true;
+      set(ref(db,'players/'+myPlayerId+'/frozen'),true);
+      push(ref(db,'chats'),{system:true,text:`🧊 ${from} membekukan ${myData.username} selama 5 detik!`});
+      setTimeout(()=>{isFrozen=false;set(ref(db,'players/'+myPlayerId+'/frozen'),false);},5000);break;
+    case 'bazooka':
+      showEffect('🚀');myHp=Math.max(0,myHp-50);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🚀 ${from} menembak bazooka ke ${myData.username}!`});
+      checkDeath();break;
+    case 'santet':
+      showEffect('🪄');myHp=Math.max(0,myHp-25);myThirst=Math.max(0,myThirst-30);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🪄 ${from} menyantet ${myData.username}!`});
+      checkDeath();break;
+    case 'kill':
+      showEffect('☠️');myHp=0;updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`☠️ ${from} membunuh ${myData.username}!`});
+      checkDeath();break;
+    case 'teleport':
+      // Teleport sender to me - no harm
+      showEffect('🌀');
+      push(ref(db,'chats'),{system:true,text:`🌀 ${from} teleport ke ${myData.username}!`});break;
+    case 'shoot':
+      showEffect('🔫');myHp=Math.max(0,myHp-20);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🔫 ${from} menembak ${myData.username}!`});
+      checkDeath();break;
+    case 'sweep':
+      showEffect('🧹');
+      if(!isSweeping){startSweep();}
+      push(ref(db,'chats'),{system:true,text:`🧹 ${from} menghukum ${myData.username} untuk menyapu!`});break;
+    case 'love':
+      showEffect('💖');myHp=Math.min(100,myHp+10);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💖 ${from} mengirim cinta ke ${myData.username}! +10 HP`});break;
+    case 'heal_self':
+      showEffect('💊');myHp=Math.min(100,myHp+50);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💊 ${myData.username} menyembuhkan diri sendiri! +50 HP`});break;
+    case 'shield':
+      showEffect('🛡️');myHp=Math.min(100,myHp+20);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🛡️ ${from} melindungi ${myData.username}! +20 HP`});break;
+    case 'thunder':
+      showEffect('⚡');myHp=Math.max(0,myHp-45);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`⚡ ${from} menyambar ${myData.username} dengan petir! -45 HP`});
+      checkDeath();break;
+    case 'poison':
+      showEffect('🐍');
+      push(ref(db,'chats'),{system:true,text:`🐍 ${from} meracuni ${myData.username}!`});
+      let poisonTick=0;
+      let poisonInterval=setInterval(()=>{
+        myHp=Math.max(0,myHp-5);updateMyBars();showFloatingText(myPlayerId,'🐍 -5HP',myData.x,myData.y);
+        poisonTick++;if(poisonTick>=3||myHp<=0){clearInterval(poisonInterval);checkDeath();}
+      },2000);
+      break;
+    case 'ghost':
+      showEffect('👻');
+      push(ref(db,'chats'),{system:true,text:`👻 ${from} mengirim hantu ke ${myData.username}! BOO!`});break;
+    case 'rainbow':
+      showEffect('🌈');addSkillPoints(10);
+      push(ref(db,'chats'),{system:true,text:`🌈 ${from} memberi keberuntungan ke ${myData.username}! +10 SP`});break;
+    case 'curse':
+      showEffect('💀');myHp=Math.max(0,myHp-30);myThirst=Math.max(0,myThirst-30);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`💀 ${from} mengutuk ${myData.username}! -30HP -30Thirst`});
+      checkDeath();break;
+    case 'star':
+      showEffect('⭐');addXp(20);
+      push(ref(db,'chats'),{system:true,text:`⭐ ${from} memberi bintang ke ${myData.username}! +20 XP`});break;
+    case 'timebomb':
+      showEffect('⏱️');
+      push(ref(db,'chats'),{system:true,text:`⏱️ ${from} pasang bom waktu ke ${myData.username}!`});
+      setTimeout(()=>{
+        showEffect('💣');myHp=Math.max(0,myHp-45);updateMyBars();
+        push(ref(db,'chats'),{system:true,text:`💥 BOM WAKTU meledak di ${myData.username}! -45 HP`});
+        checkDeath();
+      },3000);
+      break;
+    case 'dance':
+      showEffect('💃');
+      push(ref(db,'chats'),{system:true,text:`💃 ${from} memaksa ${myData.username} untuk dansa! 🕺`});break;
+    case 'prank':
+      showEffect('🤡');
+      push(ref(db,'chats'),{system:true,text:`🤡 ${from} memprank ${myData.username}! HAHAHA`});break;
+    case 'dragon':
+      showEffect('🐉');myHp=Math.max(0,myHp-70);updateMyBars();
+      push(ref(db,'chats'),{system:true,text:`🐉 ${from} melepas naga api ke ${myData.username}! -70 HP`});
+      checkDeath();break;
+  }
+}
+
+function showEffect(emoji){
+  let el=document.createElement('div');el.className='explosion';el.innerText=emoji;
+  el.style.cssText=`left:${window.innerWidth/2}px;top:${window.innerHeight/2}px;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1000);
+}
+
+function showFloatingText(pid,text,wx,wy){
+  // Convert world coords to screen coords
+  let sx=(wx||MAP_W/2)-camX;
+  let sy=(wy||MAP_H/2)-camY-40;
+  let el=document.createElement('div');el.className='status-effect';
+  el.innerText=text;el.style.cssText=`position:fixed;left:${sx}px;top:${sy}px;font-size:14px;font-weight:700;color:#ff4444;pointer-events:none;z-index:400;`;
+  document.body.appendChild(el);setTimeout(()=>el.remove(),2000);
+}
+
+function checkDeath(){
+  if(myHp<=0&&isAlive){
+    isAlive=false;
+    myData.alive=false;
+    set(ref(db,'players/'+myPlayerId),myData);
+    push(ref(db,'chats'),{system:true,text:`💀 ${myData.username} telah mati! Respawn dalam 5 detik...`});
+    setTimeout(respawn,5000);
+  }
+}
+
+function respawn(){
+  myHp=100;myThirst=100;isAlive=true;isFrozen=false;isSweeping=false;
+  myData.x=MAP_W/2;myData.y=MAP_H/2;
+  myData.hp=100;myData.thirst=100;myData.alive=true;myData.frozen=false;myData.sweeping=false;
+  set(ref(db,'players/'+myPlayerId),myData);
+  updateMyBars();
+  push(ref(db,'chats'),{system:true,text:`✨ ${myData.username} telah respawn!`});
+}
+
+function startSweep(){
+  isSweeping=true;sweepCount=0;
+  set(ref(db,'players/'+myPlayerId+'/sweeping'),true);
+  let si=setInterval(()=>{
+    sweepCount++;
+    if(sweepCount>=5){clearInterval(si);isSweeping=false;set(ref(db,'players/'+myPlayerId+'/sweeping'),false);}
+  },1500);
+}
+
+// ===== HP / THIRST LOOP =====
+function startHpThirstLoop(){
+  setInterval(()=>{
+    if(!myData||!isAlive) return;
+    // Drain thirst
+    myThirst=Math.max(0,myThirst-1);
+    // If at chill zone, restore
+    if(isNearChillZone()){
+      myHp=Math.min(100,myHp+2);
+      myThirst=Math.min(100,myThirst+5);
+    }
+    // Thirst hurts HP
+    if(myThirst<=0) myHp=Math.max(0,myHp-2);
+    updateMyBars();
+    myData.hp=myHp;myData.thirst=myThirst;
+    checkDeath();
+  },3000);
+}
+
+function updateMyBars(){
+  document.getElementById('hp-fill').style.width=myHp+'%';
+  document.getElementById('th-fill').style.width=myThirst+'%';
+  document.getElementById('hp-val').innerText=Math.round(myHp);
+  document.getElementById('th-val').innerText=Math.round(myThirst);
+}
+
+function isNearChillZone(){
+  if(!myData) return false;
+  // Chill zone center in world coords: right:120px from right of 3000px map = left:2540, top:1300, size 340px
+  const cx=2540+170, cy=1300+170;
+  return Math.hypot(myData.x-cx,myData.y-cy)<200;
+}
+
+// ===== MOVEMENT =====
+let moveDir=null,keys={};
+let isPlaying=false;
+window.addEventListener('keydown',e=>{
+  if(['chat-input','admin-pass','admin-song-name','admin-song-url'].includes(document.activeElement.id)) return;
+  keys[e.key.toLowerCase()]=true;
+  if(e.key==='f'||e.key==='F') tryFish();
+});
+window.addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+window.move=d=>moveDir=d;
+window.stopMove=()=>moveDir=null;
+
+function getFenceBounds(){
+  return{minX:50,maxX:MAP_W-60,minY:50,maxY:MAP_H-70};
+}
+
+function startGameLoop(){
+  const speed=5;
+  setInterval(()=>{
+    if(!myData||!isAlive) return;
+    if(isFrozen||isSweeping) return;
+    let moved=false;
+    const b=getFenceBounds();
+    let nx=myData.x,ny=myData.y;
+    if(keys['w']||keys['arrowup']||moveDir==='up'){ny-=speed;moved=true;}
+    if(keys['s']||keys['arrowdown']||moveDir==='down'){ny+=speed;moved=true;}
+    if(keys['a']||keys['arrowleft']||moveDir==='left'){nx-=speed;moved=true;}
+    if(keys['d']||keys['arrowright']||moveDir==='right'){nx+=speed;moved=true;}
+    if(moved){
+      myData.x=Math.max(b.minX,Math.min(b.maxX-34,nx));
+      myData.y=Math.max(b.minY,Math.min(b.maxY-54,ny));
+      // Chill zone check (use world coords)
+      if(isNearChillZone()){
+        if(!myData._lastChill||Date.now()-myData._lastChill>8000){
+          myData._lastChill=Date.now();
+          chillVisits++;updateMission('chill3',1);
+          updateMission('chill10',1);
+        }
+      }
+      set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp,fishCount:myFishCount||0});
+    }
+    // Always update camera (smooth follow)
+    updateCamera();
+  },30);
+}
+
+// Camera follow system
+let camX=0,camY=0;
+function updateCamera(){
+  if(!myData) return;
+  const vw=window.innerWidth,vh=window.innerHeight;
+  // Center player on screen
+  let targetCamX=myData.x - vw/2 + 17;
+  let targetCamY=myData.y - vh/2 + 30;
+  // Clamp so we don't show outside map
+  targetCamX=Math.max(0,Math.min(MAP_W-vw,targetCamX));
+  targetCamY=Math.max(0,Math.min(MAP_H-vh,targetCamY));
+  // Smooth interpolation
+  camX+=(targetCamX-camX)*0.12;
+  camY+=(targetCamY-camY)*0.12;
+  document.getElementById('map-world').style.transform=`translate(${-Math.round(camX)}px,${-Math.round(camY)}px)`;
+}
+
+// ===== FISHING =====
+const fishPool=[
+  {name:'Ikan Mas',emoji:'🐟',rarity:'Biasa',points:5,xp:3},
+  {name:'Ikan Koi',emoji:'🐠',rarity:'Langka',points:20,xp:15},
+  {name:'Ikan Hiu Mini',emoji:'🦈',rarity:'Epik',points:50,xp:30},
+  {name:'Ikan Buntal',emoji:'🐡',rarity:'Biasa',points:8,xp:5},
+  {name:'Lumba-lumba!',emoji:'🐬',rarity:'Legendaris',points:100,xp:60},
+  {name:'Sampah...',emoji:'🥾',rarity:'Sampah',points:0,xp:0},
+  {name:'Batu',emoji:'🪨',rarity:'Sampah',points:0,xp:0},
+  {name:'Ikan Salmon',emoji:'🐟',rarity:'Biasa',points:7,xp:4},
+  {name:'Ikan Nemo',emoji:'🐠',rarity:'Langka',points:25,xp:18},
+  {name:'Paus Mini',emoji:'🐳',rarity:'Legendaris',points:120,xp:70},
+  {name:'Ikan Tuna',emoji:'🐟',rarity:'Biasa',points:10,xp:6},
+  {name:'Ikan Lele',emoji:'🐟',rarity:'Biasa',points:6,xp:3},
+  {name:'Kepiting',emoji:'🦀',rarity:'Langka',points:30,xp:20},
+  {name:'Udang Raksasa',emoji:'🦐',rarity:'Langka',points:28,xp:17},
+  {name:'Gurita',emoji:'🐙',rarity:'Epik',points:60,xp:38},
+  {name:'Penyu Emas',emoji:'🐢',rarity:'Epik',points:55,xp:35},
+  {name:'Hiu Putih',emoji:'🦈',rarity:'Legendaris',points:150,xp:90},
+  {name:'Naga Laut',emoji:'🐲',rarity:'Mitos',points:300,xp:200},
+  {name:'Peri Air',emoji:'🧚',rarity:'Mitos',points:250,xp:180},
+  {name:'Kaleng Rusak',emoji:'🥫',rarity:'Sampah',points:0,xp:0},
+  {name:'Sepatu Bolong',emoji:'👟',rarity:'Sampah',points:0,xp:0},
+  {name:'Mutiara',emoji:'🪨',rarity:'Langka',points:35,xp:22},
+  {name:'Ikan Dori',emoji:'🐠',rarity:'Biasa',points:9,xp:5},
+  {name:'Belut Listrik',emoji:'🐍',rarity:'Epik',points:70,xp:45},
+  {name:'Ikan Pelangi',emoji:'🌈',rarity:'Legendaris',points:130,xp:80},
+];
+let isFishing=false;
+
+function isNearPond(){
+  if(!myData) return false;
+  // Pond: left:60, top:1300, width:440, height:280 -> center approx 280,1440
+  const cx=60+220, cy=1300+140;
+  return Math.hypot(myData.x-cx,myData.y-cy)<280;
+}
+
+window.tryFish=()=>{
+  if(!myData||isFishing||!isAlive) return;
+  if(!isNearPond()){showFishStatus('🚶 Dekati kolam untuk mancing! (Tekan F)');return;}
+  isFishing=true;
+  showFishStatus('🎣 Melempar kail... sabar!');
+  setTimeout(()=>{
+    let roll=Math.random();
+    let fish;
+    if(roll<0.01) fish=fishPool[17]; // Naga Laut Mitos
+    else if(roll<0.02) fish=fishPool[18]; // Peri Air Mitos
+    else if(roll<0.04) fish=fishPool[4]; // Lumba-lumba Legendaris
+    else if(roll<0.06) fish=fishPool[9]; // Paus Mini Legendaris
+    else if(roll<0.08) fish=fishPool[24]; // Ikan Pelangi Legendaris
+    else if(roll<0.10) fish=fishPool[16]; // Hiu Putih Legendaris
+    else if(roll<0.13) fish=fishPool[2]; // Hiu Mini Epik
+    else if(roll<0.16) fish=fishPool[14]; // Gurita Epik
+    else if(roll<0.19) fish=fishPool[15]; // Penyu Emas Epik
+    else if(roll<0.22) fish=fishPool[23]; // Belut Listrik Epik
+    else if(roll<0.26) fish=fishPool[1]; // Koi Langka
+    else if(roll<0.30) fish=fishPool[8]; // Nemo Langka
+    else if(roll<0.34) fish=fishPool[12]; // Kepiting Langka
+    else if(roll<0.38) fish=fishPool[13]; // Udang Langka
+    else if(roll<0.42) fish=fishPool[21]; // Mutiara Langka
+    else if(roll<0.48) fish=fishPool[3]; // Buntal Biasa
+    else if(roll<0.54) fish=fishPool[7]; // Salmon Biasa
+    else if(roll<0.58) fish=fishPool[22]; // Dori Biasa
+    else if(roll<0.62) fish=fishPool[10]; // Tuna Biasa
+    else if(roll<0.66) fish=fishPool[11]; // Lele Biasa
+    else if(roll<0.70) fish=fishPool[0]; // Mas Biasa
+    else if(roll<0.74) fish=fishPool[5]; // Sampah
+    else if(roll<0.78) fish=fishPool[6]; // Batu
+    else if(roll<0.84) fish=fishPool[19]; // Kaleng
+    else fish=fishPool[20]; // Sepatu
+    showFishResult(fish);
+    isFishing=false;hideFishStatus();
+    // Update missions
+    if(fish.points>0){
+      updateMission('fish5',1);updateMission('fish10',1);updateMission('fish20',1);updateMission('fish50',1);
+      myFishCount++;myFishScore+=fish.points;
+      if(fish.rarity==='Langka') updateMission('fish_rare',1);
+      if(fish.rarity==='Epik'){updateMission('fish_rare',1);updateMission('fish_epik',1);}
+      if(fish.rarity==='Legendaris'){updateMission('fish_rare',1);}
+      if(fish.rarity==='Mitos'){updateMission('fish_rare',1);updateMission('fish_myth',1);}
+      addXp(fish.xp);
+      // Save fish score
+      set(ref(db,'fish_scores/'+myData.username),{score:myFishScore,count:myFishCount});
+      // Also store fishCount in player data for leaderboard
+      myData.fishCount=myFishCount;
+      saveUserData();
+    }
+    if(fish.points>0){
+      push(ref(db,'chats'),{system:true,text:`🎣 ${myData.username} dapat ${fish.name} ${fish.emoji}! (+${fish.points}🏆)`});
+    }
+  },3000+Math.random()*4000);
+};
+
+function showFishStatus(msg){let s=document.getElementById('fish-status');s.innerText=msg;s.style.display='block';}
+function hideFishStatus(){setTimeout(()=>document.getElementById('fish-status').style.display='none',300);}
+
+function showFishResult(fish){
+  let ov=document.createElement('div');ov.className='popup-overlay';
+  const cols={Biasa:'#aaa',Langka:'#00ccff',Epik:'#cc00ff',Legendaris:'#ffcc00',Mitos:'#ff4400',Sampah:'#888'};
+  ov.innerHTML=`<div class="popup-box" style="max-width:300px;text-align:center;">
+    <button class="popup-close" onclick="this.closest('.popup-overlay').remove()">✕</button>
+    <h3>🎣 HASIL MANCING!</h3>
+    <div style="font-size:50px;margin:10px 0;animation:fishJump 0.5s ease infinite alternate;">${fish.emoji}</div>
+    <div style="font-size:17px;font-weight:700;color:${cols[fish.rarity]||'#fff'};">${fish.name}</div>
+    <div style="font-size:10px;color:${cols[fish.rarity]};letter-spacing:2px;margin:4px 0;">[${fish.rarity.toUpperCase()}]</div>
+    ${fish.points>0?`<div style="color:#ffcc00;font-size:12px;">+${fish.points} 🏆 | +${fish.xp} XP</div>`:'<div style="color:#888;font-size:11px;">Mending buang lagi...</div>'}
+    <button class="btn-primary" style="margin-top:12px;" onclick="this.closest('.popup-overlay').remove()">✅ OK!</button>
+  </div>`;
+  ov.style.cssText+='z-index:250;';
+  document.body.appendChild(ov);
+}
+
+// ===== XP / LEVEL =====
+function addXp(amount){
+  myXp+=amount;
+  let needed=myLevel*100;
+  while(myXp>=needed){myXp-=needed;myLevel++;needed=myLevel*100;addSkillPoints(10);}
+  myData.xp=myXp;myData.level=myLevel;
+  updateMission('level5',myLevel>=5?5:myLevel);
+  updateMission('level10',myLevel>=10?10:myLevel);
+  updateMission('level20',myLevel>=20?20:myLevel);
+  saveUserData();
+}
+function addSkillPoints(n){mySkillPoints+=n;saveUserData();}
+
+// ===== SKILLS POPUP =====
+window.openSkills=()=>{
+  let ov=document.createElement('div');ov.className='popup-overlay';
+  ov.id='skills-overlay';
+  let html=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('skills-overlay').remove()">✕</button>
+    <h3>⚡ SKILL</h3>
+    <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-size:11px;color:#ffcc00;">⭐ ${mySkillPoints} Skill Poin</div>
+      <div style="font-size:11px;color:#aaa;">Aktif: ${myActiveSkill?SKILLS_DEF.find(s=>s.id===myActiveSkill)?.icon+' '+SKILLS_DEF.find(s=>s.id===myActiveSkill)?.name:'Tidak ada'}</div>
+    </div>
+    <div style="font-size:10px;color:#888;margin-bottom:8px;">Klik skill untuk aktifkan, lalu pilih target di map atau tekan tombol Use.</div>
+    <div class="skills-grid">`;
+  SKILLS_DEF.forEach(sk=>{
+    let locked=!unlockedSkills.has(sk.id);
+    html+=`<div class="skill-card${locked?' locked':''}${myActiveSkill===sk.id?' active-skill':''}" onclick="selectSkill('${sk.id}',${locked})">
+      <span class="skill-icon">${sk.icon}</span>
+      <div class="skill-name">${sk.name}</div>
+      <div class="skill-desc">${sk.desc}</div>
+      <div class="skill-cost">💰 ${sk.cost} SP</div>
+    </div>`;
+  });
+  html+=`</div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;">
+      <button class="btn-primary" onclick="useActiveSkill()">🎯 Gunakan Skill</button>
+      <button class="btn-warn" onclick="openSpinWheel()">🎰 Spin (${spinTokens}x)</button>
+    </div>
+  </div>`;
+  ov.innerHTML=html;
+  document.body.appendChild(ov);
+};
+
+window.selectSkill=(id,locked)=>{
+  if(locked){alert('🔒 Skill ini belum terbuka! Spin atau selesaikan misi.');return;}
+  myActiveSkill=id;
+  document.querySelectorAll('.skill-card').forEach(c=>c.classList.remove('active-skill'));
+  event.currentTarget.classList.add('active-skill');
+};
+
+window.useActiveSkill=()=>{
+  if(!myActiveSkill){alert('Pilih skill dulu!');return;}
+  const sk=SKILLS_DEF.find(s=>s.id===myActiveSkill);
+  if(!sk) return;
+  if(mySkillPoints<sk.cost){alert(`Butuh ${sk.cost} SP! Kamu punya ${mySkillPoints} SP.`);return;}
+  openTargetSelector(sk);
+};
+
+function openTargetSelector(sk){
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='target-ov';
+  let others=Object.entries(playersDB).filter(([id])=>id!==myPlayerId).map(([id,p])=>({id,...p}));
+  let html=`<div class="popup-box" style="max-width:320px;"><button class="popup-close" onclick="document.getElementById('target-ov').remove()">✕</button>
+    <h3>${sk.icon} ${sk.name}</h3>
+    <div style="font-size:11px;color:#888;margin-bottom:8px;">${sk.desc} — Biaya: ${sk.cost} SP</div>
+    <div class="target-list">`;
+  if(!others.length) html+=`<div style="color:#888;font-size:11px;text-align:center;padding:12px;">Tidak ada player lain di server.</div>`;
+  others.forEach(p=>{
+    html+=`<div class="target-item" onclick="executeSkill('${sk.id}','${p.id}','${p.username}');document.getElementById('target-ov').remove();document.getElementById('skills-overlay')&&document.getElementById('skills-overlay').remove();">
+      <span>${p.gender==='Perempuan'?'👧':'👦'} ${p.username} (Lv.${p.level||1})</span>
+      <span style="font-size:18px;">${sk.icon}</span>
+    </div>`;
+  });
+  html+=`</div></div>`;
+  ov.innerHTML=html;document.body.appendChild(ov);
+}
+
+window.executeSkill=(skillId,targetId,targetName)=>{
+  const sk=SKILLS_DEF.find(s=>s.id===skillId);if(!sk) return;
+  if(mySkillPoints<sk.cost){alert('SP tidak cukup!');return;}
+  mySkillPoints-=sk.cost;
+  if(skillId==='teleport'){
+    // Teleport self to target
+    const tp=playersDB[targetId];
+    if(tp){myData.x=tp.x+30;myData.y=tp.y;set(ref(db,'players/'+myPlayerId),myData);}
+  }
+  // Send event to target
+  push(ref(db,'events/'+targetId),{type:sk.effect,from:myData.username});
+  updateMission('kill_skill',1);updateMission('skill10',1);updateMission('chat_skill',1);
+  saveUserData();
+  push(ref(db,'chats'),{skill:true,text:`${myData.username} menggunakan ${sk.icon}${sk.name} ke ${targetName}!`});
+};
+
+// ===== SPIN WHEEL =====
+window.openSpinWheel=()=>{
+  if(document.getElementById('skills-overlay')) document.getElementById('skills-overlay').remove();
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='spin-overlay';
+  ov.innerHTML=`<div class="popup-box" style="max-width:280px;text-align:center;">
+    <button class="popup-close" onclick="document.getElementById('spin-overlay').remove()">✕</button>
+    <h3>🎰 SPIN WHEEL</h3>
+    <div style="font-size:11px;color:#aaa;margin-bottom:8px;">Token spin: <strong style="color:#ffcc00">${spinTokens}x</strong></div>
+    <div id="spin-container">
+      <div id="spin-wheel"><canvas id="spin-canvas" width="200" height="200"></canvas><div id="spin-pointer">▼</div></div>
+    </div>
+    <button id="btn-spin" onclick="doSpin()" ${spinTokens<=0?'disabled':''}>🎰 SPIN!</button>
+    <div class="spin-result" id="spin-result"></div>
+  </div>`;
+  document.body.appendChild(ov);
+  drawSpinWheel();
+};
+
+function drawSpinWheel(){
+  const canvas=document.getElementById('spin-canvas');if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const n=SPIN_REWARDS.length,arc=2*Math.PI/n;
+  const colors=['#1a0a2e','#0a1a2e','#2e1a0a','#0a2e1a','#2e0a1a','#1a2e0a','#2e2e0a','#0a0a2e','#2e0a2e','#0a2e2e'];
+  SPIN_REWARDS.forEach((r,i)=>{
+    ctx.beginPath();ctx.moveTo(100,100);ctx.arc(100,100,95,arc*i-Math.PI/2,arc*(i+1)-Math.PI/2);
+    ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
+    ctx.strokeStyle='rgba(0,210,255,0.3)';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(100,100);ctx.rotate(arc*i+arc/2-Math.PI/2);
+    ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 9px Rajdhani';
+    ctx.fillText(r.label,88,4);ctx.restore();
+  });
+}
+
+let isSpinning=false;
+window.doSpin=()=>{
+  if(spinTokens<=0||isSpinning) return;
+  spinTokens--;isSpinning=true;
+  updateMission('spin5',1);
+  document.getElementById('btn-spin').disabled=true;
+  const canvas=document.getElementById('spin-canvas');
+  const ctx=canvas.getContext('2d');
+  const n=SPIN_REWARDS.length;
+  let targetIdx=Math.floor(Math.random()*n);
+  let totalRot=360*5+targetIdx*(360/n)+(360/n/2);
+  let start=null,duration=4000,curRot=0;
+  function animate(ts){
+    if(!start) start=ts;
+    let elapsed=ts-start;
+    let progress=Math.min(elapsed/duration,1);
+    let ease=1-(1-progress)*(1-progress)*(1-progress);
+    curRot=totalRot*ease;
+    ctx.clearRect(0,0,200,200);
+    ctx.save();ctx.translate(100,100);ctx.rotate(curRot*Math.PI/180);ctx.translate(-100,-100);
+    const arc=2*Math.PI/n;
+    const colors=['#1a0a2e','#0a1a2e','#2e1a0a','#0a2e1a','#2e0a1a','#1a2e0a','#2e2e0a','#0a0a2e','#2e0a2e','#0a2e2e'];
+    SPIN_REWARDS.forEach((r,i)=>{
+      ctx.beginPath();ctx.moveTo(100,100);ctx.arc(100,100,95,arc*i-Math.PI/2,arc*(i+1)-Math.PI/2);
+      ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
+      ctx.strokeStyle='rgba(0,210,255,0.3)';ctx.lineWidth=1;ctx.stroke();
+      ctx.save();ctx.translate(100,100);ctx.rotate(arc*i+arc/2-Math.PI/2);
+      ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 9px Rajdhani';ctx.fillText(r.label,88,4);ctx.restore();
+    });
+    ctx.restore();
+    if(progress<1) requestAnimationFrame(animate);
+    else{isSpinning=false;applySpinReward(SPIN_REWARDS[targetIdx]);document.getElementById('spin-result').innerText='🎉 '+SPIN_REWARDS[targetIdx].label;}
+  }
+  requestAnimationFrame(animate);
+};
+
+function applySpinReward(reward){
+  const a=reward.action;
+  if(a.startsWith('unlock_')) unlockedSkills.add(a.replace('unlock_',''));
+  else if(a==='sp20') addSkillPoints(20);
+  else if(a==='sp50') addSkillPoints(50);
+  else if(a==='sp100') addSkillPoints(100);
+  if(document.getElementById('btn-spin')) document.getElementById('btn-spin').disabled=spinTokens<=0;
+  saveUserData();
+}
+
+// ===== MISSIONS POPUP =====
+window.openMissions=()=>{
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='mission-overlay';
+  let html=`<div class="popup-box"><button class="popup-close" onclick="document.getElementById('mission-overlay').remove()">✕</button>
+    <h3>🎯 MISI</h3>
+    <div style="font-size:10px;color:#aaa;margin-bottom:10px;">Selesaikan misi untuk dapat spin & skill poin!</div>`;
+  missions.forEach(m=>{
+    let prog=Math.min(m.progress,m.target);
+    let pct=prog/m.target*100;
+    let canClaim=prog>=m.target&&!m.completed;
+    html+=`<div class="mission-item${m.completed?' completed':''}">
+      <div class="mission-header">
+        <div class="mission-title">${m.completed?'✅ ':''} ${m.title}</div>
+        <div class="mission-reward">${m.reward}</div>
+      </div>
+      <div class="mission-desc">${m.desc}</div>
+      <div class="mission-progress"><div class="mission-bar" style="width:${pct}%;"></div></div>
+      <div style="font-size:9px;color:#888;margin-top:3px;">${prog}/${m.target}</div>
+      <button class="mission-action" onclick="claimMission('${m.id}')" ${!canClaim?'disabled':''}>${m.completed?'Sudah Diklaim':canClaim?'🎁 KLAIM REWARD':'Belum Selesai'}</button>
+    </div>`;
+  });
+  html+=`<div style="margin-top:10px;text-align:center;">
+    <button class="btn-warn" style="font-size:11px;padding:8px 16px;" onclick="openAdWatchMission()">📺 Tonton Iklan (+Reward)</button>
+  </div></div>`;
+  ov.innerHTML=html;document.body.appendChild(ov);
+};
+
+window.claimMission=(id)=>{
+  let m=missions.find(x=>x.id===id);
+  if(!m||m.completed||m.progress<m.target) return;
+  m.completed=true;
+  const a=m.action;
+  // Parse spin count: spin, spin2, spin3, spin10, spin15, spin20
+  let spinMatch=a.match(/spin(\d*)/);
+  if(spinMatch) spinTokens+=parseInt(spinMatch[1]||'1')||1;
+  // Parse sp count: sp50, sp80, sp100, sp150, sp200, sp500
+  let spMatch=a.match(/sp(\d+)/);
+  if(spMatch) addSkillPoints(parseInt(spMatch[1]));
+  // Legacy skillpoints format
+  if(a.startsWith('skillpoints')) addSkillPoints(parseInt(a.replace('skillpoints',''))||0);
+  saveUserData();
+  document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
+  openMissions();
+  push(ref(db,'chats'),{system:true,text:`🎯 ${myData.username} menyelesaikan misi: "${m.title}"!`});
+};
+
+function updateMission(id,amount){
+  let m=missions.find(x=>x.id===id);
+  if(!m||m.completed) return;
+  m.progress=Math.min(m.target,m.progress+amount);
+  saveUserData();
+}
+
+// ===== AD WEBVIEW MISSION =====
+window.openAdWatchMission=()=>{
+  document.getElementById('mission-overlay')&&document.getElementById('mission-overlay').remove();
+  openAdWebview(()=>{
+    updateMission('watch_ad',1);
+    updateMission('watch_ad3',1);
+    saveUserData();
+    alert('🎉 Reward diklaim! Cek misi untuk klaim hadiah.');
+    // Refresh ad (without page reload)
+    let iframe=document.getElementById('ad-iframe');
+    if(iframe) iframe.src='about:blank';
+    setTimeout(()=>{
+      let s1=document.createElement('script');
+      s1.text="atOptions={'key':'93587828435852943b1acdaa744d23ee','format':'iframe','height':250,'width':320,'params':{}};";
+      let s2=document.createElement('script');
+      s2.src='https://www.highperformanceformat.com/93587828435852943b1acdaa744d23ee/invoke.js';
+      document.body.appendChild(s1);document.body.appendChild(s2);
+    },1000);
+  });
+};
+
+function openAdWebview(onComplete){
+  const ov=document.getElementById('ad-webview-overlay');
+  ov.style.display='flex';
+  let iframe=document.getElementById('ad-iframe');
+  iframe.src='https://hangoutdj.vercel.app/iklan.html';
+  let t=23;
+  document.getElementById('ad-timer').innerText=t;
+  document.getElementById('ad-skip-btn').style.display='none';
+  let cd=document.getElementById('ad-countdown');
+  cd.style.display='block';
+  cd.innerHTML='Tonton iklan 23 detik... ⏳ <span id="ad-timer">'+t+'</span>s';
+  window._adCallback=onComplete;
+  let ti=setInterval(()=>{
+    t--;
+    let timerEl=document.getElementById('ad-timer');
+    if(timerEl) timerEl.innerText=t;
+    if(t<=0){
+      clearInterval(ti);
+      document.getElementById('ad-skip-btn').style.display='block';
+      cd.innerText='✅ Iklan selesai! Klik KLAIM REWARD untuk ambil hadiah.';
+    }
+  },1000);
+  // Store interval ref to clear if needed
+  ov._timerInterval=ti;
+}
+
+window.closeAdWebview=()=>{
+  const ov=document.getElementById('ad-webview-overlay');
+  ov.style.display='none';
+  // Auto-refresh iframe (generate new ad impression)
+  let iframe=document.getElementById('ad-iframe');
+  if(iframe){
+    setTimeout(()=>{
+      iframe.src='about:blank';
+      setTimeout(()=>{ iframe.src='https://hangoutdj.vercel.app/iklan.html'; },300);
+    },500);
+  }
+  if(window._adCallback){window._adCallback();window._adCallback=null;}
+};
+
+// closeAdWebview defined above with openAdWebview
+
+// ===== PROFILE POPUP =====
+window.openProfile=()=>{
+  if(!myData) return;
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='profile-overlay';
+  ov.innerHTML=`<div class="popup-box" style="max-width:320px;">
+    <button class="popup-close" onclick="document.getElementById('profile-overlay').remove()">✕</button>
+    <h3>👤 PROFIL</h3>
+    <div class="profile-avatar">${myData.gender==='Perempuan'?'👧':'👦'}</div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <div style="font-family:Orbitron,sans-serif;font-size:15px;color:#00d2ff;">${myData.username}</div>
+      <div style="font-size:10px;color:#888;margin-top:2px;">ID: ${myPlayerId}</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-val">Lv.${myLevel}</div><div class="stat-label">Level</div></div>
+      <div class="stat-box"><div class="stat-val">${myXp}</div><div class="stat-label">Total XP</div></div>
+      <div class="stat-box"><div class="stat-val">${myFishScore}</div><div class="stat-label">Fish Score</div></div>
+      <div class="stat-box"><div class="stat-val">${mySkillPoints}</div><div class="stat-label">Skill Poin</div></div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08);margin:14px 0;"></div>
+    <div class="profile-field"><label>UBAH NAMA</label><input type="text" id="prof-name" value="${myData.username}" maxlength="18"></div>
+    <div class="profile-field"><label>UMUR</label><input type="number" id="prof-age" value="${myData.age}" min="1" max="99"></div>
+    <div class="profile-field"><label>GENDER</label>
+      <select id="prof-gender"><option value="Laki-laki"${myData.gender==='Laki-laki'?' selected':''}>🚹 Laki-laki</option><option value="Perempuan"${myData.gender==='Perempuan'?' selected':''}>🚺 Perempuan</option></select>
+    </div>
+    <button class="btn-primary" style="width:100%;margin-top:4px;" onclick="saveProfile()">💾 SIMPAN</button>
+  </div>`;
+  document.body.appendChild(ov);
+};
+
+window.saveProfile=()=>{
+  let newName=document.getElementById('prof-name').value.trim();
+  let newAge=document.getElementById('prof-age').value;
+  let newGender=document.getElementById('prof-gender').value;
+  if(!newName) return alert('Nama tidak boleh kosong!');
+  myData.username=newName;myData.age=newAge;myData.gender=newGender;
+  set(ref(db,'players/'+myPlayerId),{...myData,hp:myHp,thirst:myThirst,alive:isAlive,level:myLevel,xp:myXp});
+  saveUserData();
+  document.getElementById('profile-overlay').remove();
+};
+
+// ===== OWNER POPUP =====
+window.openOwner=()=>{
+  let ov=document.createElement('div');ov.className='popup-overlay';ov.id='owner-overlay';
+  ov.innerHTML=`<div class="popup-box" style="max-width:320px;">
+    <button class="popup-close" onclick="document.getElementById('owner-overlay').remove()">✕</button>
+    <h3>👑 DEVELOPER</h3>
+    <div class="owner-card">
+      <div class="owner-avatar">👨‍💻</div>
+      <div class="owner-name">RAIHAN FAJAR FA'IQ NABIL</div>
+      <div style="font-size:10px;color:#888;margin-top:4px;letter-spacing:1px;">GAME DEVELOPER · CREATOR</div>
+      <div class="owner-socials">
+        <div class="owner-social">
+          <div class="owner-social-icon">📸</div>
+          <div class="owner-social-info">
+            <div class="owner-social-label">Instagram</div>
+            <div class="owner-social-value">@raihanforever</div>
+          </div>
+        </div>
+        <div class="owner-social">
+          <div class="owner-social-icon">▶️</div>
+          <div class="owner-social-info">
+            <div class="owner-social-label">YouTube</div>
+            <div class="owner-social-value">Raihan Forever</div>
+          </div>
+        </div>
+        <div class="owner-social">
+          <div class="owner-social-icon">🎮</div>
+          <div class="owner-social-info">
+            <div class="owner-social-label">Game</div>
+            <div class="owner-social-value">Hangout DJ World v2.0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.body.appendChild(ov);
+};
+
+// ===== DJ AUDIO =====
+let audio=document.getElementById('dj-audio');
+let btnPlay=document.getElementById('btn-play-dj');
+audio.volume=0.7;
+audio.addEventListener('ended',()=>{
+  if(adminSettings.loop){
+    if(adminSettings.order==='random') currentSongIndex=Math.floor(Math.random()*localSongs.length);
+    else currentSongIndex=(currentSongIndex+1)%localSongs.length;
+    if(localSongs[currentSongIndex]){
+      audio.src=localSongs[currentSongIndex].url;audio.play().catch(()=>{});
+      let sel=document.getElementById('playlist');sel.value=localSongs[currentSongIndex].url;
+    }
+  }
+});
+
+window.toggleDJ=()=>{
+  if(isPlaying){
+    audio.pause();btnPlay.innerHTML='▶';btnPlay.classList.remove('active');
+    document.getElementById('visualizer').classList.remove('active');
+  } else {
+    let url=document.getElementById('playlist').value;
+    if(!url){if(localSongs.length){url=localSongs[0].url;document.getElementById('playlist').value=url;}else return;}
+    audio.src=url;audio.play().catch(e=>console.log(e));
+    btnPlay.innerHTML='⏹';btnPlay.classList.add('active');
+    document.getElementById('visualizer').classList.add('active');
+  }
+  isPlaying=!isPlaying;
+};
+
+document.getElementById('playlist').addEventListener('change',()=>{
+  if(isPlaying){audio.src=document.getElementById('playlist').value;audio.play();}
+});
+
+window.setVolume=v=>audio.volume=parseFloat(v);
+
+// ===== ADMIN =====
+const ADMIN_PASS='hangout';
+let isAdminLogged=false;
+
+window.openAdmin=()=>{
+  document.getElementById('admin-overlay').style.display='flex';
+  document.getElementById('admin-login-view').style.display=isAdminLogged?'none':'block';
+  document.getElementById('admin-main-view').style.display=isAdminLogged?'block':'none';
+  if(isAdminLogged) renderAdminSongList();
+};
+window.closeAdmin=()=>document.getElementById('admin-overlay').style.display='none';
+window.adminEnter=e=>{if(e.key==='Enter')doAdminLogin();};
+window.doAdminLogin=()=>{
+  let p=document.getElementById('admin-pass').value;
+  if(p===ADMIN_PASS){
+    isAdminLogged=true;
+    document.getElementById('admin-login-view').style.display='none';
+    document.getElementById('admin-main-view').style.display='block';
+    renderAdminSongList();
+  } else {
+    document.getElementById('admin-status-msg').innerText='❌ Password salah!';
+    setTimeout(()=>document.getElementById('admin-status-msg').innerText='',2000);
+  }
+};
+
+window.adminAddSong=()=>{
+  let name=document.getElementById('admin-song-name').value.trim();
+  let url=document.getElementById('admin-song-url').value.trim();
+  let msg=document.getElementById('admin-status-msg2');
+  if(!name||!url){msg.style.color='#ff8888';msg.innerText='❌ Isi nama dan URL!';return;}
+  push(ref(db,'songs'),{name,url});
+  localSongs.push({name,url});
+  rebuildPlaylist();
+  document.getElementById('admin-song-name').value='';
+  document.getElementById('admin-song-url').value='';
+  msg.style.color='#88ff88';msg.innerText='✅ Lagu ditambahkan!';
+  setTimeout(()=>msg.innerText='',3000);
+};
+
+function renderAdminSongList(){
+  let list=document.getElementById('admin-song-list');if(!list) return;
+  list.innerHTML='';
+  localSongs.forEach((s,i)=>{
+    let item=document.createElement('div');item.className='admin-song-item';
+    item.innerHTML=`<span title="${s.url}">🎵 ${s.name}</span><button class="admin-song-del" onclick="adminDelSong(${i})">✕</button>`;
+    list.appendChild(item);
+  });
+}
+
+window.adminDelSong=i=>{
+  let s=localSongs[i];
+  if(s.id) remove(ref(db,'songs/'+s.id));
+  localSongs.splice(i,1);rebuildPlaylist();
+};
+
+window.adminSetAutoplay=v=>{
+  adminSettings.autoplay=v;
+  update(ref(db,'settings'),{autoplay:v,currentSong:localSongs[0]?.url||''});
+};
+window.adminSetLoop=v=>{adminSettings.loop=v;update(ref(db,'settings'),{loop:v});};
+window.adminSetOrder=v=>{adminSettings.order=v;update(ref(db,'settings'),{order:v});};
+
+document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+
+// ===== UTILS =====
+function pingTimer(){if(myData) set(ref(db,'players/'+myPlayerId+'/lastPing'),Date.now());}
+</script>
+
+<style>
+@keyframes fishJump{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+@keyframes adBtnPulse{from{box-shadow:0 0 4px rgba(255,200,0,0.3)}to{box-shadow:0 0 12px rgba(255,200,0,0.8);}}
+</style>
 </body>
 </html>
